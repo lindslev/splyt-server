@@ -18,7 +18,12 @@ var UserSchema = new Schema({
   facebook: {},
   twitter: {},
   google: {},
-  github: {}
+  github: {},
+  status : {type: String, enum ['private','public'],
+  friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  followers:[{ type: Schema.Types.ObjectId, ref: 'User' }],
+  playlist:[{ type: Schema.Types.ObjectId, ref: 'Playlist' }],
+  history:[{type: Schema.Types.ObjectId, ref: 'Song' }]
 });
 
 /**
