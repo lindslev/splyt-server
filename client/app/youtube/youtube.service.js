@@ -22,7 +22,15 @@ angular.module('splytApp')
                 }).then(function(res) {
 
                     if (res.data.items[0].snippet.categoryId == "10") {
-                        return res;
+                      var artist = res.data.items[0].snippet.title.split('-')[0];
+                      var title = res.data.items[0].snippet.title.split('-')[1];
+                        return {
+                          id: res.data.items[0].id,
+                          //title: res.data.items[0].snippet.title,
+                          title: title,
+                          artist: artist,
+                          thumbnail: res.data.items[0].snippet.thumbnails.default.url,
+                        }
                     } else {
                         console.log('Category Id does not match');
                     }
