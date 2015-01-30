@@ -30,6 +30,7 @@ angular.module('splytApp')
                           title: title,
                           artist: artist,
                           thumbnail: res.data.items[0].snippet.thumbnails.default.url,
+                          source: 'youtube'
                         }
                     } else {
                         console.log('Category Id does not match');

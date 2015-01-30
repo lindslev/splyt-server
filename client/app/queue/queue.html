@@ -8,16 +8,16 @@
   </md-toolbar>
   <md-content style="height: 600px;">
     <md-list>
-      <md-item ng-repeat="item in todos">
+      <md-item ng-repeat="song in songs">
         <md-item-content>
           <div class="md-tile-left">
-            <img ng-src="{{item.face}}" alt="{{item.who}}" class="face">
+            <img ng-src="{{song.thumbnail}}" alt="{{song.who}}" class="face">
           </div>
           <div class="md-tile-content">
-            <h3>{{item.what}}</h3>
-            <h4>{{item.who}}</h4>
+            <h3>{{song.title}}</h3>
+            <h4>{{song.artist}}</h4>
             <p>
-              {{item.notes}}
+              {{song.source}}
             </p>
           </div>
         </md-item-content>
