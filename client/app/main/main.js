@@ -8,4 +8,6 @@ angular.module('splytApp')
         templateUrl: 'app/main/main.html',
         controller: 'MainCtrl'
       });
+
+
   });
