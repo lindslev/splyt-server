@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('QueueCtrl', function ($scope) {
+  .controller('QueueCtrl', function ($scope, youtube) {
     $scope.songs = [];
       var item = {
     face: '/img/list/60.jpeg',
