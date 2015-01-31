@@ -18,6 +18,7 @@ function onConnect(socket) {
   });
 
   // Insert sockets below
+  require('../api/youtube/youtube.socket').register(socket);
   require('../api/song/song.socket').register(socket);
   require('../api/playlist/playlist.socket').register(socket);
   require('../api/thing/thing.socket').register(socket);
