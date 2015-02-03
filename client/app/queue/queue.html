@@ -1,28 +1,43 @@
 
 <div ng-controller="QueueCtrl" layout="column" layout-fill>
-  <md-toolbar md-scroll-shrink>
-    <div class="md-toolbar-tools">
-      <h3>
-        <span>My Songs Queue</span>
+    <md-toolbar>
+
+            <h3>
+        <span>PLAYA PLAYA</span>
       </h3>
-    </div>
-  </md-toolbar>
-  <md-content style="height: 600px;">
-    <md-list>
-      <md-item ng-repeat="song in songs">
-        <md-item-content>
-          <div ng-bind-html='song.embedded' class="md-tile-left">
-          </div>
-          <div class="md-tile-content">
-            <h3>{{song.title}}</h3>
-            <h4>{{song.artist}}</h4>
-            <p>
-              {{song.source}}
-            </p>
-          </div>
-        </md-item-content>
-        <md-divider inset></md-divider>
-      </md-item>
-    </md-list>
-  </md-content>
+
+    </md-toolbar>
+    <md-content class="md-padding" style="height: 300px;">
+           <h3>NOW PLAYING</h3>
+        <div class='col-md-4'></div>
+        <div class= "col-md-4" >
+
+        <iframe id="ytplayer" type="text/html" width="300" height="200" src="http://www.youtube.com/embed/JI5noh4OyXc?autoplay=1&iv_load_policy=3" frameborder="0" />
+        </div>
+        <div class='col-md-4'></div>
+    </md-content>
+    <md-content style="height: 600px;">
+        <h2>SONG QUEUE</h2>
+        <md-list>
+            <md-item ng-repeat="song in songs">
+                <md-item-content>
+                    <div class="md-tile-left">
+                        <img ng-src="{{song.thumbnail}}" alt="{{song.who}}" class="face">
+                    </div>
+                    <div class="md-tile-content">
+                        <h3>{{song.title}}</h3>
+                        <h4>{{song.artist}}</h4>
+                        <p>{{song.source}}</p>
+                        <md-button class="md-primary">
+                            <ng-md-icon ng-click= 'play(index)'icon="play_arrow" size='30'></ng-md-icon>
+                        </md-button>
+                        <md-button class="md-primary">
+                            <ng-md-icon icon="clear" size='30'></ng-md-icon>
+                        </md-button>
+                    </div>
+                </md-item-content>
+                <md-divider inset></md-divider>
+            </md-item>
+        </md-list>
+      </md-content>
 </div>
