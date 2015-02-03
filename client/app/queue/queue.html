@@ -1,3 +1,4 @@
+
 <div ng-controller="QueueCtrl" layout="column" layout-fill>
   <md-toolbar md-scroll-shrink>
     <div class="md-toolbar-tools">
@@ -10,8 +11,7 @@
     <md-list>
       <md-item ng-repeat="song in songs">
         <md-item-content>
-          <div class="md-tile-left">
-            <img ng-src="{{song.thumbnail}}" alt="{{song.who}}" class="face">
+          <div ng-bind-html='song.embedded' class="md-tile-left">
           </div>
           <div class="md-tile-content">
             <h3>{{song.title}}</h3>
