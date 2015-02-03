@@ -7,7 +7,8 @@ angular.module('splytApp', [
   'btford.socket-io',
   'ui.router',
   'ui.bootstrap',
-  'ngMaterial'
+  'ngMaterial',
+  'angularSoundManager'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
     $urlRouterProvider
