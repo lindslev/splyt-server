@@ -5,7 +5,8 @@ var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
 var request = require('request');
-var Song = require('./song.model');
+var Song = require('../song/song.model');
+var Playlist = require('../playlist/playlist.model')
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -22,18 +23,53 @@ exports.index = function(req, res) {
   });
 };
 
+/**
+ * Checks for song source and sends it to proper place
+ */
 exports.addSong = function(req, res){
-  if(req.body.action==="newSCSong"){
-    Song.createSoundcloud();
-  }
-  else if (req.body.action==="newYoutubeSong"){
-    Song.createYoutube();
-  }
-  else if (req.body.action==="newSpotifySong"){
-    Song.createSpotify();
-  }
-  
+  var song_obj = {};
+  song_obj.userid = req.params.id;
+  song_obj.song = req.body;
+  song_obj.playlist = req.params.listid;
 
+  //find the user
+  User.findById(req.params.id, function(user) {
+    user.addSong(song_obj);
+  })
+  //theUser.addSong(song_obj)
+
+  // if(req.body.action==="newSCSong"){
+  //   Song.createSoundcloud(song_obj, function(song) {
+  //     Playlist.findByIdAndUpdate(req.params.listid,
+  //       {$push: {songs: song}},
+  //       {safe: true, upsert: true},
+  //       function(err, model) {
+  //         console.log(err);
+  //       }
+  //     })
+  // }
+  // else if (req.body.action==="newYoutubeSong"){
+  //   Song.createYoutube(song_obj, function(song) {
+  //     Playlist.findByIdAndUpdate(req.params.listid,
+  //       {$push: {songs: song}},
+  //       {safe: true, upsert: true},
+  //       function(err, model) {
+  //         console.log(err);
+  //       }
+  //     })
+  //   });
+  // }
+  // else if (req.body.action==="newSpotifySong"){
+  //   Song.createSpotify(song_obj, function(song) {
+  //       Playlist.findByIdAndUpdate(req.params.listid,
+  //       {$push: {songs: song}},
+  //       {safe: true, upsert: true},
+  //       function(err, model) {
+  //         console.log(err);
+  //       }
+  //     })
+  //   });
+  // }
 }
 
 /**

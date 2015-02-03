@@ -4,6 +4,7 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
+var Song = require('../song/song.model');
 
 var UserSchema = new Schema({
   name: String,
@@ -148,6 +149,22 @@ UserSchema.methods = {
     if (!password || !this.salt) return '';
     var salt = new Buffer(this.salt, 'base64');
     return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
+  },
+
+  addSong: function(song_obj) {
+    if (song_obj.song.action === 'newSCSong') {
+      Song.createSoundcloud(song_obj);
+    } else if (song_obj.song.action === 'newYoutubeSong') {
+      Song.createYoutubeSong(song_obj);
+    } else if  (song_obj.song.action === 'newSpotifySong') {
+      Song.createSpotify(song_obj);
+    } else {
+      throw new Error('song source is not supported');
+    }
+  },
+
+  addToPlaylist: function(song){
+
   }
 };
 
