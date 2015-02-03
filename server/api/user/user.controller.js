@@ -4,6 +4,8 @@ var User = require('./user.model');
 var passport = require('passport');
 var config = require('../../config/environment');
 var jwt = require('jsonwebtoken');
+var request = require('request');
+var Song = require('./song.model');
 
 var validationError = function(res, err) {
   return res.json(422, err);
@@ -19,6 +21,20 @@ exports.index = function(req, res) {
     res.json(200, users);
   });
 };
+
+exports.addSong = function(req, res){
+  if(req.body.action==="newSCSong"){
+    Song.createSoundcloud();
+  }
+  else if (req.body.action==="newYoutubeSong"){
+    Song.createYoutube();
+  }
+  else if (req.body.action==="newSpotifySong"){
+    Song.createSpotify();
+  }
+  
+
+}
 
 /**
  * Creates a new user
