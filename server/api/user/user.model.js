@@ -125,7 +125,7 @@ UserSchema
       if(err) return err;
       that.playlist.push(data._id);
       console.log("after THAT", that.playlist);
-      
+
       next();
     });
   });
@@ -172,8 +172,13 @@ UserSchema.methods = {
     if (song_obj.song.action === 'newSCSong') {
       Song.createSoundcloud(song_obj);
     } else if (song_obj.song.action === 'newYoutubeSong') {
-      Song.createYoutube(song_obj);
-    } else if  (song_obj.song.action === 'newSpotifySong') {
+
+      if (song_obj.song.args.info.items[0].snippet.categoryId == "10") {
+        Song.createYoutube(song_obj);
+      } else {
+        console.log('Youtube video category is not music')
+      }
+    } else if (song_obj.song.action === 'newSpotifySong') {
       Song.createSpotify(song_obj);
     } else {
       throw new Error('song source is not supported');
