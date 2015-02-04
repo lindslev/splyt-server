@@ -1,7 +1,8 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    Schema = mongoose.Schema;
+    Schema = mongoose.Schema,
+    Playlist = require('../playlist/playlist.model');
 
 var SongSchema = new Schema({
   id: {type: String, require: true },
@@ -35,7 +36,11 @@ SongSchema.statics.createYoutube = function(song_obj, cb){
       link: song_obj.song.args.song.permalink_url,
       source: 'YouTube'
     }, function(err, data) {
-      cb(err, data);
+      Playlist.findById(song_obj.playlist, function(err, playlist) {
+        console.log("inside the thing", data);
+        playlist.songs.push(data);
+        console.log(playlist);
+      })
     });
 }
 

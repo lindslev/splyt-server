@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
 var Song = require('../song/song.model');
+var Playlist = require('../playlist/playlist.model');
 
 var UserSchema = new Schema({
   name: String,
@@ -113,6 +114,22 @@ UserSchema
       next();
   });
 
+UserSchema
+  .pre('save', function(next) {
+    var that = this;
+    Playlist.create({
+        title: 'Default'
+    }, function(err, data) {
+      console.log('data', data);
+      console.log('user?', that);
+      if(err) return err;
+      that.playlist.push(data._id);
+      console.log("after THAT", that.playlist);
+      
+      next();
+    });
+  });
+
 /**
  * Methods
  */
@@ -155,7 +172,7 @@ UserSchema.methods = {
     if (song_obj.song.action === 'newSCSong') {
       Song.createSoundcloud(song_obj);
     } else if (song_obj.song.action === 'newYoutubeSong') {
-      Song.createYoutubeSong(song_obj);
+      Song.createYoutube(song_obj);
     } else if  (song_obj.song.action === 'newSpotifySong') {
       Song.createSpotify(song_obj);
     } else {
