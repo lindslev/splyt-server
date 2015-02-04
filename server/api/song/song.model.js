@@ -1,14 +1,8 @@
 'use strict';
 
-<<<<<<< HEAD
-var mongoose = require('mongoose'),
-    Schema = mongoose.Schema,
-    Playlist = require('../playlist/playlist.model');
-=======
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var Playlist = require('../playlist/playlist.model');
->>>>>>> master
 
 var SongSchema = new Schema({
   id: {type: String, require: true },

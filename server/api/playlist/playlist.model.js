@@ -4,8 +4,7 @@ var mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
 var PlaylistSchema = new Schema({
-	title: {type: String, require: true },
-	songs:[{ type: Schema.Types.ObjectId, ref: 'Song' }]
+  songs:[{ type: Schema.Types.ObjectId, ref: 'Song' }]
 });
 
 PlaylistSchema.statics.addNewSong = function(song, listid, cb) {
