@@ -23,10 +23,16 @@ var soundcloud_song = {
   playlist: 1
 }
 
+var spotify_song = {
+  userid:1,
+  song: {"action":"newSpotifySong","method":"","args":{"info":{"album":{"album_type":"single","available_markets":["CA","MX","US"],"external_urls":{"spotify":"https://open.spotify.com/album/3FHMLI0Vz2t0gdypH1yImX"},"href":"https://api.spotify.com/v1/albums/3FHMLI0Vz2t0gdypH1yImX","id":"3FHMLI0Vz2t0gdypH1yImX","images":[{"height":640,"url":"https://i.scdn.co/image/d8e78b7a8fb94ad1f3b8bae372f04b261dd9df7f","width":640},{"height":300,"url":"https://i.scdn.co/image/1ee3f29e92f78615a4278573663f405f0c07eae7","width":300},{"height":64,"url":"https://i.scdn.co/image/e9224f06708686b9b6c0210e768052b044410b7f","width":64}],"name":"Odd Look","type":"album","uri":"spotify:album:3FHMLI0Vz2t0gdypH1yImX"},"artists":[{"external_urls":{"spotify":"https://open.spotify.com/artist/0UF7XLthtbSF2Eur7559oV"},"href":"https://api.spotify.com/v1/artists/0UF7XLthtbSF2Eur7559oV","id":"0UF7XLthtbSF2Eur7559oV","name":"Kavinsky","type":"artist","uri":"spotify:artist:0UF7XLthtbSF2Eur7559oV"},{"external_urls":{"spotify":"https://open.spotify.com/artist/1Xyo4u8uXC1ZmMpatF05PJ"},"href":"https://api.spotify.com/v1/artists/1Xyo4u8uXC1ZmMpatF05PJ","id":"1Xyo4u8uXC1ZmMpatF05PJ","name":"The Weeknd","type":"artist","uri":"spotify:artist:1Xyo4u8uXC1ZmMpatF05PJ"}],"available_markets":["CA","MX","US"],"disc_number":1,"duration_ms":252853,"explicit":false,"external_ids":{"isrc":"FRS711300690"},"external_urls":{"spotify":"https://open.spotify.com/track/3Q6mwJseOFYBJ10d5CXp4o"},"href":"https://api.spotify.com/v1/tracks/3Q6mwJseOFYBJ10d5CXp4o","id":"3Q6mwJseOFYBJ10d5CXp4o","name":"Odd Look","popularity":57,"preview_url":"https://p.scdn.co/mp3-preview/488c0002f7872ae49c48d086810b91e4dd987ca9","track_number":1,"type":"track","uri":"spotify:track:3Q6mwJseOFYBJ10d5CXp4o"},"iframeSrc":"http://embed.spotify.com/?uri=spotify:track:3Q6mwJseOFYBJ10d5CXp4o&view=coverart","song":{"permalink_url":"https://open.spotify.com/track/3Q6mwJseOFYBJ10d5CXp4o","title":"Odd Look"}}},
+  playlist: 1
+}
+
 
 describe('Song Model', function() {
   before(function(done) {
-    // Clear users before testing
+    // Clear songs before testing
     Song.remove().exec().then(function() {
       done();
     });
@@ -69,5 +75,16 @@ describe('Song Model', function() {
     });
   });
 
+    it('should add a Spotify song', function(done) {
+    Song.createSpotify(spotify_song, function(err, createdSong) {
+
+      createdSong.id.should.equal('3Q6mwJseOFYBJ10d5CXp4o');
+      createdSong.title.should.equal('Odd Look');
+      createdSong.artist.should.equal('Kavinsky');
+      createdSong.link.should.equal('https://open.spotify.com/track/3Q6mwJseOFYBJ10d5CXp4o');
+      createdSong.source.should.equal('Spotify');
+      done();
+    });
+  });
 });
 
