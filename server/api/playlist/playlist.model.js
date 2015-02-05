@@ -5,7 +5,9 @@ var mongoose = require('mongoose'),
 
 var PlaylistSchema = new Schema({
 	title: {type: String, require: true },
-	songs:[{ type: Schema.Types.ObjectId, ref: 'Song' }]
+	songs:[{ type: Schema.Types.ObjectId, ref: 'Song' }],
+  friend_stream: { type: Boolean, default: false },
+  aggregate_stream: {type: Boolean, default: false }
 });
 
 PlaylistSchema.statics.addNewSong = function(song, playlist, cb) {

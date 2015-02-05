@@ -113,11 +113,29 @@ UserSchema
       next();
   });
 
+//create aggregate default playlist
 UserSchema
   .pre('save', function(next) {
+    if (!this.isNew) return next();
     var that = this;
     Playlist.create({
-        title: 'Default'
+        title: 'Default',
+        aggregate_stream: true
+    }, function(err, data) {
+      if(err) return err;
+      that.playlist.push(data._id);
+      next();
+    });
+  });
+
+//create friends' stream playlist
+UserSchema
+  .pre('save', function(next) {
+    if (!this.isNew) return next();
+    var that = this;
+    Playlist.create({
+      title: 'Friends Music',
+      friend_stream: true
     }, function(err, data) {
       if(err) return err;
       that.playlist.push(data._id);
