@@ -212,7 +212,21 @@ UserSchema.methods = {
   }
 };
 
-UserSchema.statics.propagateToFollowers = function(song, follower_array) {
+/**
+ * Statics
+ */
+UserSchema.statics = {
+    /**
+   * Populates user with playlist objects
+   *
+   */
+  getPlaylists : function(userId, done) {
+    this.findById(userId).populate('playlist').exec(function(err, user){
+          done(err, user);
+    })
+  },
+
+  propagateToFollowers : function(song, follower_array) {
   var Users = this;
   _.forEach(follower_array, function(id) {
     Users.findById(id, function(err, user) {
@@ -226,7 +240,8 @@ UserSchema.statics.propagateToFollowers = function(song, follower_array) {
         );
       });
     });
-  });
+  })
+
 };
 
 module.exports = mongoose.model('User', UserSchema);
