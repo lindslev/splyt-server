@@ -181,13 +181,19 @@ UserSchema.methods = {
   }
 };
 
-UserSchema.statics.getPlaylists = function(userId, done) {
-  this.findById(userId).populate('playlist').exec(function(err, user){
-        // if (err) return handleError(err);
-        // console.log('inside populate',user.playlist);
-        // return user.playlist
-        done(err, user);
+/**
+ * Statics
+ */
+UserSchema.statics = {
+    /**
+   * Populates user with playlist objects
+   *
+   */
+  getPlaylists : function(userId, done) {
+    this.findById(userId).populate('playlist').exec(function(err, user){
+          done(err, user);
     })
+  }
 };
 
 module.exports = mongoose.model('User', UserSchema);

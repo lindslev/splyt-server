@@ -5,15 +5,14 @@ angular.module('splytApp')
 
     // Public API here
     return {
-      createPlaylist: function () {
-        return meaningOfLife;
+      createPlaylist: function (playlistobj) {
+        return $http.post('api/playlist' + Auth.getCurrentUser()._id, playlistobj);
       },
       getPlaylists: function () {
-        console.log('user', Auth.getCurrentUser());
-        return $http.get('api/users/' + Auth.getCurrentUser()._id + '/playlists').success(function(data){
-          console.log('request', data);
-          return data;
-        })
+        return $http.get('api/users/' + Auth.getCurrentUser()._id + '/playlists');
+      },
+      removePlaylists: function () {
+        return meaningOfLife;
       },
       getFollowers: function () {
         return meaningOfLife;
