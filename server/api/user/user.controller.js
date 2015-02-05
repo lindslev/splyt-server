@@ -34,11 +34,8 @@ exports.addSong = function(req, res) {
 
     //find the user
     User.findById(req.params.id, function(err, user) {
-           user.addSong(song_obj);
-/*            Playlist.findById(song_obj.playlist, function(err, playlist) {
-                    playlist.songs.push(newSong);
-                })*/
-            })
+        user.addSong(song_obj);
+    })
 }
 
 /**

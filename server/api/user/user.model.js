@@ -22,8 +22,7 @@ var UserSchema = new Schema({
   google: {},
   github: {},
   status : {type: String, enum:['private','public']},
-  friends: [{ type: Schema.Types.ObjectId, ref: 'User' }],
-  followers:[{ type: Schema.Types.ObjectId, ref: 'User' }],
+  following:[{ type: Schema.Types.ObjectId, ref: 'User' }],
   playlist:[{ type: Schema.Types.ObjectId, ref: 'Playlist' }],
   history:[{type: Schema.Types.ObjectId, ref: 'Song' }]
 });
@@ -120,12 +119,8 @@ UserSchema
     Playlist.create({
         title: 'Default'
     }, function(err, data) {
-      console.log('data', data);
-      console.log('user?', that);
       if(err) return err;
       that.playlist.push(data._id);
-      console.log("after THAT", that.playlist);
-
       next();
     });
   });
@@ -183,10 +178,6 @@ UserSchema.methods = {
     } else {
       throw new Error('song source is not supported');
     }
-  },
-
-  addToPlaylist: function(song){
-
   }
 };
 
