@@ -40,7 +40,7 @@ SongSchema.statics.createYoutube = function(song_obj, cb){
       source: 'YouTube'
     }, function(err, data) {
       Playlist.addNewSong(data, song_obj.playlist, function(err, model) {
-        console.log('Error ', err);
+        cb(err, data);
       });
     });
 }

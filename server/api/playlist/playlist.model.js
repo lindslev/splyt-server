@@ -22,4 +22,8 @@ PlaylistSchema.statics.addNewSong = function(song, playlist, cb) {
   );
 }
 
+PlaylistSchema.statics.addFriendSong = function(id, song, cb) {
+
+}
+
 module.exports = mongoose.model('Playlist', PlaylistSchema);
