@@ -39,6 +39,18 @@ exports.addSong = function(req, res) {
 }
 
 /**
+ * Gets Playlists for Current User
+ */
+exports.getPlaylists = function(req, res) {
+    var userid = req.params.id;
+    //find the user
+    User.getPlaylists(userid, function(err, user) {
+        console.log('user controller', user);
+        res.json(200, user.playlist);
+    });
+}
+
+/**
  * Creates a new user
  */
 exports.create = function(req, res, next) {
