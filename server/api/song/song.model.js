@@ -1,14 +1,9 @@
 'use strict';
 
-<<<<<<< HEAD
 var mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    Playlist = require('../playlist/playlist.model');
-=======
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
-var Playlist = require('../playlist/playlist.model');
->>>>>>> master
+    Playlist = require('../playlist/playlist.model'),
+    User = require('../user/user.model');
 
 var SongSchema = new Schema({
   id: {type: String, require: true },
@@ -28,8 +23,8 @@ SongSchema.statics.createSoundcloud = function(song_obj, cb){
     link: song_obj.song.args.song.permalink_url,
     source:'SoundCloud'
   }, function(err, data) {
-    Playlist.addNewSong(data, song_obj.userid, function(err, model) {
-        cb(err, data);
+    Playlist.addNewSong(data, song_obj.playlist, function(err, model) {
+        console.log('Error ', err);
       });
   });
 }
@@ -44,8 +39,8 @@ SongSchema.statics.createYoutube = function(song_obj, cb){
       link: song_obj.song.args.song.permalink_url,
       source: 'YouTube'
     }, function(err, data) {
-      Playlist.addNewSong(data, song_obj.userid, function(err, model) {
-        cb(err, data);
+      Playlist.addNewSong(data, song_obj.playlist, function(err, model) {
+        console.log('Error ', err);
       });
     });
 }
@@ -59,8 +54,8 @@ SongSchema.statics.createSpotify = function(song_obj, cb){
     link: song_obj.song.args.song.permalink_url,
     source: 'Spotify'
   }, function(err, data) {
-    Playlist.addNewSong(data, song_obj.userid, function(err, model) {
-        cb(err, data);
+    Playlist.addNewSong(data, song_obj.playlist, function(err, model) {
+        console.log('Error ', err);
       });
   });
 }
