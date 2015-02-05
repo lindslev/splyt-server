@@ -23,7 +23,7 @@ SongSchema.statics.createSoundcloud = function(song_obj, cb){
     link: song_obj.song.args.song.permalink_url,
     source:'SoundCloud'
   }, function(err, data) {
-    Playlist.addNewSong(data, song_obj.playlist, function(err, model) {
+    Playlist.addNewSong(data, song_obj.playlist, song_obj.userid, function(err, model) {
         console.log('Error ', err);
       });
   });

@@ -186,7 +186,6 @@ UserSchema.methods = {
 //user adds new song
   addSong: function(song_obj) {
     var User = this;
-    console.log('addSong is being called', song_obj.song.action);
     //soundcloud
     if (song_obj.song.action === 'newSCSong') {
       Song.createSoundcloud(song_obj, function(err, song) {
@@ -196,7 +195,6 @@ UserSchema.methods = {
     } else if (song_obj.song.action === 'newYoutubeSong') {
       if (song_obj.song.args.info.items[0].snippet.categoryId == "10") {
         Song.createYoutube(song_obj, function(err, song) {
-          console.log(UserSchema);
           UserSchema.statics.propagateToFollowers(song, User.followers);
         });
       } else {
