@@ -6,6 +6,7 @@ var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
 var Song = require('../song/song.model');
 var Playlist = require('../playlist/playlist.model');
+var _ = require('lodash');
 
 var UserSchema = new Schema({
   name: String,
@@ -23,6 +24,7 @@ var UserSchema = new Schema({
   github: {},
   status : {type: String, enum:['private','public']},
   following:[{ type: Schema.Types.ObjectId, ref: 'User' }],
+  followers:[{ type: Schema.Types.ObjectId, ref: 'User' }],
   playlist:[{ type: Schema.Types.ObjectId, ref: 'Playlist' }],
   history:[{type: Schema.Types.ObjectId, ref: 'Song' }]
 });
@@ -113,11 +115,29 @@ UserSchema
       next();
   });
 
+//create aggregate default playlist
 UserSchema
   .pre('save', function(next) {
+    if (!this.isNew) return next();
     var that = this;
     Playlist.create({
-        title: 'Default'
+        title: 'Default',
+        aggregate_stream: true
+    }, function(err, data) {
+      if(err) return err;
+      that.playlist.push(data._id);
+      next();
+    });
+  });
+
+//create friends' stream playlist
+UserSchema
+  .pre('save', function(next) {
+    if (!this.isNew) return next();
+    var that = this;
+    Playlist.create({
+      title: 'Friends Music',
+      friend_stream: true
     }, function(err, data) {
       if(err) return err;
       that.playlist.push(data._id);
@@ -163,19 +183,30 @@ UserSchema.methods = {
     return crypto.pbkdf2Sync(password, salt, 10000, 64).toString('base64');
   },
 
+//user adds new song
   addSong: function(song_obj) {
+    var User = this;
+    //soundcloud
     if (song_obj.song.action === 'newSCSong') {
-      Song.createSoundcloud(song_obj);
+      Song.createSoundcloud(song_obj, function(err, song) {
+        UserSchema.staticspropagateToFollowers(song, User.followers);
+      });
+    //youtube
     } else if (song_obj.song.action === 'newYoutubeSong') {
-
       if (song_obj.song.args.info.items[0].snippet.categoryId == "10") {
-        Song.createYoutube(song_obj);
+        Song.createYoutube(song_obj, function(err, song) {
+          UserSchema.statics.propagateToFollowers(song, User.followers);
+        });
       } else {
         console.log('Youtube video category is not music')
       }
+    //spotify
     } else if (song_obj.song.action === 'newSpotifySong') {
-      Song.createSpotify(song_obj);
+      Song.createSpotify(song_obj, function(err, song) {
+        UserSchema.statics.propagateToFollowers(song, User.followers);
+      });
     } else {
+    //error
       throw new Error('song source is not supported');
     }
   }
@@ -193,7 +224,24 @@ UserSchema.statics = {
     this.findById(userId).populate('playlist').exec(function(err, user){
           done(err, user);
     })
-  }
+  },
+
+  propagateToFollowers : function(song, follower_array) {
+  var Users = this;
+  _.forEach(follower_array, function(id) {
+    Users.findById(id, function(err, user) {
+      _.findWhere(user.playlists, {'friend_stream' : true }, function(err, playlist) {
+         Playlist.findByIdAndUpdate(playlist,
+          { $push: { "songs" : song }},
+          { safe: true, upsert: true },
+          function( err, model ) {
+            if(err) console.log(err);
+          }
+        );
+      });
+    });
+  })
+
 };
 
 module.exports = mongoose.model('User', UserSchema);
