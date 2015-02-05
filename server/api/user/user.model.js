@@ -227,21 +227,22 @@ UserSchema.statics = {
   },
 
   propagateToFollowers : function(song, follower_array) {
-  var Users = this;
-  _.forEach(follower_array, function(id) {
-    Users.findById(id, function(err, user) {
-      _.findWhere(user.playlists, {'friend_stream' : true }, function(err, playlist) {
-         Playlist.findByIdAndUpdate(playlist,
-          { $push: { "songs" : song }},
-          { safe: true, upsert: true },
-          function( err, model ) {
-            if(err) console.log(err);
-          }
-        );
+    var Users = this;
+    _.forEach(follower_array, function(id) {
+      Users.findById(id, function(err, user) {
+        _.findWhere(user.playlists, {'friend_stream' : true }, function(err, playlist) {
+           Playlist.findByIdAndUpdate(playlist,
+            { $push: { "songs" : song }},
+            { safe: true, upsert: true },
+            function( err, model ) {
+              if(err) console.log(err);
+            }
+          );
+        });
       });
-    });
-  })
+    })
+  }
 
-};
+}
 
 module.exports = mongoose.model('User', UserSchema);
