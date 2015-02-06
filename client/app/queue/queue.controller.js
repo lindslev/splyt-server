@@ -3,28 +3,36 @@
 angular.module('splytApp')
   .controller('QueueCtrl', function ($scope, youtube, $sanitize, $sce, manage, $log) {
 
-  $scope.songs = [];
+  $scope.songs = [
+
+  ];
   $scope.playlist_tabs = [];
   $scope.friend_songs = [];
 
   var tabs = [
-    {title: 'Main', songs: $scope.songs },
-    {title: 'Friends\' Music', songs:$scope.friend_songs}
+    {title: 'Main', id:'1', content: 'content 1' },
+    {title: 'Friends\' Music', id:'2', content: 'content 2'}
   ];
 
   $scope.tabs = tabs;
+  $scope.update_songs = function(id) {
+    console.log(id);
+  }
 
-    // $scope.addYoutubePlaylist = function(){
-    // //HARDCODED CODE
-    //   youtube.getYoutubeVideo("zol2MJf6XNE").then(function(res){
-    //       res.embedded = $sce.trustAsHtml(res.embed);
-    //       $scope.songs.push(res);
-    //    });
-    // }
+    $scope.addYoutubePlaylist = function(){
+    //HARDCODED CODE
 
-  // for (var i = 0; i < 15; i++) {
-  //   $scope.addYoutubePlaylist();
-  // }
+          $scope.songs.push({
+            title:'random song',
+            artist: 'random artist',
+            source:'my source'
+          });
+
+    }
+
+  for (var i = 0; i < 15; i++) {
+    $scope.addYoutubePlaylist();
+  }
 
   var playlistPromise = manage.getPlaylists();
 
@@ -45,19 +53,19 @@ angular.module('splytApp')
     }
   });
 
-  for (var j = 0; j < playlists[i].songs.length; j++) {
-    var songPromise = manage.getSong(playlists[i].songs[j]);
-    songPromise.success(function(song) {
-      $scope.songs.push(song);
-    })
-  }
+  // for (var j = 0; j < playlists[i].songs.length; j++) {
+  //   var songPromise = manage.getSong(playlists[i].songs[j]);
+  //   songPromise.success(function(song) {
+  //     $scope.songs.push(song);
+  //   })
+  // }
 
-  for (var j = 0; j < playlists[i].songs.length; j++) {
-    var songPromise = manage.getSong(playlists[i].songs[j]);
-    songPromise.success(function(song) {
-      $scope.songs.push(song);
-    });
-  }
+  // for (var j = 0; j < playlists[i].songs.length; j++) {
+  //   var songPromise = manage.getSong(playlists[i].songs[j]);
+  //   songPromise.success(function(song) {
+  //     $scope.songs.push(song);
+  //   });
+  // }
 
 
 
