@@ -3,14 +3,24 @@
     <md-tabs md-selected='selectedIndex'>
       <md-tab ng-repeat='tab in tabs' ng-disabled='tab.disabled' label='{{tab.title}}'>
       <div class="demo-tab tab{{$index%4}}" layout="column" layout-fill layout-align="space-around-center">
-        <div ng-bind="tab.content"></div>
+
       </div>
-    </md-tab>
-  </md-tabs>
-    <md-content class="md-padding" style="height: 300px;">
-           <h3>NOW PLAYING</h3>
+          <md-content class="md-padding" style="height: 300px;">
+           <h3>{{tab}}</h3>
+           {{songs}}
         <div class='col-md-4'></div>
         <div class= "col-md-4" >
+           <div class="md-tile-content">
+                        <h3>{{songs[0].title}}</h3>
+                        <h4>{{songs[0].artist}}</h4>
+                        <p>{{songs[0].source}}</p>
+                        <md-button class="md-primary" aria-label='none'>
+                            <ng-md-icon ng-click= 'play(index)'icon="play_arrow" size='30'></ng-md-icon>
+                        </md-button>
+                        <md-button class="md-primary" aria-label='none'>
+                            <ng-md-icon icon="clear" size='30'></ng-md-icon>
+                        </md-button>
+                    </div>
 
         <!-- <iframe id="ytplayer" type="text/html" width="300" height="200" src="http://www.youtube.com/embed/JI5noh4OyXc?autoplay=1&iv_load_policy=3" frameborder="0" /> -->
         </div>
@@ -19,7 +29,7 @@
     <md-content style="height: 600px;">
         <h2>SONG QUEUE</h2>
         <md-list>
-            <md-item ng-repeat="song in songs">
+            <md-item ng-repeat="song in tab.songs">
                 <md-item-content>
                     <div class="md-tile-left">
                         <img ng-src="{{song.thumbnail}}" alt="{{song.who}}" class="face">
@@ -40,4 +50,7 @@
             </md-item>
         </md-list>
       </md-content>
+    </md-tab>
+  </md-tabs>
+
 </div>
