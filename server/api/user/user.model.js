@@ -237,54 +237,52 @@ UserSchema.methods = {
  */
 UserSchema.statics = {
     /**
-     * Populates user with playlist objects
-     *
-     */
-    getPlaylists: function(userId, done) {
-        this.findById(userId).populate('playlist').exec(function(err, user) {
-            done(err, user);
-        })
-    },
+   * Populates user with playlist objects
+   *
+   */
+  getPlaylists : function(userId, done) {
+    this.findById(userId).populate('playlist').exec(function(err, user){
+          done(err, user);
+    })
+  },
+
     /**
-     * Sends to Followers
-     *
-     */
-    propagateToFollowers: function(song, follower_array) {
-        var Users = this;
-        _.forEach(follower_array, function(id) {
-            Users.findById(id, function(err, user) {
-                _.findWhere(user.playlists, {
-                    'friend_stream': true
-                }, function(err, playlist) {
-                    Playlist.findByIdAndUpdate(playlist, {
-                            $push: {
-                                "songs": song
-                            }
-                        }, {
-                            safe: true,
-                            upsert: true
-                        },
-                        function(err, model) {
-                            if (err) console.log(err);
-                        }
-                    );
-                });
-            });
-        })
-    },
-    /**
-     * Populates user with playlist objects
-     *
-     */
-    savePlaylist: function(userId, playlistobj, cb) {
-        this.findByIdAndUpdate(userId, 
-          {$push: {'playlist': playlistobj}},
-          { safe: true, upsert: true },
-          function(err, model) {
-            console.log("WE here user model", model);
-            cb(err, model);
-        })
-    }
+   * Sends new song to followers
+   *
+   */
+
+  propagateToFollowers : function(song, follower_array) {
+    var Users = this;
+    _.forEach(follower_array, function(id) {
+      Users.findById(id, function(err, user) {
+        _.findWhere(user.playlists, {'friend_stream' : true }, function(err, playlist) {
+           Playlist.findByIdAndUpdate(playlist,
+            { $push: { "songs" : song }},
+            { safe: true, upsert: true },
+            function( err, model ) {
+              if(err) console.log(err);
+            }
+          );
+        });
+      });
+    })
+  },
+
+
+  /**
+   * Populates user with playlist objects
+   *
+   */
+  savePlaylist: function(userId, playlistobj, cb) {
+      this.findByIdAndUpdate(userId,
+        {$push: {'playlist': playlistobj}},
+        { safe: true, upsert: true },
+        function(err, model) {
+          console.log("WE here user model", model);
+          cb(err, model);
+      })
+  }
 };
+
 
 module.exports = mongoose.model('User', UserSchema);

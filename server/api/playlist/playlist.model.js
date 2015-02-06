@@ -30,7 +30,7 @@ PlaylistSchema.statics.addNewSong = function(song, playlist, userid, cb) {
           })
         })
       } else {
-      cb(err, model);
+      //cb(err, model);
       }
     }
   );
