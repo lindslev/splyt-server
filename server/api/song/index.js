@@ -2,8 +2,10 @@
 
 var express = require('express');
 var controller = require('./song.controller');
+var cors = require('cors');
 
 var router = express.Router();
+router.use(cors());
 
 router.get('/', controller.index);
 router.get('/:id', controller.show);

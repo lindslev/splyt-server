@@ -4,8 +4,10 @@ var express = require('express');
 var controller = require('./user.controller');
 var config = require('../../config/environment');
 var auth = require('../../auth/auth.service');
+var cors = require('cors');
 
 var router = express.Router();
+router.use(cors());
 
 router.get('/', auth.hasRole('admin'), controller.index);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);
