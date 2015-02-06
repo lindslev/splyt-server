@@ -1,18 +1,18 @@
 
 <div ng-controller="QueueCtrl" layout="column" layout-fill>
-    <md-toolbar>
-
-            <h3>
-        <span>PLAYA PLAYA</span>
-      </h3>
-
-    </md-toolbar>
+    <md-tabs md-selected='selectedIndex'>
+      <md-tab ng-repeat='tab in tabs' ng-disabled='tab.disabled' label='{{tab.title}}'>
+      <div class="demo-tab tab{{$index%4}}" layout="column" layout-fill layout-align="space-around-center">
+        <div ng-bind="tab.content"></div>
+      </div>
+    </md-tab>
+  </md-tabs>
     <md-content class="md-padding" style="height: 300px;">
            <h3>NOW PLAYING</h3>
         <div class='col-md-4'></div>
         <div class= "col-md-4" >
 
-        <iframe id="ytplayer" type="text/html" width="300" height="200" src="http://www.youtube.com/embed/JI5noh4OyXc?autoplay=1&iv_load_policy=3" frameborder="0" />
+        <!-- <iframe id="ytplayer" type="text/html" width="300" height="200" src="http://www.youtube.com/embed/JI5noh4OyXc?autoplay=1&iv_load_policy=3" frameborder="0" /> -->
         </div>
         <div class='col-md-4'></div>
     </md-content>
@@ -28,10 +28,10 @@
                         <h3>{{song.title}}</h3>
                         <h4>{{song.artist}}</h4>
                         <p>{{song.source}}</p>
-                        <md-button class="md-primary">
+                        <md-button class="md-primary" aria-label='none'>
                             <ng-md-icon ng-click= 'play(index)'icon="play_arrow" size='30'></ng-md-icon>
                         </md-button>
-                        <md-button class="md-primary">
+                        <md-button class="md-primary" aria-label='none'>
                             <ng-md-icon icon="clear" size='30'></ng-md-icon>
                         </md-button>
                     </div>
