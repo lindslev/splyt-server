@@ -6,13 +6,18 @@ angular.module('splytApp')
     // Public API here
     return {
       createPlaylist: function (playlistobj) {
-        return $http.post('api/playlist' + Auth.getCurrentUser()._id, playlistobj);
+        return $http.post('api/playlists/user/' + Auth.getCurrentUser()._id, playlistobj);
       },
       getPlaylists: function () {
         return $http.get('api/users/' + Auth.getCurrentUser()._id + '/playlists');
       },
-      removePlaylists: function () {
-        return meaningOfLife;
+      removePlaylists: function (playlistobj) {
+        return $http.delete('api/playlists/' + playlistobj._id, playlistobj, function(err, data){
+          console.log('stuff', arguments);
+        })
+      },
+      getSpecificPlaylist: function(playlistobj){
+        return $http.get('api/playlists/' + playlistobj._id)
       },
       getFollowers: function () {
         return meaningOfLife;
