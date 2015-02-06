@@ -1,9 +1,10 @@
 <h1>List of your Awesome playlists</h1>
 <li ng-repeat = "playlist in playlists">
-	{{playlist.title}}<button ng-click = "removePlaylist($index)"><ng-md-icon icon="clear"></ng-md-icon></button>
+	<div ng-click= "getSpecificPlaylist($index)">{{playlist.title}}</div><button ng-click = "removePlaylist($index)"><ng-md-icon icon="clear"></ng-md-icon></button>
 </li>
 
 <h1>Create New Playlist</h1>
 title 
 <input ng-model="newPlaylist.title"><button ng-click = "createPlaylist()">Submit</button>
-
+SONGSSSS
+{{songs}}

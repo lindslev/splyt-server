@@ -66,7 +66,6 @@ exports.create = function(req, res, next) {
         }, config.secrets.session, {
             expiresInMinutes: 60 * 5
         });
-        console.log("TESTING ORDER");
         res.json({
             token: token
         });

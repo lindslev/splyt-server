@@ -14,9 +14,10 @@ exports.index = function(req, res) {
 
 // Get a single playlist
 exports.show = function(req, res) {
-  Playlist.findById(req.params.id, function (err, playlist) {
+  Playlist.findById(req.params.id).populate('songs').exec(function (err, playlist) {
     if(err) { return handleError(res, err); }
     if(!playlist) { return res.send(404); }
+    console.log('controller playlist with songs', playlist);
     return res.json(playlist);
   });
 };

@@ -15,7 +15,7 @@ angular.module('splytApp')
         return $http.delete('api/playlists/' + playlistobj._id, playlistobj);
       },
       getSpecificPlaylist: function(playlistobj){
-        return $http.get('api/playlists/' + playlistobj._id)
+        return $http.get('api/playlists/' + playlistobj._id);
       },
       getFollowers: function () {
         return meaningOfLife;

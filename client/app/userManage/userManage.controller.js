@@ -15,6 +15,14 @@ angular.module('splytApp')
             }
         });
 
+        //Get Specific Playlist
+        $scope.getSpecificPlaylist = function(index){
+            var getSpecificPlaylistPromise = manage.getSpecificPlaylist($scope.playlists[index]);
+            getSpecificPlaylistPromise.success(function(onePlaylist){
+                $scope.songs = onePlaylist.songs;
+            })
+        }
+
         //Create Playlist
         $scope.newPlaylist = {};
 
@@ -27,9 +35,7 @@ angular.module('splytApp')
 
         //Delete Playlist
         $scope.removePlaylist = function(index){
-        	/*return(!$scope.playlists[index]);*/
         	var removePlaylistPromise = manage.removePlaylists($scope.playlists[index]);
-        	console.log(removePlaylistPromise);
         	$scope.playlists.splice(index, 1);
         }
 
