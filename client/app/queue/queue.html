@@ -1,9 +1,9 @@
 
 <div ng-controller="QueueCtrl" layout="column" layout-fill>
     <md-tabs md-selected='selectedIndex'>
-      <md-tab ng-repeat='tab in playlist_tabs' ng-disabled='tab.disabled' label='{{tab.title}}'>
+      <md-tab ng-repeat='tab in tabs' ng-disabled='tab.disabled' label='{{tab.title}}'>
       <div class="demo-tab tab{{$index%4}}" layout="column" layout-fill layout-align="space-around-center">
-        <div ng-bind="tab.title playlist">{{tab.title}} Playlist</div>
+        <div ng-bind="tab.content"></div>
       </div>
     </md-tab>
   </md-tabs>

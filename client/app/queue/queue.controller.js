@@ -6,6 +6,12 @@ angular.module('splytApp')
   $scope.songs = [];
   $scope.playlist_tabs = [];
 
+  var tabs = [
+    {title: 'Main', content: 'This is all of your recently added songs'},
+    {title: 'Friends\' Music', content:'This is all of your friends\' tracks'}
+  ];
+
+  $scope.tabs = tabs;
 
     // $scope.addYoutubePlaylist = function(){
     // //HARDCODED CODE
