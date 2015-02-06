@@ -12,8 +12,7 @@ angular.module('splytApp')
         return $http.get('api/users/' + Auth.getCurrentUser()._id + '/playlists');
       },
       removePlaylists: function (playlistobj) {
-        return $http.delete('api/playlists/' + playlistobj._id, playlistobj, function(err, data){
-          console.log('stuff', arguments);
+        return $http.delete('api/playlists/' + playlistobj._id, playlistobj);
         })
       },
       getSpecificPlaylist: function(playlistobj){
