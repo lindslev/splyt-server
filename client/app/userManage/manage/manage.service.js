@@ -13,7 +13,6 @@ angular.module('splytApp')
       },
       removePlaylists: function (playlistobj) {
         return $http.delete('api/playlists/' + playlistobj._id, playlistobj);
-        })
       },
       getSpecificPlaylist: function(playlistobj){
         return $http.get('api/playlists/' + playlistobj._id)
