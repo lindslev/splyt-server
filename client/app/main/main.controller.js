@@ -10,7 +10,8 @@ angular.module('splytApp')
 
     function cb(res) { console.log('Message sent!', res) }
     if(Auth.isLoggedIn()) {
-      chrome.runtime.sendMessage(ext_id, { action: 'LOGIN', method: '', user: $scope.currentUser },
+      var token = Auth.getToken();
+      chrome.runtime.sendMessage(ext_id, { action: 'LOGIN', method: '', user: $scope.currentUser, token: token },
        function(response) {
            cb(response);
        });
