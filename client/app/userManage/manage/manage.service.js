@@ -30,6 +30,10 @@ angular.module('splytApp')
       },
       removeSubscription: function () {
         return meaningOfLife;
+      },
+      getSong: function(song_id) {
+        return $http.get('api/songs/' + song_id)
+
       }
     };
   });

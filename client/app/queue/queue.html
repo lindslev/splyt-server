@@ -11,6 +11,17 @@
            <h3>NOW PLAYING</h3>
         <div class='col-md-4'></div>
         <div class= "col-md-4" >
+           <div class="md-tile-content">
+                        <h3>{{songs[0].title}}</h3>
+                        <h4>{{songs[0].artist}}</h4>
+                        <p>{{songs[0].source}}</p>
+                        <md-button class="md-primary" aria-label='none'>
+                            <ng-md-icon ng-click= 'play(index)'icon="play_arrow" size='30'></ng-md-icon>
+                        </md-button>
+                        <md-button class="md-primary" aria-label='none'>
+                            <ng-md-icon icon="clear" size='30'></ng-md-icon>
+                        </md-button>
+                    </div>
 
         <!-- <iframe id="ytplayer" type="text/html" width="300" height="200" src="http://www.youtube.com/embed/JI5noh4OyXc?autoplay=1&iv_load_policy=3" frameborder="0" /> -->
         </div>

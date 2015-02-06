@@ -27,6 +27,8 @@ angular.module('splytApp')
 
   var playlistPromise = manage.getPlaylists();
 
+
+
   //Getting playlists
 
   playlistPromise.success(function(playlists) {
@@ -36,12 +38,14 @@ angular.module('splytApp')
       if (playlists[i].aggregate_stream === true) {
         console.log(playlists[i]);
         for (var j = 0; j < playlists[i].songs.length; j++) {
-//IMPORTANT - only getting song ids right now, need to look up
-//song objects later
-          $scope.songs.push(playlists[i].songs[j]);
+          var songPromise = manage.getSong(playlists[i].songs[j]);
+          songPromise.success(function(song) {
+            $scope.songs.push(song);
+          })
         }
       }
     }
+
   })
 
 
