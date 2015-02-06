@@ -5,10 +5,10 @@ var mongoose = require('mongoose'),
   User = require('../user/user.model');
 
 var PlaylistSchema = new Schema({
-	title: {type: String, require: true },
-	songs:[{ type: Schema.Types.ObjectId, ref: 'Song' }],
-  friend_stream: { type: Boolean, default: false },
-  aggregate_stream: {type: Boolean, default: false }
+    title: {type: String, require: true },
+    songs:[{ type: Schema.Types.ObjectId, ref: 'Song' }],
+    friend_stream: { type: Boolean, default: false },
+    aggregate_stream: {type: Boolean, default: false }
 });
 
 PlaylistSchema.statics.addNewSong = function(song, playlist, userid, cb) {
@@ -35,5 +35,17 @@ PlaylistSchema.statics.addNewSong = function(song, playlist, userid, cb) {
     }
   );
 }
+
+
+//HOOKS
+
+PlaylistSchema.pre('remove', function(next){
+    this.model('User').update(
+        {playlist: this._id}, 
+        {$pull: {playlist: this._id}}, 
+        {multi: true},
+        next
+    );
+});
 
 module.exports = mongoose.model('Playlist', PlaylistSchema);

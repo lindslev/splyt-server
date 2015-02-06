@@ -2,6 +2,7 @@
 
 var _ = require('lodash');
 var Playlist = require('./playlist.model');
+var User = require('../user/user.model')
 
 // Get list of playlists
 exports.index = function(req, res) {
@@ -22,8 +23,13 @@ exports.show = function(req, res) {
 
 // Creates a new playlist in the DB.
 exports.create = function(req, res) {
+  var userid = req.params.id;
+  console.log('req.body', req.body);
   Playlist.create(req.body, function(err, playlist) {
     if(err) { return handleError(res, err); }
+    User.savePlaylist(userid, playlist, function(err, data){
+      console.log('sending to User', data);
+    })
     return res.json(201, playlist);
   });
 };
