@@ -2,9 +2,19 @@
 
 angular.module('splytApp')
   .controller('MainCtrl', function ($scope, $http, socket, youtube, Auth) {
+    var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
+
+
     $scope.awesomeThings = [];
     $scope.currentUser = Auth.getCurrentUser();
-    console.log($scope.currentUser);
+
+    function cb(res) { console.log('Message sent!', res) }
+    if(Auth.isLoggedIn()) {
+      chrome.runtime.sendMessage(ext_id, { action: 'LOGIN', method: '', user: $scope.currentUser },
+       function(response) {
+           cb(response);
+       });
+    }
 
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
