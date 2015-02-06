@@ -14,7 +14,7 @@ router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 router.get('/me', auth.isAuthenticated(), controller.me);
 router.get('/:id/playlists', auth.isAuthenticated(), controller.getPlaylists);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
-router.post('/addSong/:id/playlist/:listid', controller.addSong); //should be auth.isAuthenitcated(), controller..
+router.post('/addSong/:id/playlist/:listid', auth.isAuthenticated(), controller.addSong);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.post('/', controller.create);
 
