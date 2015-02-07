@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('splytApp')
-    .controller('UserManageCtrl', function($scope, Auth, manage) {
+    .controller('UserManageCtrl', function($scope, Auth, manage, user) {
 
-		//Getting Playlists
+        //Getting Playlists
         var getPlaylistPromise = manage.getPlaylists();
 
         getPlaylistPromise.success(function(playlists) {
@@ -38,5 +38,25 @@ angular.module('splytApp')
         	var removePlaylistPromise = manage.removePlaylists($scope.playlists[index]);
         	$scope.playlists.splice(index, 1);
         }
+
+        
+
+        //Gets users
+        
+        $scope.getUsers = function(selectedUser){
+            var getUsersPromise = user.getUsers(selectedUser)
+            getUsersPromise.success(function(data){
+                if(data === []){console.log("no users")}
+                    else{
+                        $scope.userList = data;
+                    }
+            })
+        }
+
+        //Subscribe
+        $scope.subscribe = function(index){
+            var subscribePromise = user.setSubscription($scope.userList[index])
+        }
+
 
     });

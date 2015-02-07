@@ -2,7 +2,7 @@
 
 angular.module('splytApp')
   .controller('MainCtrl', function ($scope, $http, socket, youtube, Auth) {
-    var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
+    var ext_id = "gdhknebfhjejaifmglhjnpmilklnkjlg";
 
 
     $scope.awesomeThings = [];

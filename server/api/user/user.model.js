@@ -281,6 +281,27 @@ UserSchema.statics = {
           console.log("WE here user model", model);
           cb(err, model);
       })
+  },
+
+    /**
+   * Set Subscription
+   *
+   */
+  setSubscription: function(currentUser, followingUser, cb) {
+    var Users = this;
+      this.findByIdAndUpdate(currentUser,
+        {$push: {'following': followingUser._id}},
+        { safe: true, upsert: true },
+
+        function(err, model) {
+            Users.findByIdAndUpdate(followingUser._id,
+                {$push: {'followers': currentUser}},
+                { safe: true, upsert: true},
+                function (err, model2) {
+                    console.log('model2', model2);
+                    cb(err, model, model2);    
+                });
+      })
   }
 };
 
