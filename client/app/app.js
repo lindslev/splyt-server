@@ -8,7 +8,8 @@ angular.module('splytApp', [
   'ui.router',
   'ui.bootstrap',
   'ngMaterial',
-  'ngMdIcons'
+  'ngMdIcons',
+  'ui.router'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
     $urlRouterProvider

@@ -1,0 +1,16 @@
+<h1>Here is the playlist</h1>
+
+<div class="md-tile-content">
+  <ul>
+    <li ng-repeat='song in songs'>
+      <h3>{{song.title}}</h3>
+      <h4>{{song.artist}}</h4>
+      <p>{{song.source}}</p>
+    <md-button class="md-primary" aria-label='none'>
+        <ng-md-icon ng-click='play(index)' icon="play_arrow" size='30'></ng-md-icon>
+    </md-button>
+    <md-button class="md-primary" aria-label='none'>
+        <ng-md-icon icon="clear" size='30'></ng-md-icon>
+    </md-button>
+  </ul>
+</div>
