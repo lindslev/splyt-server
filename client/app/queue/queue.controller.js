@@ -1,31 +1,25 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('QueueCtrl', function ($scope, youtube, $sanitize, $sce, manage, $log) {
+  .controller('QueueCtrl', function (playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state) {
 
-  $scope.songs = [];
-  $scope.playlist_tabs = [];
 
-  var tabs = [
-    {title: 'Main', content: 'This is all of your recently added songs'},
-    {title: 'Friends\' Music', content:'This is all of your friends\' tracks'}
-  ];
+  $scope.songs = playlist.songs;
+  $scope.playlist = playlist;
 
-  $scope.tabs = tabs;
+  $scope.playlist_tabs=[];
 
-    // $scope.addYoutubePlaylist = function(){
-    // //HARDCODED CODE
-    //   youtube.getYoutubeVideo("zol2MJf6XNE").then(function(res){
-    //       res.embedded = $sce.trustAsHtml(res.embed);
-    //       $scope.songs.push(res);
-    //    });
-    // }
+  $scope.tabs = $scope.playlist_tabs;
 
-  // for (var i = 0; i < 15; i++) {
-  //   $scope.addYoutubePlaylist();
-  // }
+  $scope.update_songs = function(id) {
+    console.log('update_songs');
+    $state.go('queue',{playlist_id: id}, true);
+  }
+
 
   var playlistPromise = manage.getPlaylists();
+
+
 
   //Getting playlists
 
@@ -34,17 +28,14 @@ angular.module('splytApp')
     for (var i = 0; i < playlists.length; i++) {
       $scope.playlist_tabs.push(playlists[i]);
       if (playlists[i].aggregate_stream === true) {
-        console.log(playlists[i]);
-        for (var j = 0; j < playlists[i].songs.length; j++) {
-//IMPORTANT - only getting song ids right now, need to look up
-//song objects later
-          $scope.songs.push(playlists[i].songs[j]);
-        }
+        $scope.main_playlist = playlists[i];
+
+      } if (playlists[i].friend_stream === true) {
+        $scope.friend_playlist = playlists[i];
       }
     }
-  })
-
-
-
-
+  }).then(function(){
+    console.log($scope.playlist_tabs);
   });
+
+});

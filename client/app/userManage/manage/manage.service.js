@@ -2,7 +2,6 @@
 
 angular.module('splytApp')
     .factory('manage', function(Auth, $http) {
-
         return {
             createPlaylist: function(playlistobj) {
                 return $http.post('api/playlists/user/' + Auth.getCurrentUser()._id, playlistobj);
@@ -18,3 +17,4 @@ angular.module('splytApp')
             }
         };
     });
+
