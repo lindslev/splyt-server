@@ -41,8 +41,8 @@ PlaylistSchema.statics.addNewSong = function(song, playlist, userid, cb) {
 
 PlaylistSchema.pre('remove', function(next){
     this.model('User').update(
-        {playlist: this._id}, 
-        {$pull: {playlist: this._id}}, 
+        {playlist: this._id},
+        {$pull: {playlist: this._id}},
         {multi: true},
         next
     );

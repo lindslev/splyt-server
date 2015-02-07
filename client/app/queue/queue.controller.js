@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('QueueCtrl', function (playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state) {
+  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state) {
 
 
   $scope.songs = playlist.songs;
@@ -16,10 +16,13 @@ angular.module('splytApp')
     $state.go('queue',{playlist_id: id}, true);
   }
 
+  var player = new Audio('/api/youtubes/stream/at3FPJaAwoY')
+  player.preload = 'metadata';
+  player.play();
+  player.controls = true;
+  document.body.appendChild(player);
 
   var playlistPromise = manage.getPlaylists();
-
-
 
   //Getting playlists
 
