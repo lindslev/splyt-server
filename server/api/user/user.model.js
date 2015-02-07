@@ -212,30 +212,6 @@ UserSchema.methods = {
         });
       });
     }
-    //     //soundcloud
-    //     if (song_obj.song.action === 'newSCSong') {
-    //         Song.createSoundcloud(song_obj, function(err, song) {
-    //             UserSchema.staticspropagateToFollowers(song, User.followers);
-    //         });
-    //         //youtube
-    //     } else if (song_obj.song.action === 'newYoutubeSong') {
-    //         if (song_obj.song.args.info.items[0].snippet.categoryId == "10") {
-    //             Song.createYoutube(song_obj, function(err, song) {
-    //                 UserSchema.statics.propagateToFollowers(song, User.followers);
-    //             });
-    //         } else {
-    //             console.log('Youtube video category is not music')
-    //         }
-    //         //spotify
-    //     } else if (song_obj.song.action === 'newSpotifySong') {
-    //         Song.createSpotify(song_obj, function(err, song) {
-    //             UserSchema.statics.propagateToFollowers(song, User.followers);
-    //         });
-    //     } else {
-    //         //error
-    //         throw new Error('song source is not supported');
-    //     }
-    // }
 };
 
 /**
@@ -305,7 +281,7 @@ UserSchema.statics = {
                 { safe: true, upsert: true},
                 function (err, model2) {
                     console.log('model2', model2);
-                    cb(err, model, model2);    
+                    cb(err, model, model2);
                 });
       })
   }
