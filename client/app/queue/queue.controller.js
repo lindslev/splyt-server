@@ -1,38 +1,21 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('QueueCtrl', function ($scope, youtube, $sanitize, $sce, manage, $log) {
+  .controller('QueueCtrl', function (playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state) {
 
-  $scope.songs = [
 
-  ];
-  $scope.playlist_tabs = [];
-  $scope.friend_songs = [];
+  $scope.songs = playlist.songs;
+  $scope.playlist = playlist;
 
-  var tabs = [
-    {title: 'Main', id:'1', content: 'content 1' },
-    {title: 'Friends\' Music', id:'2', content: 'content 2'}
-  ];
+  $scope.playlist_tabs=[];
 
-  $scope.tabs = tabs;
+  $scope.tabs = $scope.playlist_tabs;
+
   $scope.update_songs = function(id) {
-    console.log(id);
+    console.log('update_songs');
+    $state.go('queue',{playlist_id: id}, true);
   }
 
-    $scope.addYoutubePlaylist = function(){
-    //HARDCODED CODE
-
-          $scope.songs.push({
-            title:'random song',
-            artist: 'random artist',
-            source:'my source'
-          });
-
-    }
-
-  for (var i = 0; i < 15; i++) {
-    $scope.addYoutubePlaylist();
-  }
 
   var playlistPromise = manage.getPlaylists();
 
@@ -51,23 +34,8 @@ angular.module('splytApp')
         $scope.friend_playlist = playlists[i];
       }
     }
+  }).then(function(){
+    console.log($scope.playlist_tabs);
   });
 
-  // for (var j = 0; j < playlists[i].songs.length; j++) {
-  //   var songPromise = manage.getSong(playlists[i].songs[j]);
-  //   songPromise.success(function(song) {
-  //     $scope.songs.push(song);
-  //   })
-  // }
-
-  // for (var j = 0; j < playlists[i].songs.length; j++) {
-  //   var songPromise = manage.getSong(playlists[i].songs[j]);
-  //   songPromise.success(function(song) {
-  //     $scope.songs.push(song);
-  //   });
-  // }
-
-
-
-
-  });
+});
