@@ -11,18 +11,14 @@ angular.module('splytApp')
 
   $scope.tabs = $scope.playlist_tabs;
 
+//Updating playlist songs when user clicks on new tab
   $scope.update_songs = function(id) {
     console.log('update_songs');
-    $state.go('queue',{playlist_id: id}, true);
+    $state.go('queue', { playlist_id: id }, true);
   }
 
-
+//Getting playlists
   var playlistPromise = manage.getPlaylists();
-
-
-
-  //Getting playlists
-
   playlistPromise.success(function(playlists) {
     $scope.playlists = [];
     for (var i = 0; i < playlists.length; i++) {
