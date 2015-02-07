@@ -46,25 +46,25 @@ User.find({}).remove(function() {
     provider: 'local',
     role: 'admin',
     name: 'Kim Kardashian',
-    email: 'admin@admin.com',
+    email: 'kim@admin.com',
     password: 'admin'
   },{
     provider: 'local',
     role: 'admin',
     name: 'Jesus',
-    email: 'admin@admin.com',
+    email: 'jesus@admin.com',
     password: 'admin'
   },{
     provider: 'local',
     role: 'admin',
     name: 'Bob Dylan',
-    email: 'admin@admin.com',
+    email: 'bob@admin.com',
     password: 'admin'
   },{
     provider: 'local',
     role: 'admin',
     name: 'Usher',
-    email: 'admin@admin.com',
+    email: 'usher@admin.com',
     password: 'admin'
   }, function() {
       console.log('finished populating users');

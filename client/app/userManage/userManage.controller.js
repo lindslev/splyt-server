@@ -14,6 +14,24 @@ angular.module('splytApp')
                 }
             }
         });
+        //Get Followers and Subscriptions 
+        var getFollowersandSubscriptionsPromise = user.getFollowersandSubscriptions();
+
+        getFollowersandSubscriptionsPromise.success(function(user){
+            $scope.currentUserSubscriptions = user.subscriptions;
+            $scope.currentUserFollowers = user.followers;
+        })
+        //Gets users
+        
+        $scope.getUsers = function(selectedUser){
+            var getUsersPromise = user.getUsers(selectedUser)
+            getUsersPromise.success(function(data){
+                if(!data){console.log("no users")}
+                    else{
+                        $scope.userList = data;
+                    }
+            })
+        }
 
         //Get Specific Playlist
         $scope.getSpecificPlaylist = function(index){
@@ -27,36 +45,63 @@ angular.module('splytApp')
         $scope.newPlaylist = {};
 
         $scope.createPlaylist = function() {
-			var createPlaylistPromise = manage.createPlaylist($scope.newPlaylist);
-			createPlaylistPromise.success(function(playlist){
-				$scope.playlists.push(playlist);
-			})
+            var createPlaylistPromise = manage.createPlaylist($scope.newPlaylist);
+            createPlaylistPromise.success(function(playlist){
+                $scope.playlists.push(playlist);
+            })
         }
 
         //Delete Playlist
         $scope.removePlaylist = function(index){
-        	var removePlaylistPromise = manage.removePlaylists($scope.playlists[index]);
-        	$scope.playlists.splice(index, 1);
+            var removePlaylistPromise = manage.removePlaylists($scope.playlists[index]);
+            $scope.playlists.splice(index, 1);
         }
 
-        
-
-        //Gets users
-        
-        $scope.getUsers = function(selectedUser){
-            var getUsersPromise = user.getUsers(selectedUser)
-            getUsersPromise.success(function(data){
-                if(data === []){console.log("no users")}
-                    else{
-                        $scope.userList = data;
-                    }
-            })
-        }
 
         //Subscribe
         $scope.subscribe = function(index){
-            var subscribePromise = user.setSubscription($scope.userList[index])
+            if($scope.currentUserSubscriptions.indexOf($scope.userList[index]) === -1){
+                var subscribePromise = user.setSubscription($scope.userList[index]);
+                subscribePromise.success(function(subscription){
+                    $scope.currentUserSubscriptions.push($scope.userList[index]);
+                })
+            }
+            else{
+                console.log('already subscribed');
+            }
         }
+
+        //Remove subscriptions
+        $scope.removeSubscription = function(index){
+            console.log('front end', $scope.currentUserSubscriptions[index])
+            var removeSubscriptionPromise = user.removeSubscription($scope.currentUserSubscriptions[index]);
+            $scope.currentUserSubscriptions.splice(index, 1);
+        }
+
+        //Get specific User
+        $scope.getSpecificUser = function(index){
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     });

@@ -28,7 +28,7 @@ exports.index = function(req, res) {
  */
 exports.getUsers = function(req, res) {
     console.log('req.params', req.params);
-    User.find({name: new RegExp(req.params.id, 'gi')}).exec(function(err, users){
+    User.find({name: new RegExp(req.params.name, 'gi')}).exec(function(err, users){
         console.log('backend controller', users);
         if (err) return res.send(500, err);
         res.json(200, users);
@@ -56,17 +56,38 @@ exports.addSong = function(req, res) {
 exports.getPlaylists = function(req, res) {
     var userid = req.params.id;
     User.getPlaylists(userid, function(err, user) {
-        console.log('user controller', user);
+        console.log('user controller getPlaylists', user);
         res.json(200, user.playlist);
+    });
+}
+/**
+ * Gets Followers and Subscriptions for Current User
+ */
+exports.getFollowersandSubscriptions = function(req, res) {
+    var userid = req.params.id;
+    User.getFollowersandSubscriptions(userid, function(err, user) {
+        console.log('user controller getFollowersandSubscriptions', user);
+        res.json(200, user);
     });
 }
 /**
  * Set Subscription
  */
 exports.setSubscription = function(req, res) {
-    console.log('req.body', req.body);
+    console.log('req.body setSubscription', req.body);
     User.setSubscription(req.params.id, req.body, function(err, user) {
         console.log('user controller', user);
+        res.json(200, user);
+    });
+}
+/**
+ * Remove Subscription
+ */
+exports.removeSubscription = function(req, res) {
+    console.log('req.body removeSubscription controller', req.body);
+    User.removeSubscription(req.params.id, req.body, function(err, user) {
+        console.log('removeSubscription errrr', err);
+        console.log('user controller removeSubscription', user);
         res.json(200, user);
     });
 }
