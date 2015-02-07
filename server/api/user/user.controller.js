@@ -22,6 +22,18 @@ exports.index = function(req, res) {
         res.json(200, users);
     });
 };
+/**
+ * Search for users
+ * 
+ */
+exports.getUsers = function(req, res) {
+    console.log('req.params', req.params);
+    User.find({name: new RegExp(req.params.id, 'gi')}).exec(function(err, users){
+        console.log('backend controller', users);
+        if (err) return res.send(500, err);
+        res.json(200, users);
+    }); 
+};
 
 /**
  * Checks for song source and sends it to proper place
@@ -48,7 +60,16 @@ exports.getPlaylists = function(req, res) {
         res.json(200, user.playlist);
     });
 }
-
+/**
+ * Set Subscription
+ */
+exports.setSubscription = function(req, res) {
+    console.log('req.body', req.body);
+    User.setSubscription(req.params.id, req.body, function(err, user) {
+        console.log('user controller', user);
+        res.json(200, user);
+    });
+}
 /**
  * Creates a new user
  */
