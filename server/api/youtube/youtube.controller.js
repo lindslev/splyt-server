@@ -16,6 +16,7 @@ exports.getYouTube = function(req, res) {
 
 // Uses youtube-audio-stream for player
 exports.getStream = function(req, res) {
+  console.log('in here?')
 
   var requestUrl = 'http://youtube.com/watch?v=' + req.params.id;
 

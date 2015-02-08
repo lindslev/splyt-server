@@ -8,15 +8,27 @@ angular.module('splytApp')
 
   $scope.play = function(song) {
     if(song.source == 'SoundCloud') {
-       SC.get("/tracks/" + song.id, {}, function(sound, error) {
+      console.log('in here?', song.tag)
+       SC.get("/tracks/" + song.tag, {}, function(sound, error) {
         $('#music').attr('src', sound.stream_url + '?client_id=7af759eb774be5664395ed9afbd09c46');
+        console.log('music source', $('#music').attr('src'))
       });
     }
     if(song.source == 'YouTube') {
-      $('#music').attr('src', '/api/youtubes/stream/' + song.id);
+      console.log('in here?', song.tag)
+      $('#music').attr('src', '/api/youtubes/stream/' + song.tag);
+    }
+    if(song.source == 'Tumblr') {
+      $('#music').attr('src', song.audioSource)
     }
     // $scope.playTrack();
   }
+
+  var player = new Audio('/api/youtubes/stream/at3FPJaAwoY')
+  player.preload = 'metadata';
+  player.play();
+  player.controls = true;
+  document.body.appendChild(player);
 
   $scope.playlist = playlist;
 
@@ -29,13 +41,6 @@ angular.module('splytApp')
     console.log('update_songs');
     $state.go('queue', { playlist_id: id }, true);
   }
-
-  // var player = new Audio('/api/youtubes/stream/at3FPJaAwoY')
-  // player.preload = 'metadata';
-  // player.play();
-  // player.controls = true;
-  // document.body.appendChild(player);
-
 
   // var player2 = new Audio('https://www.tumblr.com/audio_file/uncaught/101386977846/tumblr_ne5ykbG3y11qflbpe?play_key=e6ba8f023e92bbb5aaf06052cd0c6551&tumblelog=uncaught&post_id=101386977846')
   // player2.preload = 'metadata';
