@@ -46,7 +46,9 @@ body {
   margin: -25px auto 0 auto;
   display: block;
   background-image:url('../assets/images/background.jpg');
-
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
 }
 
 .logo {
