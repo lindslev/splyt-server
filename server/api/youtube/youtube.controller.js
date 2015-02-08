@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var Youtube = require('./youtube.model');
 var request = require('request');
+var youtubeStream = require('youtube-audio-stream');
 
 // Make api call to youtube for video info
 exports.getYouTube = function(req, res) {
@@ -12,6 +13,19 @@ exports.getYouTube = function(req, res) {
       res.json(body);
     })
 }
+
+// Uses youtube-audio-stream for player
+exports.getStream = function(req, res) {
+
+  var requestUrl = 'http://youtube.com/watch?v=' + req.params.id;
+
+  try {
+    youtubeStream(requestUrl).pipe(res);
+  } catch(exception) {
+    res.status(500).send(exception);
+  }
+
+};
 
 // Get list of youtubes
 exports.index = function(req, res) {
