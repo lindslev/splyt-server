@@ -15,7 +15,7 @@ angular.module('splytApp')
     if(song.source == 'YouTube') {
       $('#music').attr('src', '/api/youtubes/stream/' + song.id);
     }
-    $scope.playTrack();
+    // $scope.playTrack();
   }
 
   $scope.playlist = playlist;
