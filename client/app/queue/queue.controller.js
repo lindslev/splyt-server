@@ -24,11 +24,11 @@ angular.module('splytApp')
     // $scope.playTrack();
   }
 
-  var player = new Audio('/api/youtubes/stream/at3FPJaAwoY')
-  player.preload = 'metadata';
-  player.play();
-  player.controls = true;
-  document.body.appendChild(player);
+  // var player = new Audio('/api/youtubes/stream/at3FPJaAwoY')
+  // player.preload = 'metadata';
+  // player.play();
+  // player.controls = true;
+  // document.body.appendChild(player);
 
   $scope.playlist = playlist;
 
