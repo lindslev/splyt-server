@@ -1,3 +1,19 @@
+ <!-- <script>
+//     $(document).ready(function() {
+//         $('#audio-player').mediaelementplayer({
+//             alwaysShowControls: true,
+//             features: ['progress','playpause','volume'],
+//             audioVolume: 'horizontal',
+//             audioWidth: 400,
+//             audioHeight: 120
+//         });
+//     });
+// </script> -->
+<!-- <div class="audio-player">
+    <h1>Demo - Preview Song</h1>
+    <img class="cover" src="http://designmodo.com/demo/audioplayer/img/cover.png" alt="">
+    <audio id="audio-player" src="http://localhost:9000/api/youtubes/stream/at3FPJaAwoY" type="audio/mp3" controls="controls"></audio>
+</div> -->
 
 <div layout="column" layout-fill>
     <md-tabs md-selected='selectedIndex'>
@@ -5,13 +21,18 @@
           <md-content class="md-padding" style="height: 300px;">
         <div class= "col-md-4" >
           <songslist></songslist>
-        <!-- <iframe id="ytplayer" type="text/html" width="300" height="200" src="http://www.youtube.com/embed/JI5noh4OyXc?autoplay=1&iv_load_policy=3" frameborder="0" /> -->
         </div>
         <div class='col-md-4'></div>
     </md-tab>
   </md-tabs>
-
+  <audio id="music" preload="true">
+    <source src="">
+        <source src="">
+    </audio>
+  <div id="audioplayer">
+    <button id="pButton" class="play" ng-click="playTrack()"></button>
+    <div id="timeline">
+          <div id="playhead"></div>
+    </div>
+  </div>
 </div>
-
-
-
