@@ -8,6 +8,10 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
  * App-wide Styles
  */
 
+ body {
+  padding-top: 70px;
+ }
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
@@ -26,6 +30,7 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
   position: fixed;
   width: 100%;
   top: 0;
+  margin-bottom: 24px;
 }
 
 .navbar-default .navbar-nav > li > a {
