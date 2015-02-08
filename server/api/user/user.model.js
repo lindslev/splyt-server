@@ -29,7 +29,7 @@ var UserSchema = new Schema({
         type: String,
         enum: ['private', 'public']
     },
-    following: [{
+    subscriptions: [{
         type: Schema.Types.ObjectId,
         ref: 'User'
     }],
@@ -205,30 +205,12 @@ UserSchema.methods = {
 
     //user adds new song
     addSong: function(song_obj) {
-        var User = this;
-        //soundcloud
-        if (song_obj.song.action === 'newSCSong') {
-            Song.createSoundcloud(song_obj, function(err, song) {
-                UserSchema.staticspropagateToFollowers(song, User.followers);
-            });
-            //youtube
-        } else if (song_obj.song.action === 'newYoutubeSong') {
-            if (song_obj.song.args.info.items[0].snippet.categoryId == "10") {
-                Song.createYoutube(song_obj, function(err, song) {
-                    UserSchema.statics.propagateToFollowers(song, User.followers);
-                });
-            } else {
-                console.log('Youtube video category is not music')
-            }
-            //spotify
-        } else if (song_obj.song.action === 'newSpotifySong') {
-            Song.createSpotify(song_obj, function(err, song) {
-                UserSchema.statics.propagateToFollowers(song, User.followers);
-            });
-        } else {
-            //error
-            throw new Error('song source is not supported');
-        }
+      var User = this;
+      Song.createSong(song_obj, function(err, song) {
+        UserSchema.statics.propagateToFollowers(song, User.followers, function(err, data) {
+          console.log(err);
+        });
+      });
     }
 };
 
@@ -245,12 +227,20 @@ UserSchema.statics = {
           done(err, user);
     })
   },
+      /**
+   * Populates user with followers and subscriptions objects
+   *
+   */
+  getFollowersandSubscriptions : function(userId, done) {
+    this.findById(userId).populate('subscriptions followers').exec(function(err, user){
+          done(err, user);
+    })
+  },
 
     /**
    * Sends new song to followers
    *
    */
-
   propagateToFollowers : function(song, follower_array) {
     var Users = this;
     _.forEach(follower_array, function(id) {
@@ -267,8 +257,6 @@ UserSchema.statics = {
       });
     })
   },
-
-
   /**
    * Populates user with playlist objects
    *
@@ -278,7 +266,7 @@ UserSchema.statics = {
         {$push: {'playlist': playlistobj}},
         { safe: true, upsert: true },
         function(err, model) {
-          console.log("WE here user model", model);
+          console.log("savePlaylist WE here user model", model);
           cb(err, model);
       })
   },
@@ -287,20 +275,40 @@ UserSchema.statics = {
    * Set Subscription
    *
    */
-  setSubscription: function(currentUser, followingUser, cb) {
+  setSubscription: function(currentUser, subscription, cb) {
     var Users = this;
       this.findByIdAndUpdate(currentUser,
-        {$push: {'following': followingUser._id}},
+        {$push: {'subscriptions': subscription._id}},
         { safe: true, upsert: true },
-
         function(err, model) {
-            Users.findByIdAndUpdate(followingUser._id,
+            Users.findByIdAndUpdate(subscription._id,
                 {$push: {'followers': currentUser}},
                 { safe: true, upsert: true},
                 function (err, model2) {
                     console.log('model2', model2);
-                    cb(err, model, model2);    
+                    cb(err, model, model2);
+
                 });
+      })
+  },
+      /**
+   * Remove Subscription
+   *
+   */
+  removeSubscription: function(currentUser, removeSubscription, cb) {
+    var Users = this;
+      this.findByIdAndUpdate(currentUser, 
+        {$pull: {'subscriptions': removeSubscription._id}},
+        function(err, data){
+            console.log('first errrrrr', err);
+            console.log('first data', data);
+            Users.findByIdAndUpdate(removeSubscription._id,
+                {$pull: {'followers': currentUser}},
+                function(err, data2){
+                    console.log('second errrrrr', err);
+                    console.log('second data', data2);
+                    cb(err, data, data2);
+                })
       })
   }
 };

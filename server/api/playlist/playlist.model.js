@@ -13,13 +13,13 @@ var PlaylistSchema = new Schema({
 
 PlaylistSchema.statics.addNewSong = function(song, playlist, userid, cb) {
   var Playlist = this;
-
   Playlist.findByIdAndUpdate(playlist,
     { $push: { "songs" : song }},
     { safe: true, upsert: true },
-    function( err, model ) {
+    function( err, model) {
       if ( playlist.aggregate_stream === false ) {
         User.findById(userid, function(err, user) {
+          console.log('user', user);
           _.findWhere(user.playlists, {'aggregate_stream': true }, function(err, playlist) {
             Playlist.findByIdAndUpdate(playlist,
               { $push: {"songs" : song }},
@@ -30,10 +30,11 @@ PlaylistSchema.statics.addNewSong = function(song, playlist, userid, cb) {
           })
         })
       } else {
-      //cb(err, model);
+        cb(err, model);
       }
     }
   );
+
 }
 
 

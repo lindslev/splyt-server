@@ -8,10 +8,16 @@ title
 <input ng-model="newPlaylist.title"><button ng-click = "createPlaylist()">Submit</button>
 SONGSSSS
 {{songs}}
-
+<h1>SEARCH foooo Subscriptions</h1>
 <input type="text" ng-model="nameFilter" placeholder="Search..."/><button ng-click = "getUsers(nameFilter)">Submit</button>
 <br>
 UserList
 <li ng-repeat = "user in userList">
 {{user.name}}<button ng-click = "subscribe($index)"></button>
+</li>
+
+<br>
+<h1>Here are your subscriptions!!</h1>
+<li ng-repeat = "subscription in currentUserSubscriptions">
+	<div ng-click= "getSpecificUser($index)">{{subscription.name}}</div><button ng-click = "removeSubscription($index)"><ng-md-icon icon="clear"></ng-md-icon></button>
 </li>

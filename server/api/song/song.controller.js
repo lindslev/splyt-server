@@ -20,23 +20,6 @@ exports.show = function(req, res) {
   });
 };
 
-// exports.createYoutube = function(req) {
-//   if (req.body.song.args.info.items[0].snippet.categoryId == "10") {
-//     Song.create({
-//       id: req.body.song.args.info.items[0].id,
-//       title: req.body.song.args.info.items[0].snippet.title.split('-')[1],
-//       artist: req.body.song.args.info.items[0].snippet.title.split('-')[0],
-//       link: req.body.song.args.song.permalink_url,
-//       source: 'YouTube'
-//     }), function(err, song) {
-//       if(err) { return handleError(res,err); }
-//       return res.json(201, song);
-//     }
-//   } else {
-//     console.log('category is not a song match');
-//   }
-// }
-
 // Creates a new song in the DB.
 exports.create = function(req, res) {
   Song.create(req.body, function(err, song) {
