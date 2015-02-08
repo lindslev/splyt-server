@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('MainCtrl', function ($scope, $http, socket, youtube, Auth) {
+  .controller('MainCtrl', function ($scope, $http, socket, youtube, Auth, $sanitize, $sce) {
     var ext_id = "gdhknebfhjejaifmglhjnpmilklnkjlg";
 
 

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, $sanitize, $sce) {
     var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
 
     $scope.menu = [{

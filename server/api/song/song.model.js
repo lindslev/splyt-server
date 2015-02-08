@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
     User = require('../user/user.model');
 
 var SongSchema = new Schema({
-  tag: {type: String },
+  tag: String,
   title: { type: String, required: true },
   artist: String,
   link: {type: String, required: true },
