@@ -9,7 +9,7 @@
                     <md-item-content>
                         <div class="md-tile-content">
                             <div class='left-float' ng-click="getSpecificPlaylist($index)">{{playlist.title}}</div>
-                            <md-button ng-click="removePlaylist($index)" class='md-warn button-yeah'>
+                            <md-button ng-click="removePlaylist($index)" class='md-warn button-yeah' aria-label='remove'>
                                 <ng-md-icon class='delete' icon="clear" size='15'></ng-md-icon>
                                 </button>
                         </div>
@@ -30,7 +30,13 @@
     <div class='col-sm-12 col-md-6'>
       <div class='set-width'>
         SONGSSSS {{songs}}
-        <h2>Your Suscriptions:</h2>
+        <md-item ng-repeat="song in currentPlaylistSongs">
+            <div class='font-set'>{{song.title}}</div>
+            <md-button ng-click="removeSongfromPlaylist($index)" class='md-warn button-yeah' aria-label='remove'>
+                                <ng-md-icon class='delete' icon="clear" size='15'></ng-md-icon>
+            </md-button>
+          </md-item>
+        <h2>Your Subcriptions:</h2>
         <md-item ng-repeat="subscription in currentUserSubscriptions">
             <div class='font-set' ng-click="getSpecificUser($index)">{{subscription.name}}</div>
             <md-button ng-click="removeSubscription($index)" class='md-warn button-yeah'>

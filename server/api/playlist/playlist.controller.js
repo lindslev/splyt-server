@@ -60,6 +60,12 @@ exports.destroy = function(req, res) {
     });
   });
 };
+// Remove Song from a playlist from the DB.
+exports.removeSongfromPlaylist = function(req, res) {
+    Playlist.removeSong(req.params.id, req.params.songid, function(err, song){
+      console.log('playlist controller', song);
+    });
+};
 
 function handleError(res, err) {
   return res.send(500, err);
