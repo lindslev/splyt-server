@@ -34,7 +34,14 @@ PlaylistSchema.statics.addNewSong = function(song, playlist, userid, cb) {
       }
     }
   );
+}
 
+PlaylistSchema.statics.removeSong = function(playlistid, songid, cb){
+  this.findByIdAndUpdate(playlistid,
+    {$pull:{'songs': songid}},
+    function(err, data){
+      console.log('playlist model', data);
+    })
 }
 
 
