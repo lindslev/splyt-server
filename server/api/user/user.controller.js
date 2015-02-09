@@ -24,15 +24,14 @@ exports.index = function(req, res) {
 };
 /**
  * Search for users
- * 
+ *
  */
 exports.getUsers = function(req, res) {
     console.log('req.params', req.params);
     User.find({name: new RegExp(req.params.name, 'gi')}).exec(function(err, users){
-        console.log('backend controller', users);
         if (err) return res.send(500, err);
         res.json(200, users);
-    }); 
+    });
 };
 
 /**
@@ -46,8 +45,12 @@ exports.addSong = function(req, res) {
 
     //find the user
     User.findById(req.params.id, function(err, user) {
-        user.addSong(song_obj);
-    })
+        user.addSong(song_obj, function(err, data) {
+          User.propagateToFollowers(data, user.followers, function(err, model) {
+            res.json(200, data);
+          });
+        });
+    });
 }
 
 /**
@@ -56,7 +59,6 @@ exports.addSong = function(req, res) {
 exports.getPlaylists = function(req, res) {
     var userid = req.params.id;
     User.getPlaylists(userid, function(err, user) {
-        console.log('user controller getPlaylists', user);
         res.json(200, user.playlist);
     });
 }
@@ -66,7 +68,6 @@ exports.getPlaylists = function(req, res) {
 exports.getFollowersandSubscriptions = function(req, res) {
     var userid = req.params.id;
     User.getFollowersandSubscriptions(userid, function(err, user) {
-        console.log('user controller getFollowersandSubscriptions', user);
         res.json(200, user);
     });
 }
@@ -76,7 +77,6 @@ exports.getFollowersandSubscriptions = function(req, res) {
 exports.setSubscription = function(req, res) {
     console.log('req.body setSubscription', req.body);
     User.setSubscription(req.params.id, req.body, function(err, user) {
-        console.log('user controller', user);
         res.json(200, user);
     });
 }
@@ -86,8 +86,6 @@ exports.setSubscription = function(req, res) {
 exports.removeSubscription = function(req, res) {
     console.log('req.body removeSubscription controller', req.body);
     User.removeSubscription(req.params.id, req.body, function(err, user) {
-        console.log('removeSubscription errrr', err);
-        console.log('user controller removeSubscription', user);
         res.json(200, user);
     });
 }
@@ -98,7 +96,6 @@ exports.create = function(req, res, next) {
     var newUser = new User(req.body);
     newUser.provider = 'local';
     newUser.role = 'user';
-    console.log('newuser.playlist', newUser.playlist);
     newUser.save(function(err, user) {
         if (err) {
           return validationError(res, err);
