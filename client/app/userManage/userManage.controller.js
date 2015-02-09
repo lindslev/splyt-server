@@ -43,12 +43,11 @@ angular.module('splytApp')
             getSpecificPlaylistPromise.success(function(onePlaylist){
                 $scope.currentPlaylistSongs = onePlaylist.songs;
             })
-            /*$scope.dropdown(index);*/
+            $scope.dropdown(index);
         }
 
         $scope.dropdown = function(index){
-            $scope.dropdownPlaylists = [];
-            $scope.dropdownPlaylists = $scope.playlists;
+            $scope.dropdownPlaylists = $scope.playlists.slice(0);
             $scope.dropdownPlaylists.splice(index, 1);
         }
 
