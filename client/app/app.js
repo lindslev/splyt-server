@@ -9,8 +9,7 @@ angular.module('splytApp', [
   'ui.bootstrap',
   'ngMaterial',
   'ngMdIcons',
-  'ui.router',
-  'angularjs-dropdown-multiselect'
+  'ui.router'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
     $urlRouterProvider

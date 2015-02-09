@@ -33,8 +33,6 @@ angular.module('splytApp')
             })
         }
 
-        $scope.addtoPlaylist = [];
-        $scope.playlistsettings = {displayProp: 'title', showCheckAll: false, showUncheckAll: false, externalIdProp: ''};
 
         //Get Specific Playlist
         $scope.getSpecificPlaylist = function(index){
@@ -43,13 +41,8 @@ angular.module('splytApp')
             getSpecificPlaylistPromise.success(function(onePlaylist){
                 $scope.currentPlaylistSongs = onePlaylist.songs;
             })
-            $scope.dropdown(index);
         }
 
-        $scope.dropdown = function(index){
-            $scope.dropdownPlaylists = $scope.playlists.slice(0);
-            $scope.dropdownPlaylists.splice(index, 1);
-        }
 
         //Create Playlist
         $scope.newPlaylist = {};
