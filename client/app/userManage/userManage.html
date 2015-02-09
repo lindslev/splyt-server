@@ -8,8 +8,8 @@
                 <md-item ng-repeat="playlist in playlists">
                     <md-item-content>
                         <div class="md-tile-content">
-                            <div class='left-float' ng-click="getSpecificPlaylist($index)">{{playlist.title}}</div>
-                            <md-button ng-click="removePlaylist($index)" class='md-warn button-yeah' aria-label='remove'>
+                            <div class='left-float' ui-sref='queue({playlist_id : playlist._id})'>{{playlist.title}}</div>
+                            <md-button ng-click="removePlaylist($index)" class='md-warn button-yeah'>
                                 <ng-md-icon class='delete' icon="clear" size='15'></ng-md-icon>
                                 </button>
                         </div>
