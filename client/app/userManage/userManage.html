@@ -1,23 +1,65 @@
-<h1>List of your Awesome playlists</h1>
-<li ng-repeat = "playlist in playlists">
-	<div ng-click= "getSpecificPlaylist($index)">{{playlist.title}}</div><button ng-click = "removePlaylist($index)"><ng-md-icon icon="clear"></ng-md-icon></button>
-</li>
+<div ng-include="'components/navbar/navbar.html'"></div>
+<row>
+    <div class='col-sm-12 col-md-6'>
+      <div class = 'set-width'>
+        <h2>Your playlists</h2>
+        <md-content>
+            <md-list class='font-set'>
+                <md-item ng-repeat="playlist in playlists">
+                    <md-item-content>
+                        <div class="md-tile-content">
+                            <div class='left-float' ng-click="getSpecificPlaylist($index)">{{playlist.title}}</div>
+                            <md-button ng-click="removePlaylist($index)" class='md-warn button-yeah'>
+                                <ng-md-icon class='delete' icon="clear" size='15'></ng-md-icon>
+                                </button>
+                        </div>
+                    </md-item-content>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-item>
+            </md-list>
+        </md-content>
 
-<h1>Create New Playlist</h1>
-title 
-<input ng-model="newPlaylist.title"><button ng-click = "createPlaylist()">Submit</button>
-SONGSSSS
-{{songs}}
-<h1>SEARCH foooo Subscriptions</h1>
-<input type="text" ng-model="nameFilter" placeholder="Search..."/><button ng-click = "getUsers(nameFilter)">Submit</button>
-<br>
-UserList
-<li ng-repeat = "user in userList">
-{{user.name}}<button ng-click = "subscribe($index)"></button>
-</li>
+        <h3>Create A New Playlist</h3>
+        <div>
+            <h4>Playlist Title: </h4>
+            <input ng-model="newPlaylist.title">
+            <md-button class='md-raised' ng-click="createPlaylist()">Submit</md-button>
+        </div>
+      </div>
+    </div>
+    <div class='col-sm-12 col-md-6'>
+      <div class='set-width'>
+        SONGSSSS {{songs}}
+        <h2>Your Suscriptions:</h2>
+        <md-item ng-repeat="subscription in currentUserSubscriptions">
+            <div class='font-set' ng-click="getSpecificUser($index)">{{subscription.name}}</div>
+            <md-button ng-click="removeSubscription($index)" class='md-warn button-yeah'>
+                                <ng-md-icon class='delete' icon="clear" size='15'></ng-md-icon>
+            </button>
+          </md-item>
+        <h3>Search for users to follow</h3>
+        <input type="text" ng-model="nameFilter" placeholder="Search..." />
+        <md-button class='md-raised' ng-click="getUsers(nameFilter)">Submit</md-button>
+        <br>
+        <h4 ng-if='userList'><strong>Search Results</strong></h4>
+        <md-content>
+            <md-list class='playlist'>
+                <md-item ng-repeat='user in userList'>
+                    <md-item-content>
+                        <div class='md-tile-content'>
+                            <div class='left-float'>
+                                {{user.name}}</div>
+                            <md-button class='button-yeah' aria-label='add' ng-click="subscribe($index)"class='follow-button'><ng-md-icon icon='add'size='20'></ng-md-icon></md-button>
+                        </div>
 
-<br>
-<h1>Here are your subscriptions!!</h1>
-<li ng-repeat = "subscription in currentUserSubscriptions">
-	<div ng-click= "getSpecificUser($index)">{{subscription.name}}</div><button ng-click = "removeSubscription($index)"><ng-md-icon icon="clear"></ng-md-icon></button>
-</li>
+
+                    </md-item-content>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-item>
+            </md-list>
+        </md-content>
+        <br>
+      </div>
+    </div>
+  </div>
+  </row>
