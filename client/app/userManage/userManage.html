@@ -34,7 +34,8 @@
             <div class='font-set'>{{song.title}}</div>
             <md-button ng-click="removeSongfromPlaylist($index)" class='md-warn button-yeah' aria-label='remove'>
                                 <ng-md-icon class='delete' icon="clear" size='15'></ng-md-icon>
-            </button>
+            </md-button>
+            <div ng-dropdown-multiselect="" options="dropdownPlaylists" selected-model="addtoPlaylist" extra-settings="playlistsettings"></div>
           </md-item>
         <h2>Your Subcriptions:</h2>
         <md-item ng-repeat="subscription in currentUserSubscriptions">
