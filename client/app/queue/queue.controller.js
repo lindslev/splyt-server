@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state) {
+  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, $mdSidenav) {
 
 
   $scope.songs = playlist.songs;
