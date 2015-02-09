@@ -58,15 +58,13 @@ var transformations = {
 }
 
 //add songs according to collection
-SongSchema.statics.createSong = function(song_obj) {
+SongSchema.statics.createSong = function(song_obj, cb) {
 
   var Song = this;
   var song_data = transformations[song_obj.song.action](song_obj.song);
-  console.log('song_data', song_data)
   Song.create(song_data, function(err, data) {
-    console.log('data in song.create', data);
     Playlist.addNewSong(data, song_obj.playlist, song_obj.userid, function(err, model) {
-      if (err)console.log(err);
+      cb(err, data);
     });
   });
 }

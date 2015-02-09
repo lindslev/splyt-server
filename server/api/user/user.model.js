@@ -204,12 +204,9 @@ UserSchema.methods = {
     },
 
     //user adds new song
-    addSong: function(song_obj) {
-      var User = this;
+    addSong: function(song_obj, cb) {
       Song.createSong(song_obj, function(err, song) {
-        UserSchema.statics.propagateToFollowers(song, User.followers, function(err, data) {
-          console.log(err);
-        });
+        cb(err, song);
       });
     }
 };
@@ -241,21 +238,23 @@ UserSchema.statics = {
    * Sends new song to followers
    *
    */
-  propagateToFollowers : function(song, follower_array) {
+  propagateToFollowers : function(song, follower_array, cb) {
     var Users = this;
     _.forEach(follower_array, function(id) {
-      Users.findById(id, function(err, user) {
-        _.findWhere(user.playlists, {'friend_stream' : true }, function(err, playlist) {
-           Playlist.findByIdAndUpdate(playlist,
+      Users.findById(id).populate('playlist').exec(function(err, user){
+         _.forEach(user.playlist, function(playlist) {
+          if (playlist.friend_stream === true) {
+           Playlist.findByIdAndUpdate(playlist._id,
             { $push: { "songs" : song }},
             { safe: true, upsert: true },
             function( err, model ) {
-              if(err) console.log(err);
+              cb(err, model);
             }
           );
+         }
         });
-      });
-    })
+      })
+    });
   },
   /**
    * Populates user with playlist objects
@@ -266,7 +265,6 @@ UserSchema.statics = {
         {$push: {'playlist': playlistobj}},
         { safe: true, upsert: true },
         function(err, model) {
-          console.log("savePlaylist WE here user model", model);
           cb(err, model);
       })
   },
@@ -297,7 +295,7 @@ UserSchema.statics = {
    */
   removeSubscription: function(currentUser, removeSubscription, cb) {
     var Users = this;
-      this.findByIdAndUpdate(currentUser, 
+      this.findByIdAndUpdate(currentUser,
         {$pull: {'subscriptions': removeSubscription._id}},
         function(err, data){
             console.log('first errrrrr', err);

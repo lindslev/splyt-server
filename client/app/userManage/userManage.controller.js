@@ -11,10 +11,14 @@ angular.module('splytApp')
             for (var i = 0; i < playlists.length; i++) {
                 if (playlists[i].friend_stream === false) {
                     $scope.playlists.push(playlists[i]);
+
+
+                } else if (playlists[i].friend_stream === true) {
+                  console.log(playlists[i]);
                 }
             }
         });
-        //Get Followers and Subscriptions 
+        //Get Followers and Subscriptions
         var getFollowersandSubscriptionsPromise = user.getFollowersandSubscriptions();
 
         getFollowersandSubscriptionsPromise.success(function(user){
@@ -22,7 +26,7 @@ angular.module('splytApp')
             $scope.currentUserFollowers = user.followers;
         })
         //Gets users
-        
+
         $scope.getUsers = function(selectedUser){
             var getUsersPromise = user.getUsers(selectedUser)
             getUsersPromise.success(function(data){
@@ -48,6 +52,9 @@ angular.module('splytApp')
             var createPlaylistPromise = manage.createPlaylist($scope.newPlaylist);
             createPlaylistPromise.success(function(playlist){
                 $scope.playlists.push(playlist);
+
+
+
             })
         }
 
@@ -85,6 +92,7 @@ angular.module('splytApp')
 
 
 
+        console.log(Auth.getCurrentUser()._id);
 
 
 
