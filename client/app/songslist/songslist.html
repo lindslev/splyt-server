@@ -6,11 +6,12 @@
       <h3><a href="{{song.link}}" target="_blank">{{song.title}}</a></h3>
       <h4>{{song.artist}}</h4>
       <p>{{song.source}}</p>
-    <md-button class="md-primary" aria-label='none'>
-        <ng-md-icon ng-click='play(song)' icon="play_arrow" size='30'></ng-md-icon>
-    </md-button>
-    <md-button class="md-primary" aria-label='none'>
-        <ng-md-icon icon="clear" size='30'></ng-md-icon>
-    </md-button>
+      <md-button class="md-primary" aria-label='none'>
+          <ng-md-icon ng-click='play(song, $index)' id='{{$index}}' icon="{{song.playing}}" size='30'></ng-md-icon>
+      </md-button>
+      <md-button class="md-primary" aria-label='none'>
+          <ng-md-icon icon="clear" size='30'></ng-md-icon>
+      </md-button>
+    </li>
   </ul>
 </div>
