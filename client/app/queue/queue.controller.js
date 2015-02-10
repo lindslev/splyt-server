@@ -6,6 +6,26 @@ angular.module('splytApp')
 
   $scope.songs = playlist.songs;
 
+  var playlistPromise = manage.getPlaylists();
+
+  //Getting playlists
+  playlistPromise.success(function(playlists) {
+    $scope.playlists = [];
+    for (var i = 0; i < playlists.length; i++) {
+      $scope.playlist_tabs.push(playlists[i]);
+    }
+  }).then(function(){
+    console.log($scope.playlist_tabs);
+  });
+
+  
+
+
+  $scope.removeSongfromPlaylist = function(index){
+    var removeSongfromPlaylistPromise = manage.removeSongfromPlaylist(playlist, $scope.songs[index]);
+    $scope.songs.splice(index, 1);
+  }
+
   $scope.play = function(song) {
     if(song.source == 'SoundCloud') {
       console.log('in here?', song.tag)
@@ -48,23 +68,6 @@ angular.module('splytApp')
   // player2.controls = true;
   // document.body.appendChild(player2);
 
-  var playlistPromise = manage.getPlaylists();
-
-  //Getting playlists
-  playlistPromise.success(function(playlists) {
-    $scope.playlists = [];
-    for (var i = 0; i < playlists.length; i++) {
-      $scope.playlist_tabs.push(playlists[i]);
-      if (playlists[i].aggregate_stream === true) {
-        $scope.main_playlist = playlists[i];
-
-      } if (playlists[i].friend_stream === true) {
-        $scope.friend_playlist = playlists[i];
-      }
-    }
-  }).then(function(){
-    console.log($scope.playlist_tabs);
-  });
 
   var music = document.getElementById('music'); // id for audio element
   var duration; // Duration of audio clip
