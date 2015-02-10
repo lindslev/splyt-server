@@ -8,6 +8,7 @@ angular.module('splytApp')
 
 
 
+
   var playlistPromise = manage.getPlaylists();
 
   //Getting playlists

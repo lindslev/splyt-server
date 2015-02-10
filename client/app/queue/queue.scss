@@ -8,7 +8,8 @@
   width: 480px;
   height: 60px;
   margin: 50px auto auto auto;
-border: solid;
+  border: solid;
+  float: right;
 }
 
 #pButton{
@@ -233,7 +234,6 @@ div.audio-player {
 #sidebar-wrapper {
     z-index: 1000;
     position: fixed;
-    left: 250px;
     width: 0;
     height: 100%;
     margin-left: -250px;
@@ -321,4 +321,8 @@ div.audio-player {
         position: relative;
         margin-right: 0;
     }
+}
+
+.custom-container {
+    width: 80%;
 }
