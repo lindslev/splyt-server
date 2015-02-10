@@ -10,7 +10,7 @@
                             <md-item-content>
                                 <div class="md-tile-content hover" ui-sref='queue({playlist_id : playlist._id})'>
                                     <div class='left-float'>{{playlist.title}}</div>
-                                    <md-button ng-click="removePlaylist($index)" class='md-warn button-yeah' aria-label='remove'>
+                                    <md-button ng-if="!$first" ng-click="removePlaylist($index)" class='md-warn button-yeah' aria-label='remove'>
                                         <ng-md-icon class='delete' icon="clear" size='15'></ng-md-icon>
                                     </md-button>
                                 </div>
