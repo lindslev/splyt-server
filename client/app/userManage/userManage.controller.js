@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
-    .controller('UserManageCtrl', function($scope, Auth, manage, user, $mdToast) {
+    .controller('UserManageCtrl', function($scope, Auth, manage, user, toast) {
 
         //Getting Playlists
         var getPlaylistPromise = manage.getPlaylists();
@@ -31,12 +31,13 @@ angular.module('splytApp')
             var getUsersPromise = user.getUsers(selectedUser)
             getUsersPromise.success(function(data) {
                 if (data.length === 0) {
-                    $scope.showNoUsers();
+                    toast.showNoUsers();
                     console.log("no users");
                 } else {
                     $scope.userList = data;
                 }
             })
+            $scope.nameFilter = '';
         }
 
 
@@ -90,32 +91,11 @@ angular.module('splytApp')
         $scope.getSpecificUser = function(index) {
 
             }
-            //Remove Song from Playlist 
+        //Remove Song from Playlist 
         $scope.removeSongfromPlaylist = function(index) {
             console.log('front end', $scope.currentPlaylistSongs[index])
             console.log('currentPlaylist', $scope.currentPlaylist);
             var removeSongfromPlaylistPromise = manage.removeSongfromPlaylist($scope.currentPlaylist, $scope.currentPlaylistSongs[index]);
             $scope.currentPlaylistSongs.splice(index, 1);
         }
-
-        //TOASTS
-        $scope.toastPosition = {
-            bottom: true,
-            top: false,
-            left: false,
-            right: true
-        };
-        $scope.getToastPosition = function() {
-            return Object.keys($scope.toastPosition)
-            .filter(function(pos) { return $scope.toastPosition[pos]; })
-            .join(' ');
-        };
-        $scope.showNoUsers = function() {
-            $mdToast.show(
-                $mdToast.simple()
-                .content('Sorry, Did not find them. Try Again!')
-                .position($scope.getToastPosition())
-                .hideDelay(3000)
-            );
-        };
     });
