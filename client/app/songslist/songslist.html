@@ -1,7 +1,9 @@
-<h1>Here is the playlist</h1>
+<h1>Queue</h1>
 
 <div class="md-content">
   <ul>
+    <h3 ng-if='songs.length===0 && !playlist.friend_stream'>Add some songs to your Playlist!</h3>
+    <h3 ng-if='songs.length===0 && playlist.friend_stream'>Your friends haven't heard any new music!</h3>
     <li ng-repeat='song in songs'>
       <h3><a href="{{song.link}}" target="_blank">{{song.title}}</a></h3>
       <h4>{{song.artist}}</h4>
