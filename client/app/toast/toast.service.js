@@ -21,7 +21,7 @@ angular.module('splytApp')
       showNoUsers : function() {
         $mdToast.show(
           $mdToast.simple()
-            .content('Sorry, Did not find them. Try Again!')
+            .content('Sorry, could not find them. Try another search!')
             .position(getToastPosition())
             .hideDelay(3000)
           );
