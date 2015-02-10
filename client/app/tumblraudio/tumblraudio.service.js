@@ -3,20 +3,22 @@
 angular.module('splytApp')
   .factory('TumblrAudio', function () {
     var TumblrAudioSource = function(song) {
-      this.source = song.iframeSrc;
-      $('#myaudiotag').attr('src', this.source);
+      var music = document.getElementById('music');
+      this.source = song.audioSource;
+      $('#music').attr('src', this.source);
     }
 
     TumblrAudioSource.prototype.play = function() {
-      $('#myaudiotag').play();
+      console.log('this is where we should play')
+      music.play();
     }
 
     TumblrAudioSource.prototype.pause = function() {
-      $('#myaudiotag').pause();
+      music.pause();
     }
 
     TumblrAudioSource.prototype.seek = function(num) {
-      $('#myaudiotag').currentTime = num;
+      //
     }
 
     return TumblrAudioSource;

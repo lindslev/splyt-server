@@ -3,10 +3,22 @@
 angular.module('splytApp')
   .factory('SoundcloudNonstreamable', function ($sce) {
     var SoundcloudNonstreamableAudioSource = function(song) {
-      this.widget = SC.Widget(document.getElementById('soundcloud_widget'));
-      this.widget.bind(SC.Widget.Events.READY, function() { });
-      // this.trustSrc = $sce.trustAsResourceUrl;
+      var trustSrc = $sce.trustAsResourceUrl;
+      var self = this;
+      this.onReadyFunctions = [];
       this.url = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/" + song.tag + "&color=0066cc";
+      $('#soundcloud_widget').attr('src', trustSrc(this.url));
+      this.widget = SC.Widget(document.getElementById('soundcloud_widget'));
+      this.widget.bind(SC.Widget.Events.READY, function() {
+        console.log(self.onReadyFunctions)
+        self.onReadyFunctions.forEach(function(fn){
+          fn();
+        })
+      });
+    }
+
+    SoundcloudNonstreamableAudioSource.prototype.onReady = function(fn) {
+      this.onReadyFunctions.push(fn);
     }
 
     SoundcloudNonstreamableAudioSource.prototype.play = function() {

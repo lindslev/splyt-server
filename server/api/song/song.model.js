@@ -26,11 +26,14 @@ var transformations = {
     }
   },
    newSCSong: function(song_obj) {
+    var audio;
+    song_obj.args.song.streamable ? audio = song_obj.args.song.stream_url : audio = null;
     return {
       tag: song_obj.args.song.id,
       title: song_obj.args.song.title,
       artist: song_obj.args.song.user.username,
       link: song_obj.args.song.permalink_url,
+      audioSource: audio,
       source:'SoundCloud'
     }
   },
@@ -44,9 +47,6 @@ var transformations = {
     }
   },
    newTumblrSong: function(song_obj) {
-    console.log('songobj in new tumblr song', song_obj)
-    console.log('**************')
-    console.log('songobj args in new tumblr song', song_obj.args)
     return {
       title: song_obj.args.song.title,
       artist: song_obj.args.song.artist,

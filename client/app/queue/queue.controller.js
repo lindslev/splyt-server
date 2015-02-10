@@ -40,78 +40,78 @@ angular.module('splytApp')
 
     $scope.songs = playlist.songs.map(function(song) { song.playing = 'play_arrow'; return song; });
 
-
+    console.log($scope.songs)
 
     //////////////////////////////////////////////
     /////////// PLAYER FUNCTIONALITY /////////////
     //////////////////////////////////////////////
 
-    var music = document.getElementById('music'); // id for audio element
-    var duration; // Duration of audio clip
-    var pButton = document.getElementById('pButton'); // play button
-    var playhead = document.getElementById('playhead'); // playhead
-    var timeline = document.getElementById('timeline'); // timeline
-    var timelineWidth = timeline.offsetWidth - playhead.offsetWidth; // timeline width adjusted for playhead
-    music.addEventListener("timeupdate", timeUpdate, false); // timeupdate event listener
-    timeline.addEventListener("click", function (event) { //Makes timeline clickable
-      moveplayhead(event);
-      music.currentTime = duration * clickPercent(event);
-    }, false);
+    // var music = document.getElementById('music'); // id for audio element
+    // var duration; // Duration of audio clip
+    // var pButton = document.getElementById('pButton'); // play button
+    // var playhead = document.getElementById('playhead'); // playhead
+    // var timeline = document.getElementById('timeline'); // timeline
+    // var timelineWidth = timeline.offsetWidth - playhead.offsetWidth; // timeline width adjusted for playhead
+    // music.addEventListener("timeupdate", timeUpdate, false); // timeupdate event listener
+    // timeline.addEventListener("click", function (event) { //Makes timeline clickable
+    //   moveplayhead(event);
+    //   music.currentTime = duration * clickPercent(event);
+    // }, false);
 
-    function clickPercent(e) { // returns click as decimal (.77) of the total timelineWidth
-      return (e.pageX - timeline.offsetLeft) / timelineWidth;
-    }
+    // function clickPercent(e) { // returns click as decimal (.77) of the total timelineWidth
+    //   return (e.pageX - timeline.offsetLeft) / timelineWidth;
+    // }
 
-    // Makes playhead draggable
-    playhead.addEventListener('mousedown', mouseDown, false);
-    window.addEventListener('mouseup', mouseUp, false);
+    // // Makes playhead draggable
+    // playhead.addEventListener('mousedown', mouseDown, false);
+    // window.addEventListener('mouseup', mouseUp, false);
 
-    // Boolean value so that mouse is moved on mouseUp only when the playhead is released
-    var onplayhead = false;
+    // // Boolean value so that mouse is moved on mouseUp only when the playhead is released
+    // var onplayhead = false;
 
-    function mouseDown() {
-      onplayhead = true;
-      window.addEventListener('mousemove', moveplayhead, true);
-      music.removeEventListener('timeupdate', timeUpdate, false);
-    }
+    // function mouseDown() {
+    //   onplayhead = true;
+    //   window.addEventListener('mousemove', moveplayhead, true);
+    //   music.removeEventListener('timeupdate', timeUpdate, false);
+    // }
 
-    function mouseUp(e) {
-      if (onplayhead == true) {
-        moveplayhead(e);
-        window.removeEventListener('mousemove', moveplayhead, true);
-        // change current time
-        if(youtubePlaying) $scope.seekTo(duration*clickPercent(e));
-        music.currentTime = duration * clickPercent(e);
-        music.addEventListener('timeupdate', timeUpdate, false);
-      }
-      onplayhead = false;
-    }
+    // function mouseUp(e) {
+    //   if (onplayhead == true) {
+    //     moveplayhead(e);
+    //     window.removeEventListener('mousemove', moveplayhead, true);
+    //     // change current time
+    //     if(youtubePlaying) $scope.seekTo(duration*clickPercent(e));
+    //     music.currentTime = duration * clickPercent(e);
+    //     music.addEventListener('timeupdate', timeUpdate, false);
+    //   }
+    //   onplayhead = false;
+    // }
 
-    // Moves playhead as user drags
-    function moveplayhead(e) {
-      var newMargLeft = e.pageX - timeline.offsetLeft;
-      if (newMargLeft >= 0 && newMargLeft <= timelineWidth) {
-        playhead.style.marginLeft = newMargLeft + "px";
-      }
-      if (newMargLeft < 0) {
-        playhead.style.marginLeft = "0px";
-      }
-      if (newMargLeft > timelineWidth) {
-        playhead.style.marginLeft = timelineWidth + "px";
-      }
-      console.log('dragged')
-    }
+    // // Moves playhead as user drags
+    // function moveplayhead(e) {
+    //   var newMargLeft = e.pageX - timeline.offsetLeft;
+    //   if (newMargLeft >= 0 && newMargLeft <= timelineWidth) {
+    //     playhead.style.marginLeft = newMargLeft + "px";
+    //   }
+    //   if (newMargLeft < 0) {
+    //     playhead.style.marginLeft = "0px";
+    //   }
+    //   if (newMargLeft > timelineWidth) {
+    //     playhead.style.marginLeft = timelineWidth + "px";
+    //   }
+    //   console.log('dragged')
+    // }
 
-    // Synchronizes playhead position with current point in audio
-    function timeUpdate() {
-      var playPercent;
-      youtubePlaying ? playPercent = timelineWidth * ($scope.current()/duration) : playPercent = timelineWidth * (music.currentTime / duration);
-      playhead.style.marginLeft = playPercent + "px";
-      if (music.currentTime == duration) {
-        pButton.className = "";
-        pButton.className = "play";
-      }
-    }
+    // // Synchronizes playhead position with current point in audio
+    // function timeUpdate() {
+    //   var playPercent;
+    //   youtubePlaying ? playPercent = timelineWidth * ($scope.current()/duration) : playPercent = timelineWidth * (music.currentTime / duration);
+    //   playhead.style.marginLeft = playPercent + "px";
+    //   if (music.currentTime == duration) {
+    //     pButton.className = "";
+    //     pButton.className = "play";
+    //   }
+    // }
 
     // $scope.trustSrc = $sce.trustAsResourceUrl;
     // $scope.chosenIcon = 'play_arrow';
@@ -219,15 +219,15 @@ angular.module('splytApp')
     // var intervalTest = true;
     // function onPlayerReady(event) {
     //   if(player.getDuration) duration = player.getDuration();
-    //   var x = 0;
-    //   if(intervalTest) {
-    //   console.log('how many times are we getting in intervalTest')
-    //     intervalTest = false;
-    //     setInterval(function() {
-    //       if(x !== $scope.current()) timeUpdate();
-    //       x = $scope.current();
-    //     }, 100);
-    //   }
+        // var x = 0;
+        // if(intervalTest) {
+        // console.log('how many times are we getting in intervalTest')
+        //   intervalTest = false;
+        //   setInterval(function() {
+        //     if(x !== $scope.current()) timeUpdate();
+        //     x = $scope.current();
+        //   }, 100);
+        // }
     //   event.target.playVideo();
     //   pButton.className = "";
     //   pButton.className = "pause";
