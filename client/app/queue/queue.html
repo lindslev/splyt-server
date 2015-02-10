@@ -1,26 +1,37 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
- <div id="wrapper">
-
+<div class="container">
+    <div id="wrapper">
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
                 <li class="sidebar-brand"><strong>
                         Your Playlists
-                </strong></li>
-                <li class= 'hover 'ng-repeat='tab in tabs' ng-click='update_songs(tab._id)'>
+                </strong>
+                </li>
+                <li class='hover' ng-repeat='tab in tabs' ng-click='update_songs(tab._id)'>
                     {{tab.title}}</li>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->
-
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
-            <div class="container-fluid">
-                <songslist></songslist>
-                </div>
+        <audio id="music" preload="true">
+            <source src=""></source>
+            <source src=""></source>
+        </audio>
+        <div id="audioplayer">
+            <button id="pButton" class="play" ng-click="playTrack()"></button>
+            <div id="timeline">
+                <div id="playhead"></div>
             </div>
         </div>
-<!-- <md-content>
+        <br>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+
+            <songslist></songslist>
+        </div>
+    </div>
+
+    <!-- <md-content>
 <div layout="column" layout-fill>
   <section layout='row' flex>
     <md-sidenav class='md-sidenav-left' md-component-id='left'>
@@ -38,18 +49,4 @@
   </md-tabs>
 </md-content> -->
 
-
-</section>
-</div>
-</md-content>
-  <audio id="music" preload="true">
-    <source src="">
-        <source src="">
-    </audio>
-  <div id="audioplayer">
-    <button id="pButton" class="play" ng-click="playTrack()"></button>
-    <div id="timeline">
-          <div id="playhead"></div>
-    </div>
-  </div>
 </div>
