@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state) {
+  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, QueuePlayerComm) {
 
     //youtube iframe api include
     var tag = document.createElement('script');
@@ -41,6 +41,10 @@ angular.module('splytApp')
     $scope.songs = playlist.songs.map(function(song) { song.playing = 'play_arrow'; return song; });
 
     console.log($scope.songs)
+
+    $scope.play = function(song) {
+       QueuePlayerComm.onChangeSong(song);
+    }
 
     //////////////////////////////////////////////
     /////////// PLAYER FUNCTIONALITY /////////////

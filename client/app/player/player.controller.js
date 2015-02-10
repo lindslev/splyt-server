@@ -1,11 +1,11 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('PlayerCtrl', function ($scope, AudioSources) {
-    var song1 = {"_id":"54da1a72d484cf56345c3395","tag":"95737356","title":"Kavinsky - Odd Look (A-Trak Remix)","artist":"Kavinsky","link":"http://soundcloud.com/deadcruiser/kavinsky-odd-look-a-trak-remix","source":"SoundCloud","__v":0,"audioSource":null,"playing":"play_arrow","$$hashKey":"object:13"}
-    var song = {"_id":"54da1a77d484cf56345c3397","tag":"2Rxa4pNAnMY","title":"Live This Nightmare (NGHTMRE Remix) [Free]","artist":"The Griswolds","link":"https://www.youtube.com/watch?v=2Rxa4pNAnMY","source":"YouTube","__v":0,"audioSource":null,"playing":"play_arrow","$$hashKey":"object:15"}
-    var song3 = {"_id":"54da1a7bd484cf56345c3398","title":"aloC-acoC","artist":"Brand New","link":"","source":"Tumblr","__v":0,"audioSource":"https://www.tumblr.com/audio_file/uncaught/106453769196/tumblr_n4lvrlXj7Y1qkuto7?play_key=e6ba8f023e92bbb5aaf06052cd0c6551&tumblelog=uncaught&post_id=106453769196","playing":"play_arrow","$$hashKey":"object:16"}
-    var song4 = {"_id":"54da1a95d484cf56345c3399","tag":"181633092","title":"Bipolar Sunshine - Daydreamer (Gryffin Remix)","artist":"Gryffin Official","link":"http://soundcloud.com/gryffinofficial/bipolar-sunshine-daydreamer-gryffin-remix","source":"SoundCloud","__v":0,"audioSource":"https://api.soundcloud.com/tracks/181633092/stream","playing":"play_arrow","$$hashKey":"object:17"}
+  .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm) {
+    // var song1 = {"_id":"54da1a72d484cf56345c3395","tag":"95737356","title":"Kavinsky - Odd Look (A-Trak Remix)","artist":"Kavinsky","link":"http://soundcloud.com/deadcruiser/kavinsky-odd-look-a-trak-remix","source":"SoundCloud","__v":0,"audioSource":null,"playing":"play_arrow","$$hashKey":"object:13"}
+    // var song = {"_id":"54da1a77d484cf56345c3397","tag":"2Rxa4pNAnMY","title":"Live This Nightmare (NGHTMRE Remix) [Free]","artist":"The Griswolds","link":"https://www.youtube.com/watch?v=2Rxa4pNAnMY","source":"YouTube","__v":0,"audioSource":null,"playing":"play_arrow","$$hashKey":"object:15"}
+    // var song3 = {"_id":"54da1a7bd484cf56345c3398","title":"aloC-acoC","artist":"Brand New","link":"","source":"Tumblr","__v":0,"audioSource":"https://www.tumblr.com/audio_file/uncaught/106453769196/tumblr_n4lvrlXj7Y1qkuto7?play_key=e6ba8f023e92bbb5aaf06052cd0c6551&tumblelog=uncaught&post_id=106453769196","playing":"play_arrow","$$hashKey":"object:16"}
+    // var song4 = {"_id":"54da1a95d484cf56345c3399","tag":"181633092","title":"Bipolar Sunshine - Daydreamer (Gryffin Remix)","artist":"Gryffin Official","link":"http://soundcloud.com/gryffinofficial/bipolar-sunshine-daydreamer-gryffin-remix","source":"SoundCloud","__v":0,"audioSource":"https://api.soundcloud.com/tracks/181633092/stream","playing":"play_arrow","$$hashKey":"object:17"}
 
     var music = document.getElementById('music'); // id for audio element
     var duration; // Duration of audio clip
@@ -16,6 +16,9 @@ angular.module('splytApp')
     var musicPlaying = false; //this might need to become something on each factory
 
     // Communicator.onQueuePlayNewSong
+    QueuePlayerComm.onChangeSong = function(song) {
+      $scope.changeSong(song);
+    }
 
     $scope.toggle = function() {
       if(musicPlaying) {
@@ -31,7 +34,7 @@ angular.module('splytApp')
       }
     }
 
-    $scope.changeSong = function() {
+    $scope.changeSong = function(song) {
       var AudioSource = AudioSources[handleSongSource(song)];
       $scope.audioProvider = new AudioSource(song);
       if(typeof $scope.audioProvider.onReady === 'function') { //for soundcloud nonstreamable and youtube embeds
@@ -48,7 +51,7 @@ angular.module('splytApp')
       return song.source;
     }
 
-    $scope.changeSong();
+    // $scope.changeSong();
 
     var timelineWidth = timeline.offsetWidth - playhead.offsetWidth; // timeline width adjusted for playhead
     music.addEventListener("timeupdate", timeUpdate, false); // timeupdate event listener
