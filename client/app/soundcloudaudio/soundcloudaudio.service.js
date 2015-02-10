@@ -17,8 +17,22 @@ angular.module('splytApp')
     }
 
     SoundcloudAudioSource.prototype.seek = function(num) {
-      // num should be or become ->> music.currentTime = duration * clickPercent(e);
-      // $('myaudiotag').currentTime = num;
+      music.currentTime = num;
+    }
+
+    SoundcloudAudioSource.prototype.currentTime = function() {
+      return music.currentTime;
+    }
+
+    SoundcloudAudioSource.prototype.duration = function() {
+      return music.duration;
+    }
+
+    SoundcloudAudioSource.prototype.addEndedListener = function() {
+      return music.addEventListener("ended",function() {
+        console.log('IT ENDED AND THIS WORKED')
+        // $scope.changeSong('next');
+      });
     }
 
     return SoundcloudAudioSource;

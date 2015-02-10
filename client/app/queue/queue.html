@@ -1,20 +1,3 @@
- <!-- <script>
-//     $(document).ready(function() {
-//         $('#audio-player').mediaelementplayer({
-//             alwaysShowControls: true,
-//             features: ['progress','playpause','volume'],
-//             audioVolume: 'horizontal',
-//             audioWidth: 400,
-//             audioHeight: 120
-//         });
-//     });
-// </script> -->
-<!-- <div class="audio-player">
-    <h1>Demo - Preview Song</h1>
-    <img class="cover" src="http://designmodo.com/demo/audioplayer/img/cover.png" alt="">
-    <audio id="audio-player" src="http://localhost:9000/api/youtubes/stream/at3FPJaAwoY" type="audio/mp3" controls="controls"></audio>
-</div> -->
-
 <div layout="column" layout-fill>
     <md-tabs md-selected='selectedIndex'>
       <md-tab ng-repeat='tab in tabs' ng-disabled='tab.disabled' label='{{tab.title}}' ng-click='update_songs(tab._id)'>
@@ -26,30 +9,3 @@
     </md-tab>
   </md-tabs>
 </div>
-<!--
-<audio id="music" preload="true">
-  <source src="">
-</audio>
-<div id="audioplayer">
-  <button id="pButton" class="play" ng-click="playTrack(null, true)"></button>
-  <div id="timeline">
-        <div id="playhead"></div>
-  </div>
-</div> -->
-
-<!-- <p ng-click="callPlayer('playVideo')">Start</p> &bull; <p ng-click="callPlayer('pauseVideo')">Pause</p> &bull; <p ng-click="callPlayer('stopVideo')">Stop</p> <p ng-click="callPlayer('seekTo', [25, true])">Stop</p> - Hover over the links to see the called function
-<br />
-<div id="whateverID">
-  <iframe width="640" height="390" frameborder="0" title="YouTube video player" type="text/html" src="http://www.youtube.com/embed/u1zgFlCw8Aw?enablejsapi=1"></iframe>
-</div>
- -->
-<p ng-click="current()">current</p>
-<p ng-click="pause()">pause</p>
-<p ng-click="seekTo()">seek</p>
-
- <div id="youtubePlayer"></div>
-
-<iframe id="soundcloud_widget" width="100%" height="166" scrolling="no" frameborder="no" src="{{trustSrc(scUrl)}}"></iframe>
-
-<p ng-click="scToggle()">pause/play</p>
-<p ng-click="scSeekTo()">seek</p>

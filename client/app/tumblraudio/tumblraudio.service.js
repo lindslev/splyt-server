@@ -18,7 +18,22 @@ angular.module('splytApp')
     }
 
     TumblrAudioSource.prototype.seek = function(num) {
-      //
+      music.currentTime = num;
+    }
+
+    TumblrAudioSource.prototype.currentTime = function() {
+      return music.currentTime;
+    }
+
+    TumblrAudioSource.prototype.duration = function() {
+      return music.duration;
+    }
+
+    TumblrAudioSource.prototype.addEndedListener = function() {
+      return music.addEventListener("ended",function() {
+        console.log('IT ENDED AND THIS WORKED')
+        // $scope.changeSong('next');
+      });
     }
 
     return TumblrAudioSource;

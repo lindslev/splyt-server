@@ -2,10 +2,15 @@
 
 angular.module('splytApp')
   .factory('QueuePlayerComm', function () {
+    var events = {}
 
     return {
-      onChangeSong: function (song) {
-        return song;
+      on: function(eventStr, fxn) {
+        events[eventStr] = fxn;
+      },
+      trigger: function(eventStr, data) {
+        events[eventStr](data);
       }
-    };
+    }
+
   });

@@ -10,7 +10,8 @@ angular.module('splytApp')
             width: '500',
             videoId: song.tag.toString(),
             events: {
-              'onReady': onPlayerReady
+              'onReady': onPlayerReady,
+              'onStateChange': onEnded
             }
           })
       function onPlayerReady() {
@@ -31,6 +32,19 @@ angular.module('splytApp')
     }
     YoutubeAudioSource.prototype.seek = function(num) {
       this.player.seekTo(num, true);
+    }
+    YoutubeAudioSource.prototype.currentTime = function() {
+      return this.player.getCurrentTime();
+    }
+    YoutubeAudioSource.prototype.duration = function() {
+      return this.player.getDuration();
+    }
+    YoutubeAudioSource.prototype.addEndedListener = function() {
+      return onEnded;
+    }
+
+    function onEnded(e) {
+      if(e.data === 0) console.log("IT ENDED AND THIS WORKED")
     }
 
     return YoutubeAudioSource;

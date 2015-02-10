@@ -33,5 +33,19 @@ angular.module('splytApp')
       this.widget.seekTo(num*1000);
     }
 
+    SoundcloudNonstreamableAudioSource.prototype.currentTime = function() {
+      return this.widget.currentPosition()/1000;
+    }
+
+    SoundcloudNonstreamableAudioSource.prototype.duration = function() {
+      return this.widget.getDuration()/1000;
+    }
+
+    SoundcloudNonstreamableAudioSource.prototype.addEndedListener = function() {
+      return this.widget.bind(SC.Widget.Events.FINISH, function() {
+        console.log("IT ENDED AND THIS WORKED");
+      })
+    }
+
     return SoundcloudNonstreamableAudioSource;
   });

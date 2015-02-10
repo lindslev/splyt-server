@@ -2,10 +2,29 @@
 
 angular.module('splytApp')
   .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm) {
-    // var song1 = {"_id":"54da1a72d484cf56345c3395","tag":"95737356","title":"Kavinsky - Odd Look (A-Trak Remix)","artist":"Kavinsky","link":"http://soundcloud.com/deadcruiser/kavinsky-odd-look-a-trak-remix","source":"SoundCloud","__v":0,"audioSource":null,"playing":"play_arrow","$$hashKey":"object:13"}
-    // var song = {"_id":"54da1a77d484cf56345c3397","tag":"2Rxa4pNAnMY","title":"Live This Nightmare (NGHTMRE Remix) [Free]","artist":"The Griswolds","link":"https://www.youtube.com/watch?v=2Rxa4pNAnMY","source":"YouTube","__v":0,"audioSource":null,"playing":"play_arrow","$$hashKey":"object:15"}
-    // var song3 = {"_id":"54da1a7bd484cf56345c3398","title":"aloC-acoC","artist":"Brand New","link":"","source":"Tumblr","__v":0,"audioSource":"https://www.tumblr.com/audio_file/uncaught/106453769196/tumblr_n4lvrlXj7Y1qkuto7?play_key=e6ba8f023e92bbb5aaf06052cd0c6551&tumblelog=uncaught&post_id=106453769196","playing":"play_arrow","$$hashKey":"object:16"}
-    // var song4 = {"_id":"54da1a95d484cf56345c3399","tag":"181633092","title":"Bipolar Sunshine - Daydreamer (Gryffin Remix)","artist":"Gryffin Official","link":"http://soundcloud.com/gryffinofficial/bipolar-sunshine-daydreamer-gryffin-remix","source":"SoundCloud","__v":0,"audioSource":"https://api.soundcloud.com/tracks/181633092/stream","playing":"play_arrow","$$hashKey":"object:17"}
+    //what needs to happen:
+    //1. music not playing - click toggle
+    //2. player icon turns to pause
+    //3. playlist icon turns to pause
+    //4. click toggle again
+    //5. player icon turns to play
+    //6. playlist icon of currentplaying turns to play
+    //7. click toggle again
+    //8. playlist icon of currentplaying turns to pause
+    //9. player icon turns to pause
+    //10. click playlist icon of currentlyplaying
+    //11. playlist icon turns to play
+    //12. player icon turns to play
+    //13. click playlist icon of currentlyPlaying
+    //14. playlist icon of currenly playing turns to pause
+    //15. player icon turns to pause
+    //16. click playlist icon of new song
+    //17. playlist icon of new song turns to pause
+    //18. playlist icon of what WAS currentlyPlaying turns to play
+    //19. player icon remains pause
+    //20. click toggle
+    //21. playlist icon of currently playing turns to play
+    //22. player icon turns to play
 
     var music = document.getElementById('music'); // id for audio element
     var duration; // Duration of audio clip
@@ -13,37 +32,61 @@ angular.module('splytApp')
     var playhead = document.getElementById('playhead'); // playhead
     var timeline = document.getElementById('timeline'); // timeline
 
-    var musicPlaying = false; //this might need to become something on each factory
+    $scope.musicPlaying = false;
+    var currentlyPlaying, currentAudioProvider; //this might need to become something on each factory
 
-    // Communicator.onQueuePlayNewSong
+    // would be better...
+    // QueuePlayerComm.on('changeSong', function() {
+    //   currentlyPlaying == song ? $scope.toggle() : $scope.changeSong(song);
+    //   return currentlyPlaying;
+    // })
+
     QueuePlayerComm.onChangeSong = function(song) {
-      $scope.changeSong(song);
+      currentlyPlaying == song ? $scope.toggle() : $scope.changeSong(song);
+      return currentlyPlaying;
     }
 
     $scope.toggle = function() {
-      if(musicPlaying) {
+      if(!$scope.musicPlaying && !$scope.audioProvider) return; //return if user tries to play before ever choosing a song
+      if($scope.musicPlaying) {
         $scope.audioProvider.pause();
-        musicPlaying = false;
-        pButton.className = "";
-        pButton.className = "play"
+        $scope.musicPlaying = false;
       } else {
         $scope.audioProvider.play();
-        musicPlaying = true;
-        pButton.className = "";
-        pButton.className = "pause"
+        $scope.musicPlaying = true;
       }
+      QueuePlayerComm.trigger('globalPlayerToggle', currentlyPlaying);
     }
 
     $scope.changeSong = function(song) {
+      if(currentlyPlaying) currentlyPlaying.playing = 'play_arrow';
+      var songChangeHandler;
+      $scope.musicPlaying ? songChangeHandler = switchTracks : songChangeHandler = $scope.toggle; //if a song was already playing, use switchTracks
+      currentlyPlaying = song;
+      currentAudioProvider = $scope.audioProvider;
       var AudioSource = AudioSources[handleSongSource(song)];
       $scope.audioProvider = new AudioSource(song);
       if(typeof $scope.audioProvider.onReady === 'function') { //for soundcloud nonstreamable and youtube embeds
         $scope.audioProvider.onReady(function(){
-          $scope.toggle();
+          // $scope.toggle();
+          songChangeHandler();
+          $scope.$apply();
         });
       } else {
-        $scope.toggle();
+        songChangeHandler();
+        // $scope.toggle();
       }
+      $scope.audioProvider.addEndedListener();
+    }
+
+    //function similar to toggle that will handle the swap of tracks
+    //when a song is in the process of playing and another song is selected
+    function switchTracks() {
+      console.log('using switch tracks instead of scope.toggle')
+      //need to set the OLD currentlyplaying.playing to play_arrow;
+      currentAudioProvider.pause();
+      $scope.audioProvider.play();
+      QueuePlayerComm.trigger('globalPlayerToggle', currentlyPlaying);
     }
 
     function handleSongSource(song) {
@@ -82,6 +125,8 @@ angular.module('splytApp')
         moveplayhead(e);
         window.removeEventListener('mousemove', moveplayhead, true);
         // change current time
+
+        //instead of music.currenttime it should be $scope.audioProvider.seek(duration*clickPercent(e))
         music.currentTime = duration * clickPercent(e);
         music.addEventListener('timeupdate', timeUpdate, false);
       }
@@ -105,6 +150,7 @@ angular.module('splytApp')
 
     // Synchronizes playhead position with current point in audio
     function timeUpdate() {
+      //playPercent = timelineWidth * ($scope.audioProvider.currentTime / duration)
       var playPercent = timelineWidth * (music.currentTime / duration);
       playhead.style.marginLeft = playPercent + "px";
       if (music.currentTime == duration) {
@@ -113,23 +159,9 @@ angular.module('splytApp')
       }
     }
 
-    function toggle() {
-      // start music
-      // if (music.paused) {
-      //   music.play();
-      //   // remove play, add pause
-      //   pButton.className = "";
-      //   pButton.className = "pause";
-      // } else { // pause music
-      //   music.pause();
-      //   // remove pause, add play
-      //   pButton.className = "";
-      //   pButton.className = "play";
-      // }
-    }
-
     // Gets audio file duration
     music.addEventListener("canplaythrough", function () {
+      //duration = $scope.audioProvider.duration
       duration = music.duration;
     }, false);
 

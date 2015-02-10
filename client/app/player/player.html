@@ -1,5 +1,5 @@
 <div id="audioplayer">
-  <button id="pButton" class="play" ng-click="toggle()"></button>
+  <button id="pButton" ng-class="{ 'pause' : musicPlaying, 'play' : !musicPlaying }" ng-click="toggle()"></button>
   <div id="timeline">
         <div id="playhead"></div>
   </div>
