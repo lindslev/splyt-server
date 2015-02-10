@@ -13,6 +13,7 @@ angular.module('splytApp')
     $scope.isLoggedIn = Auth.isLoggedIn;
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
+    $scope.user_default_playlist = Auth.getCurrentUser().playlist[0];
 
     $scope.logout = function() {
       chrome.runtime.sendMessage(ext_id, { action: 'LOGOUT', method: '', user: $scope.currentUser },

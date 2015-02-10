@@ -23,6 +23,15 @@ exports.show = function(req, res) {
   });
 };
 
+exports.getDefault = function(req, res) {
+  var id = req.params.id;
+  User.findById(id).populate('playlist').exec(function(err, data) {
+    _.findWhere(data,{'aggregate_stream' : true }, function(err, playlist) {
+      return res.json(playlist);
+    })
+  });
+};
+
 // Creates a new playlist in the DB.
 exports.create = function(req, res) {
   var userid = req.params.id;

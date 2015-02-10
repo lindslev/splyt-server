@@ -55,9 +55,7 @@ angular.module('splytApp')
             var createPlaylistPromise = manage.createPlaylist($scope.newPlaylist);
             createPlaylistPromise.success(function(playlist){
                 $scope.playlists.push(playlist);
-
-
-
+                $scope.newPlaylist = null;
             })
         }
 
@@ -92,7 +90,7 @@ angular.module('splytApp')
         $scope.getSpecificUser = function(index){
 
         }
-        //Remove Song from Playlist 
+        //Remove Song from Playlist
         $scope.removeSongfromPlaylist = function(index){
             console.log('front end', $scope.currentPlaylistSongs[index])
             console.log('currentPlaylist', $scope.currentPlaylist);

@@ -6,9 +6,12 @@ angular.module('splytApp')
 
   $scope.songs = playlist.songs;
 
-
-
   var playlistPromise = manage.getPlaylists();
+
+  //Updating playlist songs when user clicks on new tab
+  $scope.update_songs = function(id) {
+    $state.go('queue', { playlist_id: id }, true);
+  }
 
   //Getting playlists
   playlistPromise.success(function(playlists) {
@@ -61,11 +64,7 @@ angular.module('splytApp')
 
   $scope.tabs = $scope.playlist_tabs;
 
-//Updating playlist songs when user clicks on new tab
-  $scope.update_songs = function(id) {
-    console.log('update_songs');
-    $state.go('queue', { playlist_id: id }, true);
-  }
+
 
   // var player2 = new Audio('https://www.tumblr.com/audio_file/uncaught/101386977846/tumblr_ne5ykbG3y11qflbpe?play_key=e6ba8f023e92bbb5aaf06052cd0c6551&tumblelog=uncaught&post_id=101386977846')
   // player2.preload = 'metadata';
