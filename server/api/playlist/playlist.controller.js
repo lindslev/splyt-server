@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var Playlist = require('./playlist.model');
 var User = require('../user/user.model')
+var Song = require('../song/song.model');
 
 // Get list of playlists
 exports.index = function(req, res) {
@@ -34,6 +35,20 @@ exports.create = function(req, res) {
     return res.json(201, playlist);
   });
 };
+
+exports.addSong = function(req, res) {
+  var playlistid = req.params.id;
+  var songid = req.params.songid;
+  Song.findById(songid, function(err, song) {
+    Playlist.findByIdAndUpdate(playlistid,
+      { $push: {'songs': song }},
+      { safe: true, upsert: true },
+      function (err, data) {
+        return res.json(201, data);
+      }
+    );
+  });
+}
 
 // Updates an existing playlist in the DB.
 exports.update = function(req, res) {

@@ -6,6 +6,8 @@ angular.module('splytApp')
 
   $scope.songs = playlist.songs;
 
+
+
   var playlistPromise = manage.getPlaylists();
 
   //Getting playlists
@@ -16,9 +18,12 @@ angular.module('splytApp')
     }
   }).then(function(){
     console.log($scope.playlist_tabs);
+    $scope.user_playlists = $scope.playlist_tabs.slice(2);
   });
 
-  
+  $scope.add_to_playlist = function(playlistid, songid) {
+    manage.addSongtoPlaylist(playlistid, songid);
+  }
 
 
   $scope.removeSongfromPlaylist = function(index){
