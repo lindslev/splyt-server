@@ -9,9 +9,22 @@
     <md-button class="md-primary" aria-label='none'>
         <ng-md-icon ng-click='play(song)' icon="play_arrow" size='30'></ng-md-icon>
     </md-button>
-    <md-button class="md-primary right" aria-label='none'>
+    <md-button ng-click='removeSongfromPlaylist($index)' class="md-primary right" aria-label='none'>
         <ng-md-icon icon="clear" size='30'></ng-md-icon>
     </md-button>
+        <!-- Single button -->
+    <div class="btn-group" dropdown is-open="status.isopen">
+      <button type="button" class="btn btn-xs dropdown-toggle">
+        Add to <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#">Action</a></li>
+        <li><a href="#">Another action</a></li>
+        <li><a href="#">Something else here</a></li>
+        <li class="divider"></li>
+        <li><a href="#">Separated link</a></li>
+      </ul>
+    </div>
   </ul>
 </div>
 
