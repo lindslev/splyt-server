@@ -7,9 +7,9 @@
             <md-list class='font-set'>
                 <md-item ng-repeat="playlist in playlists">
                     <md-item-content>
-                        <div class="md-tile-content">
-                            <div class='left-float' ui-sref='queue({playlist_id : playlist._id})'>{{playlist.title}}</div>
-                            <md-button ng-click="removePlaylist($index)" class='md-warn button-yeah'>
+                        <div class="md-tile-content hover" ui-sref='queue({playlist_id : playlist._id})'>
+                        <div class='left-float' >{{playlist.title}}</div>
+                            <md-button ng-click="removePlaylist($index)" class='md-warn button-yeah' aria-label='remove'>
                                 <ng-md-icon class='delete' icon="clear" size='15'></ng-md-icon>
                                 </button>
                         </div>
@@ -18,7 +18,6 @@
                 </md-item>
             </md-list>
         </md-content>
-
         <h3>Create A New Playlist</h3>
         <div>
             <h4>Playlist Title: </h4>
@@ -29,7 +28,6 @@
     </div>
     <div class='col-sm-12 col-md-6'>
       <div class='set-width'>
-        SONGSSSS {{songs}}
         <md-item ng-repeat="song in currentPlaylistSongs">
             <div class='font-set'>{{song.title}}</div>
             <md-button ng-click="removeSongfromPlaylist($index)" class='md-warn button-yeah' aria-label='remove'>
@@ -57,8 +55,6 @@
                                 {{user.name}}</div>
                             <md-button class='button-yeah' aria-label='add' ng-click="subscribe($index)"class='follow-button'><ng-md-icon icon='add'size='20'></ng-md-icon></md-button>
                         </div>
-
-
                     </md-item-content>
                     <md-divider ng-if="!$last"></md-divider>
                 </md-item>

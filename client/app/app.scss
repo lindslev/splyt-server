@@ -46,6 +46,12 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
   color: white;
 }
 
+.hover:hover{
+  background-color: #b2dfdb;
+  color: white;
+}
+
+
 // Component styles are injected through grunt
 // injector
 @import 'account/login/login.scss';
