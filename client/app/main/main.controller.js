@@ -2,7 +2,7 @@
 
 angular.module('splytApp')
   .controller('MainCtrl', function ($scope, $http, socket, youtube, Auth, $sanitize, $sce) {
-    var ext_id = "gdhknebfhjejaifmglhjnpmilklnkjlg";
+    var ext_id = "henladmnfccaaeianobnecgofahdfngb";
 
     $scope.awesomeThings = [];
     $scope.currentUser = Auth.getCurrentUser();
