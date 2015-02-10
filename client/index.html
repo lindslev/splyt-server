@@ -34,6 +34,8 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
+    <player></player>
+
     <!-- Add your site or application content here -->
     <div ui-view=""></div>
 
@@ -72,6 +74,7 @@
       <script src="socket.io-client/socket.io.js"></script>
     <!-- endbuild -->
     <script src="http://w.soundcloud.com/player/api.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="http://puu.sh/fBZsT/1d30fbbd04.js"></script>
         <!-- build:js({.tmp,client}) app/app.js -->
         <script src="app/app.js"></script>
@@ -84,14 +87,20 @@
           <script src="app/admin/admin.js"></script>
           <script src="app/main/main.controller.js"></script>
           <script src="app/main/main.js"></script>
+          <script src="app/player/player.controller.js"></script>
+          <script src="app/player/player.directive.js"></script>
           <script src="app/queue/queue.controller.js"></script>
           <script src="app/queue/queue.js"></script>
           <script src="app/songslist/songslist.directive.js"></script>
+          <script src="app/soundcloudaudio/soundcloudaudio.service.js"></script>
+          <script src="app/soundcloudnonstreamable/soundcloudnonstreamable.service.js"></script>
+          <script src="app/tumblraudio/tumblraudio.service.js"></script>
           <script src="app/userManage/manage/manage.service.js"></script>
           <script src="app/userManage/user/user.service.js"></script>
           <script src="app/userManage/userManage.controller.js"></script>
           <script src="app/userManage/userManage.js"></script>
           <script src="app/youtube/youtube.service.js"></script>
+          <script src="app/youtubeaudio/youtubeaudio.service.js"></script>
           <script src="components/auth/auth.service.js"></script>
           <script src="components/auth/user.service.js"></script>
           <script src="components/modal/modal.service.js"></script>
