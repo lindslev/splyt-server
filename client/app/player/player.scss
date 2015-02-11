@@ -1,8 +1,11 @@
 #audioplayer{
-  width: 480px;
+  width: 100%;
+  background: white;
   height: 60px;
-  margin: 50px auto auto auto;
-  border: solid;
+  top: 30;
+  position: fixed;
+  margin: 0 auto auto auto;
+  z-index: 100;
 }
 
 #youtubePlayer, #soundcloud_widget {

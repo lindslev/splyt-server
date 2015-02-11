@@ -2,29 +2,6 @@
 
 angular.module('splytApp')
   .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm) {
-    //what needs to happen:
-    //1. music not playing - click toggle
-    //2. player icon turns to pause
-    //3. playlist icon turns to pause
-    //4. click toggle again
-    //5. player icon turns to play
-    //6. playlist icon of currentplaying turns to play
-    //7. click toggle again
-    //8. playlist icon of currentplaying turns to pause
-    //9. player icon turns to pause
-    //10. click playlist icon of currentlyplaying
-    //11. playlist icon turns to play
-    //12. player icon turns to play
-    //13. click playlist icon of currentlyPlaying
-    //14. playlist icon of currenly playing turns to pause
-    //15. player icon turns to pause
-    //16. click playlist icon of new song
-    //17. playlist icon of new song turns to pause
-    //18. playlist icon of what WAS currentlyPlaying turns to play
-    //19. player icon remains pause
-    //20. click toggle
-    //21. playlist icon of currently playing turns to play
-    //22. player icon turns to play
 
     var music = document.getElementById('music'); // id for audio element
     var duration; // Duration of audio clip
@@ -34,12 +11,6 @@ angular.module('splytApp')
 
     $scope.musicPlaying = false;
     var currentlyPlaying, currentAudioProvider; //this might need to become something on each factory
-
-    // would be better...
-    // QueuePlayerComm.on('changeSong', function() {
-    //   currentlyPlaying == song ? $scope.toggle() : $scope.changeSong(song);
-    //   return currentlyPlaying;
-    // })
 
     QueuePlayerComm.onChangeSong = function(song) {
       currentlyPlaying == song ? $scope.toggle() : $scope.changeSong(song);
