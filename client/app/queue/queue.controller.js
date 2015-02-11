@@ -9,10 +9,9 @@ angular.module('splytApp')
   var playlistPromise = manage.getPlaylists();
 
   //Updating playlist songs when user clicks on new tab
-  $scope.update_songs = function(id) {
+  $scope.update_songs = function(id, index) {
     $state.go('queue', { playlist_id: id }, true);
   }
-
   //Getting playlists
   playlistPromise.success(function(playlists) {
     $scope.playlists = [];
@@ -69,6 +68,12 @@ angular.module('splytApp')
     search.searchSC(query, function(err, data) {
       $scope.SCResults = data;
       console.log($scope.SCResults);
+    })
+  }
+
+  $scope.searchYT = function(query) {
+    search.searchYT(query, function(err, data) {
+      console.log(data);
     })
   }
 

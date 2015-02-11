@@ -14,6 +14,16 @@ exports.getYouTube = function(req, res) {
     })
 }
 
+// Make a YouTube search
+exports.searchYouTube = function(req, res) {
+  request('https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + req.params.query + '&key=AIzaSyC_eZm_iimb5fx5So3Bt4h96ZuKQqd7ARU',
+    function(err, response, body) {
+      if(err) return handleError(res, err)
+        console.log('youtube search ', body);
+        res.json(body);
+    })
+}
+
 // Uses youtube-audio-stream for player
 exports.getStream = function(req, res) {
 

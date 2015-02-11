@@ -9,6 +9,7 @@ router.use(cors());
 
 router.get('/', controller.index);
 router.get('/stream/:id', controller.getStream)
+router.get('/search/videos/:query', controller.searchYouTube);
 router.get('/:id', controller.getYouTube);
 router.post('/', controller.create);
 router.put('/:id', controller.update);
