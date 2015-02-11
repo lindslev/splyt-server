@@ -43,19 +43,26 @@ body {
 .logo-image {
   filter: brightness(50%);
   background-color: black;
-  width: 100%;
-  margin: -25px auto 0 auto;
+  margin: -40px auto 0 auto;
   display: block;
   background-image:url('../assets/images/background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100%;
+  width:100%;
+  float: left;
+  left: 0%;
+  position: relative;
 }
 
 .logo {
-  margin: 80px auto;
+  margin: 20px auto;
   padding-top: 20px;
   filter: brightness(167%);
+  width: auto;
+  height: 45vw;
+  float: left;
+  left: 16%;
+  position: relative;
 }
 
 .feature-row {
