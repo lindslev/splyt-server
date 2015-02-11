@@ -35,5 +35,10 @@ angular.module('splytApp')
       });
     }
 
+    SoundcloudAudioSource.prototype.stop = function() {
+      music.pause();
+      music.currentTime = 0;
+    }
+
     return SoundcloudAudioSource;
   });

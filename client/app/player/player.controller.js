@@ -3,6 +3,9 @@
 angular.module('splytApp')
   .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm) {
 
+    //1. youtube song plays
+    //2. youtube song pauses
+
     var music = document.getElementById('music'); // id for audio element
     var duration; // Duration of audio clip
     var pButton = document.getElementById('pButton'); // play button
@@ -39,23 +42,22 @@ angular.module('splytApp')
       $scope.audioProvider = new AudioSource(song);
       if(typeof $scope.audioProvider.onReady === 'function') { //for soundcloud nonstreamable and youtube embeds
         $scope.audioProvider.onReady(function(){
-          // $scope.toggle();
           songChangeHandler();
           $scope.$apply();
         });
       } else {
         songChangeHandler();
-        // $scope.toggle();
       }
       $scope.audioProvider.addEndedListener();
     }
 
-    //function similar to toggle that will handle the swap of tracks
+    //WRITE STOP FXNS THAT SHOULD REMOVE THE YOUTUBE N SOUNDCLOUD DOM ELEMENTS FROM THE DOM
+
     //when a song is in the process of playing and another song is selected
     function switchTracks() {
-      console.log('using switch tracks instead of scope.toggle')
-      //need to set the OLD currentlyplaying.playing to play_arrow;
-      currentAudioProvider.pause();
+      console.log('INSIDE OF SWITCH TRACKS')
+      //need to set the OLD currentlyplaying.playing to play_arrow - do this in changeSong currentlyPlaying.playing = 'play_arrow'
+      currentAudioProvider.stop(currentlyPlaying); //maybe stop
       $scope.audioProvider.play();
       QueuePlayerComm.trigger('globalPlayerToggle', currentlyPlaying);
     }

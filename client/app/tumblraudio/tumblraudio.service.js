@@ -36,5 +36,10 @@ angular.module('splytApp')
       });
     }
 
+    TumblrAudioSource.prototype.stop = function() {
+      music.pause();
+      music.currentTime = 0;
+    }
+
     return TumblrAudioSource;
   });
