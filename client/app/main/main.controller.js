@@ -39,7 +39,7 @@ angular.module('splytApp')
     $scope.test = function(){
       console.log('ssasa', $scope.currentUser);
       $http.post('api/users/addSong/'+ $scope.currentUser._id +'/playlist/'+ $scope.currentUser.playlist[0], song_obj).success(function(data){
-        console.log(data);
+        console.log('test function', data);
       })
      }
 
