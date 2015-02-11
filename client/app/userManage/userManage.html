@@ -23,7 +23,7 @@
                 <div>
                     <h4>Playlist Title: </h4>
                     <input ng-model="newPlaylist.title">
-                    <md-button class='md-raised' ng-click="createPlaylist()">Submit</md-button>
+                    <md-button class='md-raised' ng-disabled = "!newPlaylist.title" ng-click="createPlaylist()">Submit</md-button>
                 </div>
             </div>
         </div>
@@ -51,7 +51,7 @@
                 </md-content>
                 <h3>Search for users to follow</h3>
                 <input type="text" ng-model="nameFilter" placeholder="Search..." />
-                <md-button class='md-raised' ng-click="getUsers(nameFilter)">Submit</md-button>
+                <md-button class='md-raised' ng-disabled = "!nameFilter" ng-click="getUsers(nameFilter)">Submit</md-button>
                 <br>
                 <h4 ng-if='userList'><strong>Search Results</strong></h4>
                 <md-content>

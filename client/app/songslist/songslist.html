@@ -13,7 +13,7 @@
         <ng-md-icon ng-click='play(song)' icon="Paused" ng-if="!song.playing" size='30'></ng-md-icon> -->
         <ng-md-icon ng-click='play(song)' icon="{{song.playing}}" size='30'></ng-md-icon>
     </md-button>
-    <md-button ng-click='removeSongfromPlaylist($index)' class="md-primary right" aria-label='none'>
+    <md-button ng-if='!playlist.friend_stream' ng-click='removeSongfromPlaylist($index)' class="md-primary right" aria-label='none'>
         <ng-md-icon icon="clear" size='30'></ng-md-icon>
     </md-button>
     <div class="btn-group" dropdown is-open="status.isopen" ng-if='playlist_tabs.length>2'>
