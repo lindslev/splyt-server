@@ -14,6 +14,12 @@ angular.module('splytApp')
             },
             getSpecificPlaylist: function(playlistobj) {
                 return $http.get('api/playlists/' + playlistobj._id);
+            },
+            removeSongfromPlaylist: function(playlistobj, songobj){
+                return $http.delete('api/playlists/' + playlistobj._id + '/song/'+ songobj._id);
+            },
+            addSongtoPlaylist: function(playlistid, songid) {
+              return $http.post('api/playlists/playlist/' + playlistid +'/song/' + songid);
             }
         };
     });

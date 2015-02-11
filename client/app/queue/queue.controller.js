@@ -23,6 +23,7 @@ angular.module('splytApp')
     $scope.playlist_tabs=[];
     $scope.tabs = $scope.playlist_tabs;
 
+
     //Updating playlist songs when user clicks on new tab
     $scope.update_songs = function(id) {
       console.log('update_songs');
@@ -36,16 +37,21 @@ angular.module('splytApp')
       $scope.playlists = [];
       for (var i = 0; i < playlists.length; i++) {
         $scope.playlist_tabs.push(playlists[i]);
-        if (playlists[i].aggregate_stream === true) {
-          $scope.main_playlist = playlists[i];
-
-        } if (playlists[i].friend_stream === true) {
-          $scope.friend_playlist = playlists[i];
-        }
       }
     }).then(function(){
       console.log($scope.playlist_tabs);
+      $scope.user_playlists = $scope.playlist_tabs.slice(2);
     });
+
+    $scope.add_to_playlist = function(playlistid, songid) {
+      manage.addSongtoPlaylist(playlistid, songid);
+    }
+
+
+    $scope.removeSongfromPlaylist = function(index){
+      var removeSongfromPlaylistPromise = manage.removeSongfromPlaylist(playlist, $scope.songs[index]);
+      $scope.songs.splice(index, 1);
+    }
 
     $scope.songs = playlist.songs.map(function(song) { song.playing = 'play_arrow'; return song; });
 

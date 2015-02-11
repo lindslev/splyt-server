@@ -3,7 +3,6 @@
 angular.module('splytApp')
   .run(function ($rootScope) {
     $rootScope.$on('$routeChangeStart', function () {
-      console.log(arguments);
     });
   })
   .config(function ($stateProvider, $urlRouterProvider) {

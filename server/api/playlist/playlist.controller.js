@@ -3,6 +3,7 @@
 var _ = require('lodash');
 var Playlist = require('./playlist.model');
 var User = require('../user/user.model')
+var Song = require('../song/song.model');
 
 // Get list of playlists
 exports.index = function(req, res) {
@@ -22,6 +23,15 @@ exports.show = function(req, res) {
   });
 };
 
+exports.getDefault = function(req, res) {
+  var id = req.params.id;
+  User.findById(id).populate('playlist').exec(function(err, data) {
+    _.findWhere(data,{'aggregate_stream' : true }, function(err, playlist) {
+      return res.json(playlist);
+    })
+  });
+};
+
 // Creates a new playlist in the DB.
 exports.create = function(req, res) {
   var userid = req.params.id;
@@ -34,6 +44,20 @@ exports.create = function(req, res) {
     return res.json(201, playlist);
   });
 };
+
+exports.addSong = function(req, res) {
+  var playlistid = req.params.id;
+  var songid = req.params.songid;
+  Song.findById(songid, function(err, song) {
+    Playlist.findByIdAndUpdate(playlistid,
+      { $push: {'songs': song }},
+      { safe: true, upsert: true },
+      function (err, data) {
+        return res.json(201, data);
+      }
+    );
+  });
+}
 
 // Updates an existing playlist in the DB.
 exports.update = function(req, res) {
@@ -59,6 +83,12 @@ exports.destroy = function(req, res) {
       return res.send(204);
     });
   });
+};
+// Remove Song from a playlist from the DB.
+exports.removeSongfromPlaylist = function(req, res) {
+    Playlist.removeSong(req.params.id, req.params.songid, function(err, song){
+      console.log('playlist controller', song);
+    });
 };
 
 function handleError(res, err) {

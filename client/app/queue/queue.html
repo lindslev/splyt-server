@@ -1,6 +1,33 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+<div class="container">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand"><strong>
+                        Your Playlists
+                </strong>
+                </li>
+                <li class='hover' ng-repeat='tab in tabs' ng-click='update_songs(tab._id)'>
+                    {{tab.title}}</li>
+            </ul>
+        </div>
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <songslist></songslist>
+        </div>
+    </div>
+
+    <!-- <md-content>
+>>>>>>> master
 <div layout="column" layout-fill>
+  <section layout='row' flex>
+    <md-sidenav class='md-sidenav-left' md-component-id='left'>
+    <h2>Playlists</h2>
+  </md-sidenav>
+  <md-content>
     <md-tabs md-selected='selectedIndex'>
-      <md-tab ng-repeat='tab in tabs' ng-disabled='tab.disabled' label='{{tab.title}}' ng-click='update_songs(tab._id)'>
+      <md-button ng-repeat='tab in tabs' ng-disabled='tab.disabled' label='{{tab.title}}' ng-click='update_songs(tab._id)'>{{tab.title}}</md-button>
           <md-content class="md-padding" style="height: 300px;">
         <div class= "col-md-4" >
           <songslist></songslist>
@@ -8,4 +35,9 @@
         <div class='col-md-4'></div>
     </md-tab>
   </md-tabs>
+<<<<<<< HEAD
+</div>
+=======
+</md-content> -->
+
 </div>
