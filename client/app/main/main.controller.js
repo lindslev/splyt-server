@@ -5,6 +5,8 @@ angular.module('splytApp')
     //DONT FORGET TO CHANGE TO YOUR EXT ID
     var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
 
+    var api = "AIzaSyABJumn6ZK-Ru4vt1U0hq7wQA99Z6EhXLE";
+
     $scope.awesomeThings = [];
     $scope.currentUser = Auth.getCurrentUser();
 
@@ -21,6 +23,7 @@ angular.module('splytApp')
       $scope.awesomeThings = awesomeThings;
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
+
 
     $scope.addThing = function() {
       if($scope.newThing === '') {
