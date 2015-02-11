@@ -16,7 +16,6 @@ angular.module('splytApp')
         resolve: {
           playlist: function($stateParams, $http) {
             return $http.get('/api/playlists/' + $stateParams.playlist_id).then(function (response) {
-              console.log('what is this thing', response);
               return response.data;
             });
           }

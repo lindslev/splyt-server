@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, QueuePlayerComm) {
+  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, QueuePlayerComm, toast) {
 
     ////////////////////////
     //*********************
@@ -57,6 +57,7 @@ angular.module('splytApp')
     $scope.removeSongfromPlaylist = function(index){
       var removeSongfromPlaylistPromise = manage.removeSongfromPlaylist(playlist, $scope.songs[index]);
       $scope.songs.splice(index, 1);
+      toast.removedSong();
     }
 
     $scope.songs = playlist.songs.map(function(song) { song.playing = 'play_arrow'; return song; });
