@@ -1,0 +1,11 @@
+<div id="audioplayer">
+  <button id="pButton" ng-class="{ 'pause' : musicPlaying, 'play' : !musicPlaying }" ng-click="toggle()"></button>
+  <div id="timeline">
+        <div id="playhead"></div>
+  </div>
+</div>
+<div id="youtubePlayer"></div>
+<iframe id="soundcloud_widget" width="100%" height="166" scrolling="no" frameborder="no" src=""></iframe>
+<audio id="music" preload="true">
+  <source src="">
+</audio>

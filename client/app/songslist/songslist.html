@@ -9,7 +9,9 @@
       <h4>{{song.artist}}</h4>
       <p>{{song.source}}</p>
     <md-button class="md-primary" aria-label='none'>
-        <ng-md-icon ng-click='play(song)' icon="play_arrow" size='30'></ng-md-icon>
+  <!-- <ng-md-icon ng-click='play(song)' icon="Playing" ng-if="song.playing" size='30'></ng-md-icon>
+        <ng-md-icon ng-click='play(song)' icon="Paused" ng-if="!song.playing" size='30'></ng-md-icon> -->
+        <ng-md-icon ng-click='play(song)' icon="{{song.playing}}" size='30'></ng-md-icon>
     </md-button>
     <md-button ng-click='removeSongfromPlaylist($index)' class="md-primary right" aria-label='none'>
         <ng-md-icon icon="clear" size='30'></ng-md-icon>
