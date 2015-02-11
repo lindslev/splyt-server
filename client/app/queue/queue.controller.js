@@ -1,9 +1,9 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, $mdSidenav) {
+  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, $mdSidenav, Auth) {
 
-
+    console.log('dkjfdkjfkd', Auth.getCurrentUser());
   $scope.songs = playlist.songs;
 
   var playlistPromise = manage.getPlaylists();
@@ -168,6 +168,32 @@ angular.module('splytApp')
     duration = music.duration;
   }, false);
 
+  $scope.search = function(query) {
+            $scope.query = "";
+            $http({
+                    url: 'https://www.googleapis.com/youtube/v3/search',
+                    method: 'GET',
+                    params: {
+                        part: 'snippet',
+                        q: 'love ' + query,
+                        maxResults: 4
+                    },
+                    headers: {
+                        Authorization: 'Bearer ' + 'AIzaSyC_eZm_iimb5fx5So3Bt4h96ZuKQqd7ARU'
+                    }
+                })
+                .success(function(res) {
+                  console.log(res.items);
+                    $scope.searchResults = res.items;
+                });
+        };
+
+        $scope.search();
+
+
+
 
 
 });
+
+

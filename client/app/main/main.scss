@@ -41,7 +41,8 @@ body {
 }
 
 .logo-image {
-  background-color: #CE87E6;
+  filter: brightness(40%);
+  background-color: black;
   width: 100%;
   margin: -25px auto 0 auto;
   display: block;
@@ -54,6 +55,7 @@ body {
 .logo {
   margin: 80px auto;
   padding-top: 20px;
+  filter: brightness(170%);
 }
 
 .feature-row {
@@ -82,5 +84,3 @@ a {
   text-decoration: none;
   font-weight: Thin 100;
 }
-
-

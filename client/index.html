@@ -27,6 +27,10 @@
       SC.initialize({
         client_id: "7af759eb774be5664395ed9afbd09c46"
       });
+
+      SC.get('/tracks', {q:'love'}, function(tracks) {
+        console.log(tracks);
+      })
     </script>
   </head>
   <body ng-app="splytApp">
