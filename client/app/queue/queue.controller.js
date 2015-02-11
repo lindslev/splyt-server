@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, $mdSidenav, Auth) {
+  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, $mdSidenav, Auth, search) {
 
     console.log('dkjfdkjfkd', Auth.getCurrentUser());
   $scope.songs = playlist.songs;
@@ -64,7 +64,13 @@ angular.module('splytApp')
 
   $scope.tabs = $scope.playlist_tabs;
 
-
+  //search bar stuff
+  $scope.searchSC = function(query) {
+    search.searchSC(query, function(err, data) {
+      $scope.SCResults = data;
+      console.log($scope.SCResults);
+    })
+  }
 
   // var player2 = new Audio('https://www.tumblr.com/audio_file/uncaught/101386977846/tumblr_ne5ykbG3y11qflbpe?play_key=e6ba8f023e92bbb5aaf06052cd0c6551&tumblelog=uncaught&post_id=101386977846')
   // player2.preload = 'metadata';

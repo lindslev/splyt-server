@@ -24,9 +24,14 @@
             </div>
         </div>
         <br>
-        <!-- Page Content -->
-        <div id="page-content-wrapper">
 
+        <!-- Search bar -->
+        <div class='search'>
+           <input type="text" ng-model="search.query" placeholder="Search..." />
+                <md-button class='md-raised' ng-click="searchSC(search.query)">Submit</md-button>
+        </div>
+        <div id="page-content-wrapper">
+<!-- Page Content -->
             <songslist></songslist>
         </div>
     </div>
