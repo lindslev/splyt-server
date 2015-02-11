@@ -28,10 +28,9 @@ angular.module('splytApp')
       return music.duration;
     }
 
-    SoundcloudAudioSource.prototype.addEndedListener = function() {
+    SoundcloudAudioSource.prototype.addEndedListener = function(cb) {
       return music.addEventListener("ended",function() {
-        console.log('IT ENDED AND THIS WORKED')
-        // $scope.changeSong('next');
+        cb();
       });
     }
 

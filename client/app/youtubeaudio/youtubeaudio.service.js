@@ -2,6 +2,8 @@
 
 angular.module('splytApp')
   .factory('YoutubeAudio', function () {
+    var callback;
+
     var YoutubeAudioSource = function(song) {
       var self = this;
       this.onReadyFunctions = [];
@@ -43,12 +45,13 @@ angular.module('splytApp')
     YoutubeAudioSource.prototype.duration = function() {
       return this.player.getDuration();
     }
-    YoutubeAudioSource.prototype.addEndedListener = function() {
+    YoutubeAudioSource.prototype.addEndedListener = function(cb) {
+      callback = cb;
       return onEnded;
     }
 
     function onEnded(e) {
-      if(e.data === 0) console.log("IT ENDED AND THIS WORKED")
+      if(e.data === 0) callback();
     }
 
     YoutubeAudioSource.prototype.stop = function(newSong) {

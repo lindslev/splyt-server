@@ -54,6 +54,7 @@ angular.module('splytApp')
     }
 
     $scope.songs = playlist.songs.map(function(song) { song.playing = 'play_arrow'; return song; });
+    QueuePlayerComm.getSongsFromQueue($scope.songs);
 
     console.log($scope.songs)
 

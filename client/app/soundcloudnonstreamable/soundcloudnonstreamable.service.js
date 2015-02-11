@@ -43,9 +43,9 @@ angular.module('splytApp')
       return this.widget.getDuration()/1000;
     }
 
-    SoundcloudNonstreamableAudioSource.prototype.addEndedListener = function() {
+    SoundcloudNonstreamableAudioSource.prototype.addEndedListener = function(cb) {
       return this.widget.bind(SC.Widget.Events.FINISH, function() {
-        console.log("IT ENDED AND THIS WORKED");
+        cb();
       })
     }
 
