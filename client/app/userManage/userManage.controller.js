@@ -59,7 +59,7 @@ angular.module('splytApp')
             createPlaylistPromise.success(function(playlist) {
                 $scope.playlists.push(playlist);
                 $scope.newPlaylist = null;
-
+                toast.createdPlaylist();
             })
         }
 
@@ -67,17 +67,22 @@ angular.module('splytApp')
         $scope.removePlaylist = function(index) {
             var removePlaylistPromise = manage.removePlaylists($scope.playlists[index]);
             $scope.playlists.splice(index, 1);
+            toast.removedPlaylist();
         }
 
 
         //Subscribe
         $scope.subscribe = function(index) {
-            if ($scope.currentUserSubscriptions.indexOf($scope.userList[index]) === -1) {
+            if ($scope.currentUserSubscriptions.map(function(x) {return x._id; }).indexOf($scope.userList[index]._id) === -1) {
                 var subscribePromise = user.setSubscription($scope.userList[index]);
                 subscribePromise.success(function(subscription) {
                     $scope.currentUserSubscriptions.push($scope.userList[index]);
+                    toast.subscribed();
+                    $scope.userList = null;
                 })
             } else {
+                toast.alreadySubscribed();
+                $scope.userList = null;
                 console.log('already subscribed');
             }
         }
@@ -87,6 +92,7 @@ angular.module('splytApp')
             console.log('front end', $scope.currentUserSubscriptions[index])
             var removeSubscriptionPromise = user.removeSubscription($scope.currentUserSubscriptions[index]);
             $scope.currentUserSubscriptions.splice(index, 1);
+            toast.removedSubscription();
         }
 
         //Get specific User
@@ -95,7 +101,6 @@ angular.module('splytApp')
         }
         //Remove Song from Playlist
         $scope.removeSongfromPlaylist = function(index) {
-
             console.log('front end', $scope.currentPlaylistSongs[index])
             console.log('currentPlaylist', $scope.currentPlaylist);
             var removeSongfromPlaylistPromise = manage.removeSongfromPlaylist($scope.currentPlaylist, $scope.currentPlaylistSongs[index]);
