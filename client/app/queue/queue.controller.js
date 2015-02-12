@@ -63,20 +63,6 @@ angular.module('splytApp')
 
   $scope.tabs = $scope.playlist_tabs;
 
-  //search bar stuff
-  $scope.searchSC = function(query) {
-    search.searchSC(query, function(err, data) {
-      $scope.SCResults = data;
-      console.log($scope.SCResults);
-    })
-  }
-
-  $scope.searchYT = function(query) {
-    search.searchYT(query, function(err, data) {
-      console.log(data);
-    })
-  }
-
   // var player2 = new Audio('https://www.tumblr.com/audio_file/uncaught/101386977846/tumblr_ne5ykbG3y11qflbpe?play_key=e6ba8f023e92bbb5aaf06052cd0c6551&tumblelog=uncaught&post_id=101386977846')
   // player2.preload = 'metadata';
   // player2.play();

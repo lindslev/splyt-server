@@ -1,0 +1,27 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<div class='search'>
+    <input type="text" ng-model="search.SCquery" placeholder="Search..." />
+    <md-button class='md-raised' ng-click="searchSC(search.SCquery)">Submit</md-button>
+</div>
+<div class='search'>
+    <input type="text" ng-model="search.YTquery" placeholder="Search..." />
+    <md-button class='md-raised' ng-click="searchYT(search.YTquery)">Submit</md-button>
+</div>
+<div ng-show='SCResults.length>0'>
+  <ul>
+    <li ng-repeat='song in SCResults'>
+      {{song.title}}
+      <a href={{song.permalink_url}}>SoundCloud</a>
+</div>
+
+<div ng-show='YTResults.length>0'>
+  <ul>
+    <li ng-repeat='song in YTResults'>
+      {{song.snippet.title}}
+      <a href='https://www.youtube.com/watch?v={{song.id.videoId}}'>Youtube</a>
+</div>
+
+</div>
+
+
