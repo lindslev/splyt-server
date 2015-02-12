@@ -46,11 +46,12 @@ angular.module('splytApp')
       }
     }).then(function(){
       console.log($scope.playlist_tabs);
-      $scope.user_playlists = $scope.playlist_tabs.slice(2);
+      $scope.user_playlists = $scope.playlist_tabs.slice(3);
     });
 
     $scope.add_to_playlist = function(playlistid, songid) {
       manage.addSongtoPlaylist(playlistid, songid);
+      toast.addedSong();
     }
 
 
