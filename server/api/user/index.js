@@ -16,7 +16,7 @@ router.get('/name/:name', auth.isAuthenticated(), controller.getUsers);
 router.get('/:id', auth.isAuthenticated(), controller.show);
 router.get('/social/:id', auth.isAuthenticated(), controller.getFollowersandSubscriptions);
 router.put('/:id/password', auth.isAuthenticated(), controller.changePassword);
-router.post('/addSong/:id/playlist/:listid', controller.addSong); //should be auth.isAuthenitcated(), controller..
+router.post('/addSong/:id/playlist/:listid', auth.isAuthenticated(), controller.addSong);
 router.post('/', controller.create);
 router.post('/:id', controller.setSubscription);
 router.delete('/:id', auth.hasRole('admin'), controller.destroy);

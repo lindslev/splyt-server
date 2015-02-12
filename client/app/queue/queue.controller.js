@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
+
   .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, QueuePlayerComm, toast) {
 
     ////////////////////////
@@ -18,16 +19,18 @@ angular.module('splytApp')
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     ///
+    $scope.update_songs = function(id) {
+
+      $state.go('queue', { playlist_id: id }, true);
+    }
 
     $scope.playlist = playlist;
     $scope.playlist_tabs=[];
     $scope.tabs = $scope.playlist_tabs;
+    $scope.songs = playlist.songs;
 
     //Updating playlist songs when user clicks on new tab
-    $scope.update_songs = function(id) {
-      console.log('update_songs');
-      $state.go('queue', { playlist_id: id }, true);
-    }
+
 
     $scope.isActive = function(id){
       if($stateParams.playlist_id === id){
@@ -54,7 +57,6 @@ angular.module('splytApp')
       toast.addedSong();
     }
 
-
     $scope.removeSongfromPlaylist = function(index){
       var removeSongfromPlaylistPromise = manage.removeSongfromPlaylist(playlist, $scope.songs[index]);
       $scope.songs.splice(index, 1);
@@ -74,3 +76,5 @@ angular.module('splytApp')
       song.playing == 'pause' ? song.playing = 'play_arrow' : song.playing = 'pause';
     })
 });
+
+

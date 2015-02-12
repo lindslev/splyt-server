@@ -12,6 +12,10 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
   padding-top: 50px;
  }
 
+ ul {
+  list-style-type: none;
+ }
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
@@ -70,6 +74,7 @@ md-toast md-default-theme {
 // Component styles are injected through grunt
 // injector
 @import 'account/login/login.scss';
+@import 'addSearchResult/addSearchResult.scss';
 @import 'admin/admin.scss';
 @import 'main/main.scss';
 @import 'player/player.scss';

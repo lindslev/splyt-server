@@ -37,6 +37,6 @@ angular.module('splytApp')
                         console.log('Category Id does not match');
                     }
                 });
-            }
+            },
         };
     });
