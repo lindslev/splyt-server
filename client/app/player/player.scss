@@ -1,8 +1,22 @@
 #audioplayer{
-  width: 480px;
+  width: 100%;
+  background: white;
   height: 60px;
-  margin: 50px auto auto auto;
-  border: solid;
+  top: 30;
+  position: fixed;
+  margin: 0 auto auto auto;
+  z-index: 100;
+  border-bottom: 3px solid #009688;
+}
+
+.player-buttons {
+  margin: 0 10px;
+  margin-top: 16px;
+  cursor: pointer;
+  font-size: 25px;
+  border: none;
+  float:left;
+  outline:none;
 }
 
 #youtubePlayer, #soundcloud_widget {

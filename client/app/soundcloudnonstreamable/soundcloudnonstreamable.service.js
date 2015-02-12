@@ -6,6 +6,8 @@ angular.module('splytApp')
       var trustSrc = $sce.trustAsResourceUrl;
       var self = this;
       this.onReadyFunctions = [];
+      this.domElement = $('<iframe id="soundcloud_widget" width="100%" height="166" scrolling="no" frameborder="no" src=""></iframe>')
+      $('body').append(this.domElement);
       this.url = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/" + song.tag + "&color=0066cc";
       $('#soundcloud_widget').attr('src', trustSrc(this.url));
       this.widget = SC.Widget(document.getElementById('soundcloud_widget'));
@@ -41,10 +43,14 @@ angular.module('splytApp')
       return this.widget.getDuration()/1000;
     }
 
-    SoundcloudNonstreamableAudioSource.prototype.addEndedListener = function() {
+    SoundcloudNonstreamableAudioSource.prototype.addEndedListener = function(cb) {
       return this.widget.bind(SC.Widget.Events.FINISH, function() {
-        console.log("IT ENDED AND THIS WORKED");
+        cb();
       })
+    }
+
+    SoundcloudNonstreamableAudioSource.prototype.stop = function() {
+      $('#soundcloud_widget').remove();
     }
 
     return SoundcloudNonstreamableAudioSource;

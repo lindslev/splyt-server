@@ -9,7 +9,6 @@ angular.module('splytApp')
     }
 
     TumblrAudioSource.prototype.play = function() {
-      console.log('this is where we should play')
       music.play();
     }
 
@@ -29,11 +28,15 @@ angular.module('splytApp')
       return music.duration;
     }
 
-    TumblrAudioSource.prototype.addEndedListener = function() {
+    TumblrAudioSource.prototype.addEndedListener = function(cb) {
       return music.addEventListener("ended",function() {
-        console.log('IT ENDED AND THIS WORKED')
-        // $scope.changeSong('next');
+        cb();
       });
+    }
+
+    TumblrAudioSource.prototype.stop = function() {
+      music.pause();
+      music.currentTime = 0;
     }
 
     return TumblrAudioSource;

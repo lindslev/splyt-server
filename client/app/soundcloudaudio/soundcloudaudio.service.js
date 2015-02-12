@@ -28,11 +28,15 @@ angular.module('splytApp')
       return music.duration;
     }
 
-    SoundcloudAudioSource.prototype.addEndedListener = function() {
+    SoundcloudAudioSource.prototype.addEndedListener = function(cb) {
       return music.addEventListener("ended",function() {
-        console.log('IT ENDED AND THIS WORKED')
-        // $scope.changeSong('next');
+        cb();
       });
+    }
+
+    SoundcloudAudioSource.prototype.stop = function() {
+      music.pause();
+      music.currentTime = 0;
     }
 
     return SoundcloudAudioSource;
