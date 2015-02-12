@@ -1,13 +1,15 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm) {
+  .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm, Auth) {
 
     var music = document.getElementById('music'); // id for audio element
     var duration; // Duration of audio clip
     var pButton = document.getElementById('pButton'); // play button
     var playhead = document.getElementById('playhead'); // playhead
     var timeline = document.getElementById('timeline'); // timeline
+
+    $scope.isLoggedIn = Auth.isLoggedIn;
 
     $scope.musicPlaying = false;
     var currentlyPlaying, currentAudioProvider; //this might need to become something on each factory
