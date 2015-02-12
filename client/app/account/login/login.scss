@@ -30,8 +30,13 @@ $btnGithubBackgroundHighlight:      #ccc;
 }
 
 md-card md-card-content{
-	background-color: darkgrey;
+	background-color: rgba(158, 160, 157, 0.78);;
 	text-align: center;
 	color: whitesmoke;
 	padding: 90px;
+  font-size: 16px;
+}
+
+.btn-google-plus {
+  margin-top: 60px;
 }
