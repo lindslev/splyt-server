@@ -21,7 +21,7 @@
       <li ng-repeat='song in YTResults'>
         {{song.snippet.title}}
         <a href='https://www.youtube.com/watch?v={{song.id.videoId}}'>Youtube link</a>
-        <div class="btn-group" dropdown is-open="status.isopen">
+        <div class="btn-group" ng-show=dropdown is-open="status.isopen">
             <button type="button" class="btn btn-xs dropdown-toggle">
                 Add to <span class="caret"></span>
             </button>

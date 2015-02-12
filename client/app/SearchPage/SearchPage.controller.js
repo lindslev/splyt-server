@@ -1,14 +1,14 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('SearchPageCtrl', function ($scope, search, manage) {
+  .controller('SearchPageCtrl', function ($scope, search, manage, Auth) {
     $scope.SCResults;
     $scope.YTResults;
     $scope.SC = false;
     $scope.YT = false;
     $scope.playlist_tabs = [];
-    var playlistPromise = manage.getPlaylists();
 
+    var playlistPromise = manage.getPlaylists();
     playlistPromise.success(function(playlists) {
       $scope.playlists = [];
       for (var i = 0; i < playlists.length; i++) {
