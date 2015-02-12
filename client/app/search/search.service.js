@@ -9,6 +9,7 @@ angular.module('splytApp')
 
       searchSC: function (query, cb) {
           SC.get('/tracks', {q: query }, function(data) {
+            console.log(data);
             cb(data)
           });
       },
@@ -32,13 +33,37 @@ angular.module('splytApp')
             title: title,
             artist: artist,
             link: 'https://www.youtube.com/watch?v=' + song.items[0].id.videoId,
-            source: 'YouTube'
+            source: 'YouTube',
+            addedUser: Auth.getCurrentUser()._id
           };
           $http.post('/api/users/addSong/'+Auth.getCurrentUser()._id + '/playlist/' + playlist, song_obj)
           .success(function(model) {
-            console.log(model);
             cb(err, model);
           })
+        })
+      },
+
+      addSC: function(song, playlist, cd) {
+        var audio;
+        song.streamable ? audio = song.stream_url : audio = null;
+        var title = song.title.split(' - ')[1];
+          var artist = song.title.split(' - ')[0];
+          if (title === undefined) {
+            title = song.title;
+            artist = '';
+          }
+          var song_obj = {
+            tag: song.id,
+            title: song.title,
+            artist: song.user.username,
+            link: song.permalink,
+            audioSource: audio,
+            source: 'SoundCloud',
+            addedUser: Auth.getCurrentUser()._id
+          };
+        $http.post('/api/users/addSong/'+Auth.getCurrentUser()._id + '/playlist/' + playlist, song_obj)
+        .success(function(model) {
+          cb(err, model);
         })
       }
 

@@ -73,6 +73,7 @@ md-toast md-default-theme {
 
 // Component styles are injected through grunt
 // injector
+@import 'SearchPage/SearchPage.scss';
 @import 'account/login/login.scss';
 @import 'addSearchResult/addSearchResult.scss';
 @import 'admin/admin.scss';
