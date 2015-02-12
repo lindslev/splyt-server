@@ -18,11 +18,17 @@ var SongSchema = new Schema({
 //obj for returning song objects in proper format according to song source
 var transformations = {
   newYoutubeSong: function(song_obj) {
+    var title = song_obj.args.info.items[0].snippet.title.split(' - ')[1];
+    var artist = song_obj.args.info.items[0].snippet.title.split(' - ')[0];
+    if (title === undefined) {
+      title = song_obj.args.info.items[0].snippet.title;
+      artist = '';
+    }
     return {
-      tag: song_obj.song.args.info.items[0].id,
-      title: song_obj.song.args.info.items[0].snippet.title.split(' - ')[1],
-      artist: song_obj.song.args.info.items[0].snippet.title.split(' - ')[0],
-      link: song_obj.song.args.song.permalink_url,
+      tag: song_obj.args.info.items[0].id,
+      title: title,
+      artist: artist,
+      link: song_obj.args.song.permalink_url,
       source: 'YouTube',
       addedUser: song_obj.userid
     }
@@ -66,7 +72,11 @@ var transformations = {
 SongSchema.statics.createSong = function(song_obj, cb) {
 
   var Song = this;
-  var song_data = transformations[song_obj.song.action](song_obj);
+  if (song_obj.song.tag == undefined) {
+    var song_data = transformations[song_obj.song.action](song_obj.song);
+  } else {
+    var song_data = song_obj.song;
+  }
   Song.create(song_data, function(err, data) {
     Playlist.addNewSong(data, song_obj.playlist, song_obj.userid, function(err, model) {
       cb(err, data);

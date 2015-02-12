@@ -21,8 +21,8 @@
         <!-- <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/signup')}"><a href="/signup">Sign up</a></li> -->
         <li ng-hide="isLoggedIn()" ng-class="{active: isActive('/login')}"><a href="/login">Login</a></li>
         <li ng-show="isLoggedIn()"><a ng-href="/queue/{{getCurrentUser().playlist[0]}}">Your Music</a></li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/user/:id')}"><a ng-href="/user/{{getCurrentUser()._id}}">{{ getCurrentUser().name }}</a></li>
-        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/settings')}"><a href="/settings"><span class="glyphicon glyphicon-cog"></span></a></li>
+        <li ng-show="isLoggedIn()" ng-class="{active: isActive('/user/:id')}"><a ng-href="/user/{{getCurrentUser()._id}}">Playlist Settings</a></li>
+
         <li ng-show="isLoggedIn()" ng-class="{active: isActive('/logout')}"><a href="" ng-click="logout()">Logout</a></li>
       </ul>
     </div>

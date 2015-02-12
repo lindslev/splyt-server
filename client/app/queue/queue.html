@@ -8,8 +8,8 @@
                         Your Playlists
                 </strong>
                 </li>
-                <li class='hover' ng-class = "{'activeClass': isActive(tab._id)}" 
-                                  ng-repeat='tab in tabs' 
+                <li class='hover' ng-class = "{'activeClass': isActive(tab._id)}"
+                                  ng-repeat='tab in tabs'
                                   ng-click='update_songs(tab._id)'>
                     {{tab.title}}
                   </li>
