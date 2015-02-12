@@ -57,9 +57,13 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
   color: white;
 }
 
-.md-toast .md-default-theme {
+md-toast md-default-theme {
   background-color: rgba(82,0,0,0.87) !important;
   color: rgb(250,250,250);
+}
+
+.top{
+  margin-top: 70px;
 }
 
 

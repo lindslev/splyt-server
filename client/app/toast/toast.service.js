@@ -81,6 +81,14 @@ angular.module('splytApp')
               .position(getToastPosition())
               .hideDelay(3000)
           );
+        },
+        cantaddMe : function() {
+          $mdToast.show(
+            $mdToast.simple()
+              .content('You cant follow yourself, Silly!')
+              .position(getToastPosition())
+              .hideDelay(3000)
+          );
         }
       }
 });
