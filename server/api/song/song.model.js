@@ -11,7 +11,8 @@ var SongSchema = new Schema({
   artist: String,
   link: { type: String },
   audioSource: { type: String, default: null },
-  source: {type: String, required: true }
+  source: {type: String, required: true },
+  addedUser: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 //obj for returning song objects in proper format according to song source
@@ -24,41 +25,53 @@ var transformations = {
       artist = '';
     }
     return {
+<<<<<<< HEAD
       tag: song_obj.args.info.items[0].id,
       title: title,
       artist: artist,
       link: song_obj.args.song.permalink_url,
       source: 'YouTube'
+=======
+      tag: song_obj.song.args.info.items[0].id,
+      title: song_obj.song.args.info.items[0].snippet.title.split(' - ')[1],
+      artist: song_obj.song.args.info.items[0].snippet.title.split(' - ')[0],
+      link: song_obj.song.args.song.permalink_url,
+      source: 'YouTube',
+      addedUser: song_obj.userid
+>>>>>>> master
     }
   },
    newSCSong: function(song_obj) {
+    var audio;
+    song_obj.song.args.song.streamable ? audio = song_obj.song.args.song.stream_url : audio = null;
     return {
-      tag: song_obj.args.song.id,
-      title: song_obj.args.song.title,
-      artist: song_obj.args.song.user.username,
-      link: song_obj.args.song.permalink_url,
-      source:'SoundCloud'
+      tag: song_obj.song.args.song.id,
+      title: song_obj.song.args.song.title,
+      artist: song_obj.song.args.song.user.username,
+      link: song_obj.song.args.song.permalink_url,
+      audioSource: audio,
+      source:'SoundCloud',
+      addedUser: song_obj.userid
     }
   },
    newSpotifySong: function(song_obj) {
     return {
-      tag: song_obj.args.info.id,
-      title: song_obj.args.song.title,
-      artist: song_obj.args.info.artists[0].name,
-      link: song_obj.args.song.permalink_url,
-      source: 'Spotify'
+      tag: song_obj.song.args.info.id,
+      title: song_obj.song.args.song.title,
+      artist: song_obj.song.args.info.artists[0].name,
+      link: song_obj.song.args.song.permalink_url,
+      source: 'Spotify',
+      addedUser: song_obj.userid
     }
   },
    newTumblrSong: function(song_obj) {
-    console.log('songobj in new tumblr song', song_obj)
-    console.log('**************')
-    console.log('songobj args in new tumblr song', song_obj.args)
     return {
-      title: song_obj.args.song.title,
-      artist: song_obj.args.song.artist,
-      link: song_obj.args.song.permalink_url,
-      audioSource: song_obj.args.iframeSrc,
-      source: 'Tumblr'
+      title: song_obj.song.args.song.title,
+      artist: song_obj.song.args.song.artist,
+      link: song_obj.song.args.song.permalink_url,
+      audioSource: song_obj.song.args.iframeSrc,
+      source: 'Tumblr',
+      addedUser: song_obj.userid
     }
   }
 }

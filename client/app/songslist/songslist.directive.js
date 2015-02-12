@@ -6,6 +6,7 @@ angular.module('splytApp')
       templateUrl: 'app/songslist/songslist.html',
       restrict: 'EA',
       link: function (scope, element, attrs) {
+
       }
     };
   });

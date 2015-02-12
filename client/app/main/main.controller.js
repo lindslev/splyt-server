@@ -4,6 +4,8 @@ angular.module('splytApp')
   .controller('MainCtrl', function ($scope, $http, socket, youtube, Auth, $sanitize, $sce) {
     //DONT FORGET TO CHANGE TO YOUR EXT ID
     var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
+    var api = "AIzaSyABJumn6ZK-Ru4vt1U0hq7wQA99Z6EhXLE";
+
 
     $scope.awesomeThings = [];
     $scope.currentUser = Auth.getCurrentUser();
@@ -22,6 +24,7 @@ angular.module('splytApp')
       socket.syncUpdates('thing', $scope.awesomeThings);
     });
 
+
     $scope.addThing = function() {
       if($scope.newThing === '') {
         return;
@@ -39,7 +42,7 @@ angular.module('splytApp')
     $scope.test = function(){
       console.log('ssasa', $scope.currentUser);
       $http.post('api/users/addSong/'+ $scope.currentUser._id +'/playlist/'+ $scope.currentUser.playlist[0], song_obj).success(function(data){
-        console.log(data);
+        console.log('test function', data);
       })
      }
 

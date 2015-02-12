@@ -25,6 +25,62 @@ angular.module('splytApp')
             .position(getToastPosition())
             .hideDelay(3000)
           );
+        },
+        createdPlaylist : function() {
+        $mdToast.show(
+          $mdToast.simple()
+            .content('Playlist Created!')
+            .position(getToastPosition())
+            .hideDelay(3000)
+          );
+        },
+        removedPlaylist : function() {
+        $mdToast.show(
+          $mdToast.simple()
+            .content('Removed Playlist!')
+            .position(getToastPosition())
+            .hideDelay(3000)
+          );
+        },
+        alreadySubscribed : function() {
+        $mdToast.show(
+          $mdToast.simple()
+            .content('Sorry, you are already subscribed to them!')
+            .position(getToastPosition())
+            .hideDelay(3000)
+          );
+        },
+        removedSubscription : function() {
+        $mdToast.show(
+          $mdToast.simple()
+            .content('Subscription Removed!')
+            .position(getToastPosition())
+            .hideDelay(3000)
+          );
+        },
+        subscribed : function() {
+        $mdToast.show(
+          $mdToast.simple()
+            .content('Subscribed!')
+            .position(getToastPosition())
+            .hideDelay(3000)
+          );
+        },
+        removedSong : function() {
+        $mdToast.show(
+          $mdToast.simple()
+            .content('Song Removed!')
+            .position(getToastPosition())
+            .hideDelay(3000)
+          );
+        },
+        addedSong : function() {
+          $mdToast.show(
+            $mdToast.simple()
+              .content('Song Added!')
+              .position(getToastPosition())
+              .hideDelay(3000)
+          );
         }
       }
 });

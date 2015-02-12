@@ -8,24 +8,15 @@
                         Your Playlists
                 </strong>
                 </li>
-                <li class='hover' ng-repeat='tab in tabs' ng-click='update_songs(tab._id)'>
-                    {{tab.title}}</li>
+                <li class='hover' ng-class = "{'activeClass': isActive(tab._id)}"
+                                  ng-repeat='tab in tabs'
+                                  ng-click='update_songs(tab._id)'>
+                    {{tab.title}}
+                  </li>
             </ul>
         </div>
-        <!-- /#sidebar-wrapper -->
-        <audio id="music" preload="true">
-            <source src=""></source>
-            <source src=""></source>
-        </audio>
-        <div id="audioplayer">
-            <button id="pButton" class="play" ng-click="playTrack()"></button>
-            <div id="timeline">
-                <div id="playhead"></div>
-            </div>
-        </div>
-        <br>
+        <!-- Page Content -->
         <div id="page-content-wrapper">
-<!-- Page Content -->
             <songslist></songslist>
         </div>
     </div>

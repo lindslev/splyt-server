@@ -9,7 +9,7 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
  */
 
  body {
-  padding-top: 70px;
+  padding-top: 50px;
  }
 
  ul {
@@ -56,6 +56,11 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
   cursor: pointer;
 }
 
+.activeClass{
+  background-color: #009688;
+  color: white;
+}
+
 .md-toast .md-default-theme {
   background-color: rgba(82,0,0,0.87) !important;
   color: rgb(250,250,250);
@@ -68,6 +73,7 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 @import 'addSearchResult/addSearchResult.scss';
 @import 'admin/admin.scss';
 @import 'main/main.scss';
+@import 'player/player.scss';
 @import 'queue/queue.scss';
 @import 'songslist/songslist.scss';
 @import 'userManage/userManage.scss';

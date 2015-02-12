@@ -149,6 +149,20 @@ UserSchema
             next();
         });
     });
+//create aggregate spotify bookmarks
+UserSchema
+    .pre('save', function(next) {
+        if (!this.isNew) return next();
+        var that = this;
+        Playlist.create({
+            title: 'Spotify Bookmarks',
+            aggregate_stream: true
+        }, function(err, data) {
+            if (err) return err;
+            that.playlist.push(data._id);
+            next();
+        });
+    });
 
 //create friends' stream playlist
 UserSchema
