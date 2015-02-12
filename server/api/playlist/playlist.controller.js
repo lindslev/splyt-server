@@ -16,13 +16,15 @@ exports.index = function(req, res) {
 // Get a single playlist
 exports.show = function(req, res) {
   Playlist.findById(req.params.id).populate('songs').exec(function (err, playlist) {
-    if(err) { return handleError(res, err); }
-    if(!playlist) { return res.send(404); }
-    console.log('controller playlist with songs', playlist);
-    return res.json(playlist);
+    Song.populate(playlist.songs,'addedUser', function(err, data){
+      if(err) { return handleError(res, err); }
+      playlist.songs = data;
+      return res.json(playlist);
+    })
   });
 };
 
+//Get Default Player
 exports.getDefault = function(req, res) {
   var id = req.params.id;
   User.findById(id).populate('playlist').exec(function(err, data) {
