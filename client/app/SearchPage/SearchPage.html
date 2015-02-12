@@ -9,19 +9,28 @@
     <md-button class='md-raised' ng-click="searchYT(search.YTquery)">Submit</md-button>
 </div>
 <div ng-show='SCResults.length>0'>
-  <ul>
-    <li ng-repeat='song in SCResults'>
-      {{song.title}}
-      <a href={{song.permalink_url}}>SoundCloud</a>
+    <ul>
+        <li ng-repeat='song in SCResults'>
+            {{song.title}}
+            <a href={{song.permalink_url}}>SoundCloud link</a>
+
 </div>
 
 <div ng-show='YTResults.length>0'>
-  <ul>
-    <li ng-repeat='song in YTResults'>
-      {{song.snippet.title}}
-      <a href='https://www.youtube.com/watch?v={{song.id.videoId}}'>Youtube</a>
+    <ul>
+      <li ng-repeat='song in YTResults'>
+        {{song.snippet.title}}
+        <a href='https://www.youtube.com/watch?v={{song.id.videoId}}'>Youtube link</a>
+        <div class="btn-group" dropdown is-open="status.isopen">
+            <button type="button" class="btn btn-xs dropdown-toggle">
+                Add to <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li ng-repeat='playlist in playlist_tabs' ng-click='addYTSong(playlist._id, song.id.videoId)'>{{playlist.title}}</li>
+            </ul>
+        </div>
+      </li>
+    </ul>
 </div>
 
 </div>
-
-
