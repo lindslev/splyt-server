@@ -70,6 +70,8 @@ angular.module('splytApp')
     }
 
     QueuePlayerComm.on('globalPlayerToggle', function(song) {
+      // debugger;
       song.playing == 'pause' ? song.playing = 'play_arrow' : song.playing = 'pause';
+      // $scope.$apply();
     })
 });

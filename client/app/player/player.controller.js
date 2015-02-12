@@ -21,6 +21,20 @@ angular.module('splytApp')
       $scope.queue = songs;
     }
 
+    function prevSongInQueue(song) {
+      var toReturn = 'top';
+      $scope.queue.forEach(function(s,i){
+        if(song == s && i !== 0) {
+          toReturn = $scope.queue[i-1];
+        }
+      })
+      return toReturn;
+    }
+
+    $scope.prevSong = function() {
+      currentlyPlaying ? $scope.changeSong(prevSongInQueue(currentlyPlaying)) : $scope.changeSong($scope.queue[0]);
+    }
+
     function nextSongInQueue(song) { //takes just played song and returns the next song in the queue
       var toReturn = 'done';
       $scope.queue.forEach(function(s, i){
@@ -30,6 +44,11 @@ angular.module('splytApp')
       })
       console.log('returning: ', toReturn)
       return toReturn;
+    }
+
+    $scope.nextSong = function() {
+      currentlyPlaying ? $scope.changeSong(nextSongInQueue(currentlyPlaying)) : $scope.changeSong($scope.queue[0]);
+      // $scope.musicPlaying = true;
     }
 
     $scope.toggle = function() {
@@ -45,11 +64,11 @@ angular.module('splytApp')
     }
 
     $scope.changeSong = function(song, next) {
-      console.log('song, next', song, next)
       if(song == 'done') return; //queue is over
       if(next) {
-        console.log('inside of next = true')
         $scope.changeSong(nextSongInQueue(currentlyPlaying));
+        // $scope.musicPlaying = true;
+        // $scope.$apply();
         return;
       } //will get called in onEnd listeners with currentlyPlaying song hopefully
       if(currentlyPlaying) currentlyPlaying.playing = 'play_arrow';
