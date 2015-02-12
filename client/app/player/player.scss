@@ -1,6 +1,6 @@
 #audioplayer{
   width: 100%;
-  background: white;
+  background: #FFC2A3;
   height: 60px;
   top: 30;
   position: fixed;
@@ -17,6 +17,7 @@
   border: none;
   float:left;
   outline:none;
+  color: #009688;
 }
 
 #youtubePlayer, #soundcloud_widget {
@@ -43,7 +44,8 @@
   margin-top: 20px;
   float: left;
   border-radius: 15px;
-  background: rgba(0,0,0,.3);
+  // background: rgba(0,0,0,.3);
+  background: rgba(255,255,255,.7);
 
 }
 #playhead{

@@ -12,15 +12,19 @@ angular.module('splytApp')
     $scope.isLoggedIn = Auth.isLoggedIn;
 
     $scope.musicPlaying = false;
-    var currentlyPlaying, currentAudioProvider; //this might need to become something on each factory
+    var currentlyPlaying, currentAudioProvider;
 
     QueuePlayerComm.onChangeSong = function(song) {
-      currentlyPlaying == song ? $scope.toggle() : $scope.changeSong(song);
-      return currentlyPlaying;
+      console.log('currentlyPlaying and song in onChangeSong', currentlyPlaying, song)
+      currentlyPlaying && currentlyPlaying._id == song._id ? $scope.toggle() : $scope.changeSong(song);
     }
 
     QueuePlayerComm.getSongsFromQueue = function(songs) {
       $scope.queue = songs;
+    }
+
+    QueuePlayerComm.giveCurrentlyPlaying = function() {
+      return currentlyPlaying;
     }
 
     function prevSongInQueue(song) {
@@ -44,7 +48,6 @@ angular.module('splytApp')
           toReturn = $scope.queue[i+1];
         }
       })
-      console.log('returning: ', toReturn)
       return toReturn;
     }
 
@@ -61,15 +64,16 @@ angular.module('splytApp')
         $scope.audioProvider.play();
         $scope.musicPlaying = true;
       }
+      console.log($scope.queue)
       QueuePlayerComm.trigger('globalPlayerToggle', currentlyPlaying);
     }
 
     $scope.changeSong = function(song, next) {
       if(song == 'done' || song == 'top') return; //queue is over
-      if(next) {
+      if(next) { //next will be sent as true from onEnded listener callbacks
         $scope.changeSong(nextSongInQueue(currentlyPlaying));
         return;
-      } //will get called in onEnd listeners with currentlyPlaying song hopefully
+      }
       if(currentlyPlaying) currentlyPlaying.playing = 'play_arrow';
       var songChangeHandler;
       $scope.musicPlaying ? songChangeHandler = switchTracks : songChangeHandler = $scope.toggle; //if a song was already playing, use switchTracks
@@ -96,6 +100,7 @@ angular.module('splytApp')
       //need to set the OLD currentlyplaying.playing to play_arrow - do this in changeSong currentlyPlaying.playing = 'play_arrow'
       currentAudioProvider.stop(currentlyPlaying);
       $scope.audioProvider.play();
+      console.log($scope.queue)
       QueuePlayerComm.trigger('globalPlayerToggle', currentlyPlaying);
     }
 

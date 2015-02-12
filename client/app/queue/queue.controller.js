@@ -3,15 +3,6 @@
 angular.module('splytApp')
   .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, QueuePlayerComm, toast) {
 
-    ////////////////////////
-    //*********************
-    //WHEN YOU GET TO THE QUEUE FROM CHANGING STATES,
-    //NEED TO CHECK IF A SONG IN THE PLAYLIST IS ALREADY PLAYING
-    //IN THE PLAYER AND SET IT TO PLAYING
-    //*********************
-    ////////////////////////
-
-
     //youtube iframe api include
     var tag = document.createElement('script');
     tag.src = "https://www.youtube.com/iframe_api";
@@ -25,7 +16,6 @@ angular.module('splytApp')
 
     //Updating playlist songs when user clicks on new tab
     $scope.update_songs = function(id) {
-      console.log('update_songs');
       $state.go('queue', { playlist_id: id }, true);
     }
 
@@ -45,7 +35,6 @@ angular.module('splytApp')
         $scope.playlist_tabs.push(playlists[i]);
       }
     }).then(function(){
-      console.log($scope.playlist_tabs);
       $scope.user_playlists = $scope.playlist_tabs.slice(3);
     });
 
@@ -64,13 +53,21 @@ angular.module('splytApp')
     $scope.songs = playlist.songs.map(function(song) { song.playing = 'play_arrow'; return song; });
     QueuePlayerComm.getSongsFromQueue($scope.songs);
 
-    console.log($scope.songs)
-
-    $scope.play = function(song) {
-      var currentlyPlaying = QueuePlayerComm.onChangeSong(song);
+    if(document.getElementById('pButton').className == 'pause') {
+      //then a song is already playing and we're coming back from a diff state
+      var currently = QueuePlayerComm.giveCurrentlyPlaying();
+      $scope.songs.forEach(function(s, i){
+        if(s._id == currently._id) {
+          $scope.songs[i] = currently; //this makes it possible to move between states and have the icon logic remain functional
+        }
+      })
     }
 
-    QueuePlayerComm.on('globalPlayerToggle', function(song) {
-      song.playing == 'pause' ? song.playing = 'play_arrow' : song.playing = 'pause';
+    $scope.play = function(song) {
+      QueuePlayerComm.onChangeSong(song);
+    }
+
+    QueuePlayerComm.on('globalPlayerToggle', function(s) {
+      s.playing == 'pause' ? s.playing = 'play_arrow' : s.playing = 'pause';
     })
 });
