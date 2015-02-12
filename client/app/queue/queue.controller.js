@@ -67,18 +67,9 @@ angular.module('splytApp')
 
     $scope.play = function(song) {
       var currentlyPlaying = QueuePlayerComm.onChangeSong(song);
-      if(currentlyPlaying == song) { //if you just pressed the song currently playing
-        // song.playing == 'pause' ? song.playing = 'play_arrow' : song.playing = 'pause';
-      } else { //just pressed another song to start playing
-        //currentlyplaying should become play_Arrow & song should become
-        // currentlyPlaying.playing = 'play_arrow';
-        // song.playing = 'pause';
-      }
     }
 
     QueuePlayerComm.on('globalPlayerToggle', function(song) {
-      // debugger;
       song.playing == 'pause' ? song.playing = 'play_arrow' : song.playing = 'pause';
-      // $scope.$apply();
     })
 });

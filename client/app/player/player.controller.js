@@ -48,7 +48,6 @@ angular.module('splytApp')
 
     $scope.nextSong = function() {
       currentlyPlaying ? $scope.changeSong(nextSongInQueue(currentlyPlaying)) : $scope.changeSong($scope.queue[0]);
-      // $scope.musicPlaying = true;
     }
 
     $scope.toggle = function() {
@@ -67,8 +66,6 @@ angular.module('splytApp')
       if(song == 'done') return; //queue is over
       if(next) {
         $scope.changeSong(nextSongInQueue(currentlyPlaying));
-        // $scope.musicPlaying = true;
-        // $scope.$apply();
         return;
       } //will get called in onEnd listeners with currentlyPlaying song hopefully
       if(currentlyPlaying) currentlyPlaying.playing = 'play_arrow';
@@ -88,6 +85,7 @@ angular.module('splytApp')
       }
       $scope.audioProvider.addEndedListener(function() {
         $scope.changeSong(null, true);
+        $scope.$apply();
       });
     }
 
@@ -161,10 +159,10 @@ angular.module('splytApp')
       //playPercent = timelineWidth * ($scope.audioProvider.currentTime / duration)
       var playPercent = timelineWidth * (music.currentTime / duration);
       playhead.style.marginLeft = playPercent + "px";
-      if (music.currentTime == duration) {
-        pButton.className = "";
-        pButton.className = "play";
-      }
+      // if (music.currentTime == duration) {
+      //   // pButton.className = "";
+      //   // pButton.className = "play";
+      // }
     }
 
     // Gets audio file duration
