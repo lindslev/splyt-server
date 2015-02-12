@@ -35,6 +35,11 @@ angular.module('splytApp')
                     console.log("no users");
                 } else {
                     $scope.userList = data;
+                    var index = $scope.userList.indexOf(Auth.getCurrentUser());
+                    $scope.userList.splice(index, 1);
+                    if($scope.userList.length ===0){
+                        toast.cantaddMe();
+                    }
                 }
             })
             $scope.nameFilter = '';
