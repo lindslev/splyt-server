@@ -28,3 +28,10 @@ $btnGithubBackgroundHighlight:      #ccc;
 .btn-github {
   @include button-variant($btnTextAlt, $btnGithubBackground, $btnGithubBackgroundHighlight);
 }
+
+md-card md-card-content{
+	background-color: darkgrey;
+	text-align: center;
+	color: whitesmoke;
+	padding: 90px;
+}
