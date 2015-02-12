@@ -73,6 +73,14 @@ angular.module('splytApp')
             .position(getToastPosition())
             .hideDelay(3000)
           );
+        },
+        addedSong : function() {
+          $mdToast.show(
+            $mdToast.simple()
+              .content('Song Added!')
+              .position(getToastPosition())
+              .hideDelay(3000)
+          );
         }
       }
 });
