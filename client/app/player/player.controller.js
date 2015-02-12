@@ -63,7 +63,7 @@ angular.module('splytApp')
     }
 
     $scope.changeSong = function(song, next) {
-      if(song == 'done') return; //queue is over
+      if(song == 'done' || song == 'top') return; //queue is over
       if(next) {
         $scope.changeSong(nextSongInQueue(currentlyPlaying));
         return;
