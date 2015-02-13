@@ -18,17 +18,18 @@ var SongSchema = new Schema({
 //obj for returning song objects in proper format according to song source
 var transformations = {
   newYoutubeSong: function(song_obj) {
-    var title = song_obj.args.info.items[0].snippet.title.split(' - ')[1];
-    var artist = song_obj.args.info.items[0].snippet.title.split(' - ')[0];
+    console.log('songobject', song_obj);
+    var title = song_obj.song.args.info.items[0].snippet.title.split(' - ')[1];
+    var artist = song_obj.song.args.info.items[0].snippet.title.split(' - ')[0];
     if (title === undefined) {
-      title = song_obj.args.info.items[0].snippet.title;
+      title = song_obj.song.args.info.items[0].snippet.title;
       artist = '';
     }
     return {
-      tag: song_obj.args.info.items[0].id,
+      tag: song_obj.song.args.info.items[0].id,
       title: title,
       artist: artist,
-      link: song_obj.args.song.permalink_url,
+      link: song_obj.song.args.song.permalink_url,
       source: 'YouTube',
       addedUser: song_obj.userid
     }
