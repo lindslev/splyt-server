@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm, Auth) {
+  .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm, Auth, $q) {
 
     var music = document.getElementById('music'); // id for audio element
     var duration; // Duration of audio clip
@@ -64,7 +64,6 @@ angular.module('splytApp')
         $scope.audioProvider.play();
         $scope.musicPlaying = true;
       }
-      console.log($scope.queue)
       QueuePlayerComm.trigger('globalPlayerToggle', $scope.currentlyPlaying);
     }
 
@@ -94,7 +93,7 @@ angular.module('splytApp')
         $scope.$apply();
       });
       addDuration();
-      if($scope.audioProvider.timer) $scope.audioProvider.timer(function(){ timeUpdate(); });
+      if($scope.audioProvider.timer) $scope.audioProvider.timer(function(pos){ timeUpdate(pos); });
     }
 
     //when a song is in the process of playing and another song is selected
@@ -112,7 +111,9 @@ angular.module('splytApp')
 
     function addDuration() {
       music.addEventListener("canplaythrough", function () {
-        duration = $scope.audioProvider.duration();
+        $q.when($scope.audioProvider.duration()).then(function(dur){
+          duration = dur;
+        })
       }, false);
     }
 
@@ -148,7 +149,7 @@ angular.module('splytApp')
         // change current time
 
         //instead of music.currenttime it should be $scope.audioProvider.seek(duration*clickPercent(e))
-        music.currentTime = duration * clickPercent(e);
+        // music.currentTime = duration * clickPercent(e);
         $scope.audioProvider.seek(duration*clickPercent(e))
         music.addEventListener('timeupdate', timeUpdate, false);
       }
@@ -167,20 +168,15 @@ angular.module('splytApp')
       if (newMargLeft > timelineWidth) {
         playhead.style.marginLeft = timelineWidth + "px";
       }
-      console.log('dragged')
     }
 
     // Synchronizes playhead position with current point in audio
-    function timeUpdate() {
-      var playPercent = timelineWidth * ($scope.audioProvider.currentTime() / $scope.audioProvider.duration())
-      // var playPercent = timelineWidth * (music.currentTime / duration);
-      playhead.style.marginLeft = playPercent + "px";
+    function timeUpdate(currTime) {
+      currTime = +currTime || $scope.audioProvider.currentTime();
+      $q.when($scope.audioProvider.duration()).then(function(duration){
+        var playPercent = timelineWidth * (currTime / duration);
+        playhead.style.marginLeft = playPercent + "px";
+      })
     }
-
-    // // Gets audio file duration
-    // music.addEventListener("canplaythrough", function () {
-    //   duration = $scope.audioProvider.duration
-    //   // duration = music.duration;
-    // }, false);
 
   });

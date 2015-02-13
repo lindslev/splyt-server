@@ -1,7 +1,9 @@
 'use strict';
 
 angular.module('splytApp')
-  .factory('SoundcloudNonstreamable', function ($sce) {
+  .factory('SoundcloudNonstreamable', function ($sce, $q) {
+    var timerInterval;
+
     var SoundcloudNonstreamableAudioSource = function(song) {
       var trustSrc = $sce.trustAsResourceUrl;
       var self = this;
@@ -36,11 +38,19 @@ angular.module('splytApp')
     }
 
     SoundcloudNonstreamableAudioSource.prototype.currentTime = function() {
-      return this.widget.currentPosition()/1000;
+      var deferral = $q.defer();
+      this.widget.getPosition(function(e) {
+        deferral.resolve(e/1000);
+      })
+      return deferral.promise;
     }
 
     SoundcloudNonstreamableAudioSource.prototype.duration = function() {
-      return this.widget.getDuration()/1000;
+      var deferral = $q.defer();
+      this.widget.getDuration(function(e){
+        deferral.resolve(e/1000);
+      });
+      return deferral.promise;
     }
 
     SoundcloudNonstreamableAudioSource.prototype.addEndedListener = function(cb) {
@@ -49,7 +59,20 @@ angular.module('splytApp')
       })
     }
 
+    SoundcloudNonstreamableAudioSource.prototype.timer = function(playerTimeUpdate) {
+      var x = 0, self = this;
+      timerInterval = setInterval(function() {
+        self.currentTime().then(function(position){
+          if(position !== x) {
+            x = position;
+            playerTimeUpdate(position);
+          }
+        })
+      }, 100);
+    }
+
     SoundcloudNonstreamableAudioSource.prototype.stop = function() {
+      clearInterval(timerInterval);
       $('#soundcloud_widget').remove();
     }
 
