@@ -123,6 +123,7 @@ angular.module('splytApp')
     timeline.addEventListener("click", function (event) { //Makes timeline clickable
       moveplayhead(event);
       music.currentTime = duration * clickPercent(event);
+      // $scope.audioProvider.seek(duration*clickPercent(event))
     }, false);
 
     function clickPercent(e) { // returns click as decimal (.77) of the total timelineWidth

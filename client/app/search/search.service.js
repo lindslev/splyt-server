@@ -9,7 +9,9 @@ angular.module('splytApp')
 
       searchSC: function (query, cb) {
           SC.get('/tracks', {q: query }, function(data) {
-            console.log(data);
+            for (var i = 0; i < data.length; i++) {
+              console.log(data[i].title);
+            }
             cb(data)
           });
       },
@@ -54,9 +56,9 @@ angular.module('splytApp')
           }
           var song_obj = {
             tag: song.id,
-            title: song.title,
-            artist: song.user.username,
-            link: song.permalink,
+            title: title,
+            artist: artist,
+            link: song.permalink_url,
             audioSource: audio,
             source: 'SoundCloud',
             addedUser: Auth.getCurrentUser()._id

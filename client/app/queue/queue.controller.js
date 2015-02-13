@@ -81,9 +81,34 @@ angular.module('splytApp')
       QueuePlayerComm.onChangeSong(song);
     }
 
-    QueuePlayerComm.on('globalPlayerToggle', function(s) {
-      s.playing == 'pause' ? s.playing = 'play_arrow' : s.playing = 'pause';
-    })
+    QueuePlayerComm.on('globalPlayerToggle', function(song) {
+      song.playing == 'pause' ? song.playing = 'play_arrow' : song.playing = 'pause';
+    });
+
+    $scope.toggleLeft = function() {
+      $mdSidenav('left').toggle()
+                        .then(function(){
+                            $log.debug("toggle left is done");
+                        });
+    };
+    $scope.toggleRight = function() {
+      $mdSidenav('right').toggle()
+                          .then(function(){
+                            $log.debug("toggle RIGHT is done");
+                          });
+    };
+
+    $scope.close = function() {
+      $mdSidenav('left').close()
+                        .then(function(){
+                          $log.debug("close LEFT is done");
+                        });
+    };
+
+    $scope.close = function() {
+      $mdSidenav('right').close()
+    };
+
 });
 
 
