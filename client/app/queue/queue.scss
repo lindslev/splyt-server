@@ -1,3 +1,5 @@
+md-toolbar.md-default-theme
+
 .toolbardemoScrollShrink .face {
   width: 48px;
   margin: 16px;
@@ -10,6 +12,8 @@
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    margin-top: -50px;
+    padding: 0px;
 }
 
 #wrapper.toggled {
@@ -22,13 +26,14 @@
     width: 0;
     height: 100%;
     margin-top: 30px;
-    margin-left: -250px;
+    /*margin-left: -250px;*/
     overflow-y: auto;
     background: white;
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 0.5s ease;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
+    border: 2px solid black;
 }
 
 #wrapper.toggled #sidebar-wrapper {
@@ -83,14 +88,14 @@
 }
 
 @media(min-width:768px) {
-    #wrapper {
+/*    #wrapper {
         padding-left: 250px;
     }
 
     #wrapper.toggled {
         padding-left: 0;
     }
-
+*/
     #sidebar-wrapper {
         width: 250px;
     }
@@ -112,4 +117,39 @@
 
 .custom-container {
     width: 80%;
+}
+
+.track-box {
+  display: block;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+}
+
+md-toolbar.md-default-theme {
+/*background-color: rgb(0,150,136);*/
+color: black;
+/*padding: 10px;*/
+}
+
+md-toolbar.md-default-theme li{
+color: black;
+padding: 10px;
+margin: 5px;
+}
+
+md-toolbar.md-default-theme ul{
+color: black;
+padding: 10px;
+margin: 5px auto;
+}
+
+.font-white {
+  color: rgb(255,255,255);
+}
+
+md-toolbar.md-default-theme li.activeClass {
+  color: rgb(255,255,255);
 }

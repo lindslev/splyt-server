@@ -1,23 +1,27 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="container">
-    <div id="wrapper">
+  <section layout='row' flex>
+     <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-md')">
+     <md-toolbar class="md-theme-teal">
         <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <ul class="sidebar-nav">
-                <li class="sidebar-brand"><strong>
-                        Your Playlists
-                </strong>
-                </li>
+        <h1 class="md-toolbar-tools font-white">Your Playlists</h1>
+        <md-content class="md-padding">
+            <ul>
                 <li class='hover' ng-class = "{'activeClass': isActive(tab._id)}"
                                   ng-repeat='tab in tabs'
                                   ng-click='update_songs(tab._id)'>
                     {{tab.title}}
                   </li>
             </ul>
-        </div>
+          </md-content>
+        </md-sidenav>
+        <md-content flex class="md-padding">
         <!-- Page Content -->
-        <div id="page-content-wrapper">
+         <div layout="column" layout-fill layout-align="left">
             <songslist></songslist>
         </div>
-    </div>
+      </md-content>
+    </md-sidenav>
+  </section>
+  </div>
 </div>
