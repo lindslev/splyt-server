@@ -38,6 +38,7 @@
                 <h2>Your Subcriptions:</h2>
                 <md-content>
                     <md-list class='font-set'>
+                    <h4 ng-if='currentUserSubscriptions.length===0'>Discover new music with Subscriptions!</h4>
                         <md-item ng-repeat="subscription in currentUserSubscriptions">
                             <md-item-content>
                                 <div class='md-tile-content left-float' ng-click="getSpecificUser($index)">{{subscription.name}}</div>
