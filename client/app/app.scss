@@ -37,6 +37,10 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
   margin-bottom: 24px;
 }
 
+.navbar-hide {
+  visibility: hidden;
+}
+
 .navbar-default .navbar-nav > li > a {
   color: white;
 }
@@ -68,6 +72,17 @@ md-toast md-default-theme {
 
 .top{
   margin-top: 70px;
+}
+
+#audioplayer.sticky {
+  background-color:white;
+}
+
+.fixed {
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
 }
 
 
