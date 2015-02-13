@@ -12,11 +12,11 @@ angular.module('splytApp')
     $scope.isLoggedIn = Auth.isLoggedIn;
 
     $scope.musicPlaying = false;
-    var currentlyPlaying, currentAudioProvider;
+    var currentAudioProvider;
+    $scope.currentlyPlaying;
 
     QueuePlayerComm.onChangeSong = function(song) {
-      console.log('currentlyPlaying and song in onChangeSong', currentlyPlaying, song)
-      currentlyPlaying && currentlyPlaying._id == song._id ? $scope.toggle() : $scope.changeSong(song);
+      $scope.currentlyPlaying && $scope.currentlyPlaying._id == song._id ? $scope.toggle() : $scope.changeSong(song);
     }
 
     QueuePlayerComm.getSongsFromQueue = function(songs) {
@@ -24,7 +24,7 @@ angular.module('splytApp')
     }
 
     QueuePlayerComm.giveCurrentlyPlaying = function() {
-      return currentlyPlaying;
+      return $scope.currentlyPlaying;
     }
 
     function prevSongInQueue(song) {
@@ -38,7 +38,7 @@ angular.module('splytApp')
     }
 
     $scope.prevSong = function() {
-      currentlyPlaying ? $scope.changeSong(prevSongInQueue(currentlyPlaying)) : $scope.changeSong($scope.queue[0]);
+      $scope.currentlyPlaying ? $scope.changeSong(prevSongInQueue($scope.currentlyPlaying)) : $scope.changeSong($scope.queue[0]);
     }
 
     function nextSongInQueue(song) { //takes just played song and returns the next song in the queue
@@ -52,7 +52,7 @@ angular.module('splytApp')
     }
 
     $scope.nextSong = function() {
-      currentlyPlaying ? $scope.changeSong(nextSongInQueue(currentlyPlaying)) : $scope.changeSong($scope.queue[0]);
+      $scope.currentlyPlaying ? $scope.changeSong(nextSongInQueue($scope.currentlyPlaying)) : $scope.changeSong($scope.queue[0]);
     }
 
     $scope.toggle = function() {
@@ -65,19 +65,19 @@ angular.module('splytApp')
         $scope.musicPlaying = true;
       }
       console.log($scope.queue)
-      QueuePlayerComm.trigger('globalPlayerToggle', currentlyPlaying);
+      QueuePlayerComm.trigger('globalPlayerToggle', $scope.currentlyPlaying);
     }
 
     $scope.changeSong = function(song, next) {
       if(song == 'done' || song == 'top') return; //queue is over
       if(next) { //next will be sent as true from onEnded listener callbacks
-        $scope.changeSong(nextSongInQueue(currentlyPlaying));
+        $scope.changeSong(nextSongInQueue($scope.currentlyPlaying));
         return;
       }
-      if(currentlyPlaying) currentlyPlaying.playing = 'play_arrow';
+      if($scope.currentlyPlaying) $scope.currentlyPlaying.playing = 'play_arrow';
       var songChangeHandler;
       $scope.musicPlaying ? songChangeHandler = switchTracks : songChangeHandler = $scope.toggle; //if a song was already playing, use switchTracks
-      currentlyPlaying = song;
+      $scope.currentlyPlaying = song;
       currentAudioProvider = $scope.audioProvider;
       var AudioSource = AudioSources[handleSongSource(song)];
       $scope.audioProvider = new AudioSource(song);
@@ -93,15 +93,16 @@ angular.module('splytApp')
         $scope.changeSong(null, true);
         $scope.$apply();
       });
+      addDuration();
+      if($scope.audioProvider.timer) $scope.audioProvider.timer(function(){ timeUpdate(); });
     }
 
     //when a song is in the process of playing and another song is selected
     function switchTracks() {
       //need to set the OLD currentlyplaying.playing to play_arrow - do this in changeSong currentlyPlaying.playing = 'play_arrow'
-      currentAudioProvider.stop(currentlyPlaying);
+      currentAudioProvider.stop($scope.currentlyPlaying);
       $scope.audioProvider.play();
-      console.log($scope.queue)
-      QueuePlayerComm.trigger('globalPlayerToggle', currentlyPlaying);
+      QueuePlayerComm.trigger('globalPlayerToggle', $scope.currentlyPlaying);
     }
 
     function handleSongSource(song) {
@@ -109,6 +110,13 @@ angular.module('splytApp')
       return song.source;
     }
 
+    function addDuration() {
+      music.addEventListener("canplaythrough", function () {
+        duration = $scope.audioProvider.duration();
+      }, false);
+    }
+
+    //visual player functionality
     var timelineWidth = timeline.offsetWidth - playhead.offsetWidth; // timeline width adjusted for playhead
     music.addEventListener("timeupdate", timeUpdate, false); // timeupdate event listener
     timeline.addEventListener("click", function (event) { //Makes timeline clickable
@@ -141,6 +149,7 @@ angular.module('splytApp')
 
         //instead of music.currenttime it should be $scope.audioProvider.seek(duration*clickPercent(e))
         music.currentTime = duration * clickPercent(e);
+        $scope.audioProvider.seek(duration*clickPercent(e))
         music.addEventListener('timeupdate', timeUpdate, false);
       }
       onplayhead = false;
@@ -163,19 +172,15 @@ angular.module('splytApp')
 
     // Synchronizes playhead position with current point in audio
     function timeUpdate() {
-      //playPercent = timelineWidth * ($scope.audioProvider.currentTime / duration)
-      var playPercent = timelineWidth * (music.currentTime / duration);
+      var playPercent = timelineWidth * ($scope.audioProvider.currentTime() / $scope.audioProvider.duration())
+      // var playPercent = timelineWidth * (music.currentTime / duration);
       playhead.style.marginLeft = playPercent + "px";
-      // if (music.currentTime == duration) {
-      //   // pButton.className = "";
-      //   // pButton.className = "play";
-      // }
     }
 
-    // Gets audio file duration
-    music.addEventListener("canplaythrough", function () {
-      //duration = $scope.audioProvider.duration
-      duration = music.duration;
-    }, false);
+    // // Gets audio file duration
+    // music.addEventListener("canplaythrough", function () {
+    //   duration = $scope.audioProvider.duration
+    //   // duration = music.duration;
+    // }, false);
 
   });

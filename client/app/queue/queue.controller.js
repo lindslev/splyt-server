@@ -43,7 +43,6 @@ angular.module('splytApp')
       toast.addedSong();
     }
 
-
     $scope.removeSongfromPlaylist = function(index){
       var removeSongfromPlaylistPromise = manage.removeSongfromPlaylist(playlist, $scope.songs[index]);
       $scope.songs.splice(index, 1);

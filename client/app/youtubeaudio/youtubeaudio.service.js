@@ -2,7 +2,7 @@
 
 angular.module('splytApp')
   .factory('YoutubeAudio', function () {
-    var callback;
+    var callback, timerInterval;
 
     var YoutubeAudioSource = function(song) {
       var self = this;
@@ -20,7 +20,6 @@ angular.module('splytApp')
             }
           })
       function onPlayerReady() {
-        console.log('self.onReady', self.onReadyFunctions)
         self.onReadyFunctions.forEach(function(fn){
           fn();
         })
@@ -29,6 +28,7 @@ angular.module('splytApp')
 
     YoutubeAudioSource.prototype.onReady = function(fn) {
       this.onReadyFunctions.push(fn);
+      // this.timer();
     }
     YoutubeAudioSource.prototype.play = function() {
       this.player.playVideo();
@@ -49,15 +49,23 @@ angular.module('splytApp')
       callback = cb;
       return onEnded;
     }
+    YoutubeAudioSource.prototype.timer = function(playerTimeUpdate) {
+      var x = 0, self = this;
+      timerInterval = setInterval(function() {
+        if(x !== self.currentTime()) {
+          x = self.currentTime();
+          playerTimeUpdate();
+        }
+        console.log('x', x)
+      }, 100);
+    }
 
     function onEnded(e) {
       if(e.data === 0) callback();
     }
 
     YoutubeAudioSource.prototype.stop = function(newSong) {
-      // do nothing tbh right?? jk needs to remove itself if its followed by
-      // a non youtube song
-      // console.log('document.getElement', $('youtubePlayer'))
+      clearInterval(timerInterval);
       if(newSong.source !== 'YouTube') $('#youtubePlayer').remove();
       //doesnt work from youtube to youtube bc this removes the element before new song can run this.player.playVideo
     }
