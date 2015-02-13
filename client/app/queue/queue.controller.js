@@ -2,7 +2,7 @@
 
 angular.module('splytApp')
 
-  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, QueuePlayerComm, toast) {
+  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, QueuePlayerComm, toast, $mdDialog) {
 
     ////////////////////////
     //*********************
@@ -62,6 +62,18 @@ angular.module('splytApp')
       $scope.songs.splice(index, 1);
       toast.removedSong();
     }
+
+    $scope.showConfirm = function(ev, index) {
+    var confirm = $mdDialog.confirm()
+        .title('Are you sure you want to delete this song?')
+        .ok('Absolutely')
+        .cancel('No, Of course not!')
+        .targetEvent(ev);
+      $mdDialog.show(confirm).then(function() {
+        $scope.removeSongfromPlaylist(index)
+      }, function() {
+      });
+    };
 
     $scope.songs = playlist.songs.map(function(song) { song.playing = 'play_arrow'; return song; });
     QueuePlayerComm.getSongsFromQueue($scope.songs);
