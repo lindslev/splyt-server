@@ -73,7 +73,7 @@ SongSchema.statics.createSong = function(song_obj, cb) {
 
   var Song = this;
   if (song_obj.song.tag == undefined) {
-    var song_data = transformations[song_obj.song.action](song_obj.song);
+    var song_data = transformations[song_obj.song.action](song_obj);
   } else {
     var song_data = song_obj.song;
   }

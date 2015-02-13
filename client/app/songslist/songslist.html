@@ -1,31 +1,31 @@
 <h1>Queue</h1>
 
 <div class="md-content">
-  <ul>
-    <h3 ng-if='songs.length===0 && !playlist.friend_stream && playlist.title != "Spotify Bookmarks"'>Add some songs to your Playlist!</h3>
-    <h3 ng-if='songs.length===0 && playlist.friend_stream'>Your friends haven't heard any new music!</h3>
-    <h3 ng-if='songs.length===0 && playlist.title === "Spotify Bookmarks"'>Bookmark your favorite songs from Spotify!</h3>
-    <li ng-repeat='song in songs'>
-      <h3 ng-if='playlist.friend_stream'>{{song.addedUser.name}} is listening to ...</h3>
-      <h3><a href="{{song.link}}" target="_blank">{{song.title}}</a></h3>
-      <h4>{{song.artist}}</h4>
-      <p>{{song.source}}</p>
-    <md-button class="md-primary" aria-label='none'>
-  <!-- <ng-md-icon ng-click='play(song)' icon="Playing" ng-if="song.playing" size='30'></ng-md-icon>
-        <ng-md-icon ng-click='play(song)' icon="Paused" ng-if="!song.playing" size='30'></ng-md-icon> -->
-        <ng-md-icon ng-if = 'playlist.title != "Spotify Bookmarks"' ng-click='play(song)' icon="{{song.playing}}" size='30'></ng-md-icon>
-    </md-button>
-    <md-button ng-if='!playlist.friend_stream' ng-click='showConfirm($event, $index)' class="md-primary right" aria-label='none'>
-        <ng-md-icon icon="clear" size='30'></ng-md-icon>
-    </md-button>
-    <div class="btn-group" dropdown is-open="status.isopen" ng-if='playlist_tabs.length>3'>
-      <button type="button" class="btn btn-xs dropdown-toggle">
-        Add to <span class="caret"></span>
-      </button>
-      <ul class="dropdown-menu" role="menu" >
-        <li ng-repeat='playlist in user_playlists' ng-click='add_to_playlist(playlist._id, song._id)'>{{playlist.title}}</li>
-      </ul>
-    </div>
-  </ul>
+    <ul>
+      <h3 ng-if='songs.length===0 && !playlist.friend_stream && playlist.title != "Spotify Bookmarks"'>Add some songs to your Playlist!</h3>
+      <h3 ng-if='songs.length===0 && playlist.friend_stream'>Your friends haven't heard any new music!</h3>
+      <h3 ng-if='songs.length===0 && playlist.title === "Spotify Bookmarks"'>Bookmark your favorite songs from Spotify!</h3>
+      <div class='track-box'>
+      <li ng-repeat='song in songs'>
+          <h3 ng-if='playlist.friend_stream'>{{song.addedUser.name}} is listening to ...</h3>
+          <h3><a href="{{song.link}}" target="_blank">{{song.title}}</a></h3>
+          <h4>{{song.artist}}</h4>
+          <p>{{song.source}}</p>
+          <md-button class="md-primary" aria-label='none'>
+              <ng-md-icon ng-if='playlist.title != "Spotify Bookmarks"' ng-click='play(song)' icon="{{song.playing}}" size='30'></ng-md-icon>
+          </md-button>
+          <md-button ng-if='!playlist.friend_stream' ng-click='showConfirm($event, $index)' class="md-primary right" aria-label='none'>
+              <ng-md-icon icon="clear" size='30'></ng-md-icon>
+          </md-button>
+          <div class="btn-group" dropdown is-open="status.isopen" ng-if='playlist_tabs.length>3'>
+              <button type="button" class="btn btn-xs dropdown-toggle">
+                  Add to <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                  <li ng-repeat='playlist in user_playlists' ng-click='add_to_playlist(playlist._id, song._id)'>{{playlist.title}}</li>
+              </ul>
+          </div>
+        </li>
+      </div>
+    </ul>
 </div>
-
