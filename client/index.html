@@ -116,6 +116,21 @@
           <script src="components/navbar/navbar.controller.js"></script>
           <script src="components/socket/socket.service.js"></script>
           <!-- endinjector -->
-        <!-- endbuild -->
+       <!-- endbuild -->
+       <script>
+        $(window).scroll(function(){
+        var sticky = $('.sticky'),
+            nav = $('.navbar'),
+            scroll = $(window).scrollTop();
+        if (scroll >= 200) {
+          sticky.addClass('fixed');
+          nav.addClass('navbar-hide');
+        }
+        else {
+          sticky.removeClass('fixed');
+          nav.removeClass('navbar-hide');
+        }
+      });
+       </script>
 </body>
 </html>
