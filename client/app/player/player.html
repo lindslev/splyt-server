@@ -1,17 +1,15 @@
-<div id="audioplayer">
+<div id="audioplayer" class='sticky'>
   <div id="playerstuff">
     <span class="glyphicon glyphicon-backward player-buttons" ng-click="prevSong()"></span>
     <button id="pButton" ng-class="{ 'pause' : musicPlaying, 'play' : !musicPlaying }" ng-click="toggle()"></button>
     <span class="glyphicon glyphicon-forward player-buttons" ng-click="nextSong()"></span>
-    <div id="timeline">
-          <div id="playhead"></div>
-    </div>
+    <div id="timeline"><div id="playhead"></div></div>
   </div>
   <p id="songinfo">{{currentlyPlaying.title}}</p>
-
 </div>
+
 <div id="youtubePlayer"></div>
 <iframe id="soundcloud_widget" width="100%" height="166" scrolling="no" frameborder="no" src=""></iframe>
 <audio id="music" preload="true">
-  <source src="">
+    <source src="">
 </audio>

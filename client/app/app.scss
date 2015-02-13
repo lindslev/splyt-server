@@ -12,6 +12,10 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
   padding-top: 50px;
  }
 
+ ul {
+  list-style-type: none;
+ }
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
@@ -31,6 +35,10 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
   width: 100%;
   top: 0;
   margin-bottom: 24px;
+}
+
+.navbar-hide {
+  visibility: hidden;
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -57,15 +65,32 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
   color: white;
 }
 
-.md-toast .md-default-theme {
+md-toast md-default-theme {
   background-color: rgba(82,0,0,0.87) !important;
   color: rgb(250,250,250);
+}
+
+.top{
+  margin-top: 70px;
+}
+
+#audioplayer.sticky {
+  background-color:white;
+}
+
+.fixed {
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100%;
 }
 
 
 // Component styles are injected through grunt
 // injector
+@import 'SearchPage/SearchPage.scss';
 @import 'account/login/login.scss';
+@import 'addSearchResult/addSearchResult.scss';
 @import 'admin/admin.scss';
 @import 'main/main.scss';
 @import 'player/player.scss';

@@ -4,8 +4,8 @@ angular.module('splytApp')
   .controller('MainCtrl', function ($scope, $http, socket, youtube, Auth, $sanitize, $sce) {
     //DONT FORGET TO CHANGE TO YOUR EXT ID
     var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
-
     var api = "AIzaSyABJumn6ZK-Ru4vt1U0hq7wQA99Z6EhXLE";
+
 
     $scope.awesomeThings = [];
     $scope.currentUser = Auth.getCurrentUser();

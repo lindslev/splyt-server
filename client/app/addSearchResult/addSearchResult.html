@@ -1,0 +1,10 @@
+<div>this is the addSearchResult directive</div>
+
+<div class="btn-group" dropdown is-open="status.isopen" ng-if='SC || YT'>
+    <button type="button" class="btn btn-xs dropdown-toggle">
+        Add to <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" role="menu">
+        <li ng-repeat='playlist in user_playlists' ng-click='add_to_playlist(playlist._id, song._id)'>{{playlist.title}}</li>
+    </ul>
+</div>

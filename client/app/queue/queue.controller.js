@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, QueuePlayerComm, toast) {
+
+  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, QueuePlayerComm, toast, $mdDialog) {
 
     //youtube iframe api include
     var tag = document.createElement('script');
@@ -13,8 +14,10 @@ angular.module('splytApp')
     $scope.playlist = playlist;
     $scope.playlist_tabs=[];
     $scope.tabs = $scope.playlist_tabs;
+    $scope.songs = playlist.songs;
 
     //Updating playlist songs when user clicks on new tab
+
     $scope.update_songs = function(id) {
       $state.go('queue', { playlist_id: id }, true);
     }
@@ -49,6 +52,18 @@ angular.module('splytApp')
       toast.removedSong();
     }
 
+    $scope.showConfirm = function(ev, index) {
+    var confirm = $mdDialog.confirm()
+        .title('Are you sure you want to delete this song?')
+        .ok('Absolutely')
+        .cancel('No, Of course not!')
+        .targetEvent(ev);
+      $mdDialog.show(confirm).then(function() {
+        $scope.removeSongfromPlaylist(index)
+      }, function() {
+      });
+    };
+
     $scope.songs = playlist.songs.map(function(song) { song.playing = 'play_arrow'; return song; });
     QueuePlayerComm.getSongsFromQueue($scope.songs);
 
@@ -70,3 +85,5 @@ angular.module('splytApp')
       s.playing == 'pause' ? s.playing = 'play_arrow' : s.playing = 'pause';
     })
 });
+
+
