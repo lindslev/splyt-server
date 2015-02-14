@@ -128,10 +128,14 @@ md-toolbar.md-default-theme
   vertical-align: baseline;
 }
 
+md-sidenav.md-locked-open {
+  position: fixed !important;
+  left: 5%;
+  margin-top: 136px;
+}
+
 md-toolbar.md-default-theme {
-/*background-color: rgb(0,150,136);*/
 color: black;
-/*padding: 10px;*/
 }
 
 md-toolbar.md-default-theme li{
@@ -154,10 +158,11 @@ md-toolbar.md-default-theme li.activeClass {
   color: rgb(255,255,255);
 }
 
-.left{
-  width: 50%;
-  margin: 0;
+.right-column{
+  width: 75%;
+  margin-left:300px !important;
   display: inline-block;
+  /*float:right;*/
 }
 
 .right {
