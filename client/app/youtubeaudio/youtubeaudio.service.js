@@ -37,7 +37,6 @@ angular.module('splytApp')
       this.player.pauseVideo();
     }
     YoutubeAudioSource.prototype.seek = function(num) {
-      console.log('num', num)
       this.player.seekTo(num, true);
     }
     YoutubeAudioSource.prototype.currentTime = function() {

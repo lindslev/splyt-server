@@ -2,7 +2,7 @@
 
 angular.module('splytApp')
 
-  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, QueuePlayerComm, toast, $mdDialog) {
+  .controller('QueueCtrl', function ($http, socket, Auth, playlist, $scope, youtube, $sanitize, manage, $log, $stateParams, $state, QueuePlayerComm, toast, $mdDialog) {
 
     //youtube iframe api include
     var tag = document.createElement('script');
@@ -10,6 +10,23 @@ angular.module('splytApp')
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     ///
+
+    var currentUser = Auth.getCurrentUser();
+
+    socket.socket.on('newSong', function(data){
+      if(data.user == currentUser._id) {
+        if(playlist._id == data.playlist) {
+          data.song.playing = 'play_arrow';
+          $scope.songs.push(data.song);
+        }
+      } else if(subscribedTo(data.user)) {
+        toast.friendAddedSong(data.song);
+      }
+    })
+
+    function subscribedTo(user) {
+      return currentUser.subscriptions.indexOf(user) > -1;
+    }
 
     $scope.playlist = playlist;
     $scope.playlist_tabs=[];
@@ -47,6 +64,7 @@ angular.module('splytApp')
     }
 
     $scope.removeSongfromPlaylist = function(index){
+      QueuePlayerComm.trigger('songDeletion', $scope.songs[index]);
       var removeSongfromPlaylistPromise = manage.removeSongfromPlaylist(playlist, $scope.songs[index]);
       $scope.songs.splice(index, 1);
       toast.removedSong();
