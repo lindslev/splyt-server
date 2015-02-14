@@ -1,6 +1,6 @@
 #audioplayer{
   width: 100%;
-  background: white;
+  background: #FFC2A3 !important;
   height: 60px;
   top: 30;
   position: fixed;
@@ -17,6 +17,13 @@
   border: none;
   float:left;
   outline:none;
+  color: #009688;
+}
+
+#songinfo {
+  padding-left: 30px;
+  margin-top: 18px;
+  font-size: 13.5px;
 }
 
 #youtubePlayer, #soundcloud_widget {
@@ -41,9 +48,11 @@
   width: 400px;
   height: 20px;
   margin-top: 20px;
+  margin-right: 10px;
   float: left;
   border-radius: 15px;
-  background: rgba(0,0,0,.3);
+  // background: rgba(0,0,0,.3);
+  background: rgba(255,255,255,.7);
 
 }
 #playhead{
@@ -52,5 +61,4 @@
   border-radius: 50%;
   margin-top: 1px;
   background: rgba(0, 0, 0,1);
-
 }
