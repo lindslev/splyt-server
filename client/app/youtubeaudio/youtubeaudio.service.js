@@ -37,13 +37,14 @@ angular.module('splytApp')
       this.player.pauseVideo();
     }
     YoutubeAudioSource.prototype.seek = function(num) {
+      console.log('num', num)
       this.player.seekTo(num, true);
     }
     YoutubeAudioSource.prototype.currentTime = function() {
       return this.player.getCurrentTime();
     }
     YoutubeAudioSource.prototype.duration = function() {
-      return this.player.getDuration();
+      if(this.player.getDuration) return this.player.getDuration();
     }
     YoutubeAudioSource.prototype.addEndedListener = function(cb) {
       callback = cb;
@@ -56,7 +57,6 @@ angular.module('splytApp')
           x = self.currentTime();
           playerTimeUpdate();
         }
-        console.log('x', x)
       }, 100);
     }
 

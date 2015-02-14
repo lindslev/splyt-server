@@ -34,7 +34,6 @@ angular.module('splytApp')
     }
 
     SoundcloudNonstreamableAudioSource.prototype.seek = function(num) {
-      console.log('num', num)
       this.widget.seekTo(num*1000);
     }
 

@@ -110,12 +110,16 @@ angular.module('splytApp')
     }
 
     function addDuration() {
-      music.addEventListener("canplaythrough", function () {
-        $q.when($scope.audioProvider.duration()).then(function(dur){
-          duration = dur;
-        })
-      }, false);
+      $q.when($scope.audioProvider.duration()).then(function(dur){
+        duration = dur;
+      })
     }
+
+    music.addEventListener("canplaythrough", function () {
+      $q.when($scope.audioProvider.duration()).then(function(dur){
+        duration = dur;
+      })
+    }, false);
 
     //visual player functionality
     var timelineWidth = timeline.offsetWidth - playhead.offsetWidth; // timeline width adjusted for playhead
@@ -151,8 +155,10 @@ angular.module('splytApp')
 
         //instead of music.currenttime it should be $scope.audioProvider.seek(duration*clickPercent(e))
         // music.currentTime = duration * clickPercent(e);
-        $scope.audioProvider.seek(duration*clickPercent(e))
-        music.addEventListener('timeupdate', timeUpdate, false);
+        $q.when($scope.audioProvider.duration()).then(function(dur){
+          $scope.audioProvider.seek(dur*clickPercent(e))
+          music.addEventListener('timeupdate', timeUpdate, false);
+        })
       }
       onplayhead = false;
     }
