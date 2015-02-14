@@ -10,3 +10,26 @@
 .buttons {
   float: right;
 }
+
+.font-white {
+  color: rgb(255,255,255);
+}
+
+md-toolbar.md-default-theme li.activeClass {
+  color: rgb(255,255,255);
+}
+
+.left{
+  width: 50%;
+  margin: 0;
+  display: inline-block;
+}
+
+.right {
+  width: auto;
+  float: right;
+  position: relative;
+  top: 0;
+  right: 0;
+  display:inline-block;
+}
