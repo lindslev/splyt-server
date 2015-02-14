@@ -12,9 +12,9 @@ angular.module('splytApp')
     ///
 
     var currentUser = Auth.getCurrentUser();
+    console.log('currentUser followers', currentUser)
 
     socket.socket.on('newSong', function(data){
-      console.log('data', data)
       if(data.user == currentUser._id) {
         if(playlist._id == data.playlist) {
           data.song.playing = 'play_arrow';
