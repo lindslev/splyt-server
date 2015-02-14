@@ -28,7 +28,7 @@ angular.module('splytApp')
     }
 
     QueuePlayerComm.on('songDeletion', function(deletedSong){
-      if(deletedSong._id == $scope.currentlyPlaying._id) {
+      if($scope.musicPlaying && deletedSong._id == $scope.currentlyPlaying._id) {
         var nextSong = nextSongInQueue($scope.currentlyPlaying);
         $scope.audioProvider.stop(nextSong);
         if(nextSong == 'done') {

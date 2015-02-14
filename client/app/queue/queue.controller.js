@@ -2,7 +2,7 @@
 
 angular.module('splytApp')
 
-  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, QueuePlayerComm, toast, $mdDialog) {
+  .controller('QueueCtrl', function ($http, socket, Auth, playlist, $scope, youtube, $sanitize, manage, $log, $stateParams, $state, QueuePlayerComm, toast, $mdDialog) {
 
     //youtube iframe api include
     var tag = document.createElement('script');
@@ -10,6 +10,18 @@ angular.module('splytApp')
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     ///
+
+    var currentUser = Auth.getCurrentUser();
+
+    socket.socket.on('newSong', function(data){
+      console.log('data', data)
+      if(data.user == currentUser._id) {
+        if(playlist._id == data.playlist) {
+          data.song.playing = 'play_arrow';
+          $scope.songs.push(data.song);
+        }
+      }
+    })
 
     $scope.playlist = playlist;
     $scope.playlist_tabs=[];
