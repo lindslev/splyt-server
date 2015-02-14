@@ -12,7 +12,6 @@ angular.module('splytApp')
     ///
 
     var currentUser = Auth.getCurrentUser();
-    console.log('currentUser followers', currentUser)
 
     socket.socket.on('newSong', function(data){
       if(data.user == currentUser._id) {
@@ -20,8 +19,14 @@ angular.module('splytApp')
           data.song.playing = 'play_arrow';
           $scope.songs.push(data.song);
         }
+      } else if(subscribedTo(data.user)) {
+        toast.friendAddedSong(data.song);
       }
     })
+
+    function subscribedTo(user) {
+      return currentUser.subscriptions.indexOf(user) > -1;
+    }
 
     $scope.playlist = playlist;
     $scope.playlist_tabs=[];
