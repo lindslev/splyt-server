@@ -27,6 +27,19 @@ angular.module('splytApp')
       return $scope.currentlyPlaying;
     }
 
+    QueuePlayerComm.on('songDeletion', function(deletedSong){
+      if(deletedSong._id == $scope.currentlyPlaying._id) {
+        var nextSong = nextSongInQueue($scope.currentlyPlaying);
+        $scope.audioProvider.stop(nextSong);
+        if(nextSong == 'done') {
+          $scope.musicPlaying = false;
+          $scope.currentlyPlaying = null;
+        } else {
+          $scope.changeSong(nextSong);
+        }
+      }
+    })
+
     function prevSongInQueue(song) {
       var toReturn = 'top';
       $scope.queue.forEach(function(s,i){

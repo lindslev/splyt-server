@@ -47,6 +47,7 @@ angular.module('splytApp')
     }
 
     $scope.removeSongfromPlaylist = function(index){
+      QueuePlayerComm.trigger('songDeletion', $scope.songs[index]);
       var removeSongfromPlaylistPromise = manage.removeSongfromPlaylist(playlist, $scope.songs[index]);
       $scope.songs.splice(index, 1);
       toast.removedSong();
