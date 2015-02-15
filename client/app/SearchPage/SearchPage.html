@@ -3,6 +3,8 @@
         <span style = "color:white">Search!</span>
       </h2>
 </md-toolbar>
+
+
 <div class = "input">
 <md-button class= "fa fa-soundcloud fa-5x" aria-label='add' ng-click = "chooseSC()"></md-button>
 <md-button class= "fa fa-youtube fa-5x" aria-label='add' ng-click = "chooseYT()"></md-button>
@@ -16,6 +18,9 @@
         <md-button class='md-raised' ng-disabled="!search.YTquery" aria-label='add' ng-click="searchYT(search.YTquery)">Search Youtube</md-button>
     </div>
 </div>
+
+
+
 <md-toolbar ng-if = 'YTResults || SCResults'>
     <h2 class="md-toolbar-tools">
         <span style = "color:white">Results</span>
@@ -77,4 +82,8 @@
         </md-item>
       </md-list>
     </div>
+</div>
+
+<div layout="row" layout-sm="column" layout-align="space-around">
+<ng-if='progress' md-progress-circular md-mode="indeterminate"></md-progress-circular>
 </div>

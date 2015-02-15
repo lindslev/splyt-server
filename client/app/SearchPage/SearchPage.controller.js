@@ -7,6 +7,7 @@ angular.module('splytApp')
     $scope.playlist_tabs = [];
     $scope.youtube = false;
     $scope.soundcloud = false;
+    $scope.progress = false;
 
     var playlistPromise = manage.getPlaylists();
     playlistPromise.success(function(playlists) {
@@ -22,7 +23,7 @@ angular.module('splytApp')
     $scope.chooseYT = function(){
       $scope.soundcloud = false;
       $scope.youtube = true;
-    }    
+    }
 
     $scope.chooseSC = function(){
       $scope.youtube = false;
@@ -31,19 +32,23 @@ angular.module('splytApp')
 
       //search bar stuff.
   $scope.searchSC = function(query) {
+    $scope.progress = true;
     $scope.YTResults = null;
     search.searchSC(query, function(data) {
       $scope.SCResults = data;
       $scope.search.SCquery= "";
       $scope.$apply();
+      $scope.progress = false;
     });
   }
 
   $scope.searchYT = function(query) {
+    $scope.progress = true;
     $scope.SCResults = null;
     search.searchYT(query, function(data) {
       $scope.YTResults = data.items;
       $scope.search.YTquery= "";
+      $scope.progress = true;
     });
   }
 
