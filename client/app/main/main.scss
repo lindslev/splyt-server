@@ -43,7 +43,7 @@ body {
 .logo-image {
   filter: brightness(50%);
   background-color: black;
-  margin: -40px auto 0 auto;
+  margin: -70px auto 0 auto;
   display: block;
   background-image:url('../assets/images/background.jpg');
   background-repeat: no-repeat;
@@ -52,6 +52,10 @@ body {
   float: left;
   left: 0%;
   position: relative;
+}
+
+.logo-image .logged{
+  margin: -40px auto;
 }
 
 .logo {
@@ -63,6 +67,10 @@ body {
   float: left;
   left: 16%;
   position: relative;
+}
+
+.logo-logged {
+  margin: 56px auto !important;
 }
 
 .feature-row {
