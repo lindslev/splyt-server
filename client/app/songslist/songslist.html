@@ -48,37 +48,38 @@
                 <h3 ng-if='songs.length===0 && playlist.friend_stream'>Your friends haven't heard any new music! Maybe it's time to add some new friends?</h3>
                 <h3 ng-if='songs.length===0 && playlist.title === "Spotify Bookmarks"'>You don't have any songs here yet.
       Bookmark your favorite songs from Spotify!</h3>
-                <md-item ng-repeat='song in songs'>
-                    <md-item-content>
-                        <div class='md-tile-content'>
-                            <layout='row' layout-align='left'>
-                                <div flex='50' class='left'>
-                                    <h3 ng-if='playlist.friend_stream'>{{song.addedUser.name}} is listening to ...</h3>
-                                    <h3><a href="{{song.link}}" target="_blank">{{song.title}}</a></h3>
-                                    <h4>{{song.artist}}</h4>
-                                    <p>{{song.source}}</p>
-                                    <div class="btn-group" dropdown is-open="status.isopen" ng-if='playlist_tabs.length>3'>
-                                        <button type="button" class="btn btn-xs dropdown-toggle">
-                                            Add to <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li ng-repeat='playlist in user_playlists' ng-click='add_to_playlist(playlist._id, song._id)'>{{playlist.title}}</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div flex='33' class='right'>
-                                    <md-button class="md-primary" aria-label='none'>
-                                        <ng-md-icon ng-if='playlist.title != "Spotify Bookmarks"' ng-click='play(song)' icon="{{song.playing}}" size='30'></ng-md-icon>
-                                    </md-button>
-                                    <md-button ng-if='!playlist.friend_stream' ng-click='showConfirm($event, $index)' class="md-primary right" aria-label='none'>
-                                        <ng-md-icon icon="clear" size='30'></ng-md-icon>
-                                    </md-button>
-                                </div>
-                            </layout>
-                        </div>
-                    </md-item-content>
-                    <md-divider inset></md-divider>
-                </md-item>
-            </md-list>
-        </md-content>
+    <md-item ng-repeat='song in songs | filter:searchTerm'>
+    <md-item-content>
+    <div class='md-tile-content'>
+      <layout='row' layout-align='left' >
+      <div flex='50' class='left'>
+          <h3 ng-if='playlist.friend_stream'>{{song.addedUser.name}} is listening to ...</h3>
+          <h3><a href="{{song.link}}" target="_blank">{{song.title}}</a></h3>
+          <h4>{{song.artist}}</h4>
+          <p>{{song.source}}</p>
+          <div class="btn-group" dropdown is-open="status.isopen" ng-if='playlist_tabs.length>3'>
+              <button type="button" class="btn btn-xs dropdown-toggle">
+                  Add to <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                  <li ng-repeat='playlist in user_playlists' ng-click='add_to_playlist(playlist._id, song._id)'>{{playlist.title}}</li>
+              </ul>
+          </div>
+        </div>
+        <div flex='33' class ='right'>
+          <md-button class="md-primary" aria-label='none'>
+              <ng-md-icon ng-if='playlist.title != "Spotify Bookmarks"' ng-click='play(song)' icon="{{song.playing}}" size='30'></ng-md-icon>
+          </md-button>
+          <md-button ng-if='!playlist.friend_stream' ng-click='showConfirm($event, $index)' class="md-primary right" aria-label='none'>
+              <ng-md-icon icon="clear" size='30'></ng-md-icon>
+          </md-button>
+        </div>
+      </layout>
+    </div>
+  </md-item-content>
+  <md-divider inset></md-divider>
+</md-item>
+</md-list>
+</md-content>
 </div>
+

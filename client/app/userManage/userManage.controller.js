@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('splytApp')
-    .controller('UserManageCtrl', function($scope, Auth, manage, user, toast) {
+    .controller('UserManageCtrl', function($scope, Auth, manage, user, toast, $log) {
+
+      //Tabs functionality
+
 
         //Getting Playlists
         var getPlaylistPromise = manage.getPlaylists();
@@ -37,10 +40,10 @@ angular.module('splytApp')
                     $scope.userList = data;
                     var index = $scope.userList.map(function(x) {return x._id; }).indexOf(Auth.getCurrentUser()._id);
                     if(index != -1){
-                        $scope.userList.splice(index, 1); 
+                        $scope.userList.splice(index, 1);
                         if($scope.userList.length === 0){
                             toast.showNoUsers();
-                        }   
+                        }
                     }
                 }
             })

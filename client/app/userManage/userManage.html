@@ -1,78 +1,151 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 <row>
     <div class='container'>
+        <md-tabs>
+
+            <md-tab label='Playlists'>
+
+                <div layout="column" layout-align="center">
+                    <md-content>
+
+                    <div class='playlist_list'>
+                        <md-list class='font-set'>
+                        <h3>Your Playlists</h3>
+                            <md-item ng-repeat="playlist in playlists">
+                                <md-item-content>
+                                    <div class="md-tile-content hover" ui-sref='queue({playlist_id : playlist._id})'>
+                                        <div class='left-float'>{{playlist.title}}</div>
+                                        <md-button ng-if="!$first && playlist.title != 'Spotify Bookmarks'" ng-click="removePlaylist($index)" class='md-warn button-yeah' aria-label='remove'>
+                                            <ng-md-icon class='delete' icon="clear" size='15'></ng-md-icon>
+                                        </md-button>
+                                    </div>
+                                </md-item-content>
+                                <md-divider></md-divider>
+
+                            </md-item>
+                        </md-list>
+                      </div>
+                    </md-content>
+                </div>
+            </md-tab>
+
+            <md-tab label='Create New Playlist'>
+                <div layout="column" layout-align="center" class='center'>
+                    <md-item-content>
+                    <div class='create_list'>
+                            <h3>Create A New Playlist</h3>
+                            <div>
+                                <input ng-model="newPlaylist.title">
+                                <md-button class='md-raised' ng-disabled="!newPlaylist.title" ng-click="createPlaylist()">Create!</md-button>
+                            </div>
+                            <md-item ng-repeat="song in currentPlaylistSongs">
+                                <div class='font-set'>{{song.title}}</div>
+                                <md-button ng-click="removeSongfromPlaylist($index)" class='md-warn button-yeah' aria-label='remove'>
+                                    <ng-md-icon class='delete' icon="clear" size='15'></ng-md-icon>
+                                </md-button>
+                            </md-item>
+                          </div>
+                    </md-content>
+                </div>
+            </md-tab>
+
+
+            <md-tab label='Friend Subscriptions'>
+                <div layout="column" layout-align="center">
+                    <md-content>
+                    <div class='friend_list'>
+                      <h3>Users you are currently following</h3>
+                        <md-list class='font-set'>
+                            <div ng-if='currentUserSubscriptions.length===0'>
+                                <h4>Discover new music with Subscriptions!</h4>
+                                <h3>Search for users to follow</h3>
+                        <input type="text" ng-model="nameFilter" placeholder="Search..." />
+                        <md-button class='md-raised' ng-disabled="!nameFilter" ng-click="getUsers(nameFilter)">Search</md-button>
+                        <br>
+                        <h4 ng-if='userList'><strong>Search Results</strong></h4>
+                        <md-content>
+                            <md-list class='userList font-set'>
+                                <md-item ng-repeat='user in userList'>
+                                    <md-item-content>
+                                        <div class='md-tile-content hover'>
+                                            <div class='left-float'>
+                                                {{user.name}}</div>
+                                            <md-button class='button-yeah' aria-label='add' ng-click="subscribe($index)" class='follow-button'>
+                                                <ng-md-icon icon='add' size='20'></ng-md-icon>
+                                            </md-button>
+                                        </div>
+                                    </md-item-content>
+                                    <md-divider ng-if="!$last"></md-divider>
+                                </md-item>
+                            </md-list>
+                        </md-content>
+
+                              </div>
+                              <md-item ng-repeat="subscription in currentUserSubscriptions">
+                                    <md-item-content>
+                                        <div class='md-tile-content left-float' ng-click="getSpecificUser($index)">{{subscription.name}}</div>
+                                        <md-button ng-click="removeSubscription($index)" aria-label='remove' class='md-warn button-yeah'>
+                                            <ng-md-icon class='delete' icon="clear" size='15'></ng-md-icon>
+                                        </md-button>
+                                    </md-item-content>
+                                    <md-divider ng-if="!$last"></md-divider>
+                                </md-item>
+                        </md-list>
+                      </div>
+                    </md-content>
+                    </div>
+            </md-tab>
+
+            <md-tab label='Search and Add Friends'>
+                <div layout="column" layout-align="center">
+                  <div class='search_friend' layout-align='center center'>
+                        <h3>Search for users to follow</h3>
+                        <input type="text" ng-model="nameFilter" placeholder="Search..." />
+                        <md-button class='md-raised' ng-disabled="!nameFilter" ng-click="getUsers(nameFilter)">Search</md-button>
+                        <br>
+                        <h4 ng-if='userList'><strong>Search Results</strong></h4>
+                        <md-content>
+                            <md-list class='userList'>
+                                <md-item ng-repeat='user in userList'>
+                                    <md-item-content>
+                                        <div class='md-tile-content'>
+                                            <div class='left-float'>
+                                                {{user.name}}</div>
+                                            <md-button class='button-yeah' aria-label='add' ng-click="subscribe($index)" class='follow-button'>
+                                                <ng-md-icon icon='add' size='20'></ng-md-icon>
+                                            </md-button>
+                                        </div>
+                                    </md-item-content>
+                                    <md-divider ng-if="!$last"></md-divider>
+                                </md-item>
+                            </md-list>
+                        </md-content>
+                      </div>
+                </div>
+            </md-tab>
+
+
+            <md-tab ng-repeat='tab in tabs' ng-disabled='tab.disabled' label='{{tab.title}}'>
+                <div class="demo-tab tab{{$index%4}}" layout="column" layout-fill layout-align="space-around center">
+                    <div ng-bind='tab.content'></div>
+            </md-tab>
+
+
+        </md-tabs>
+
         <div class='col-sm-12 col-md-6'>
             <div class='set-width'>
                 <h2>Your playlists</h2>
-                <md-content>
-                    <md-list class='font-set'>
-                        <md-item ng-repeat="playlist in playlists">
-                            <md-item-content>
-                                <div class="md-tile-content hover" ui-sref='queue({playlist_id : playlist._id})'>
-                                    <div class='left-float'>{{playlist.title}}</div>
-                                    <md-button ng-if="!$first && playlist.title != 'Spotify Bookmarks'" ng-click="removePlaylist($index)" class='md-warn button-yeah' aria-label='remove'>
-                                        <ng-md-icon class='delete' icon="clear" size='15'></ng-md-icon>
-                                    </md-button>
-                                </div>
-                            </md-item-content>
-                            <md-divider ng-if="!$last"></md-divider>
-                        </md-item>
-                    </md-list>
-                </md-content>
-                <h3>Create A New Playlist</h3>
-                <div>
-                    <h4>Playlist Title: </h4>
-                    <input ng-model="newPlaylist.title">
-                    <md-button class='md-raised' ng-disabled = "!newPlaylist.title" ng-click="createPlaylist()">Submit</md-button>
-                </div>
+
             </div>
         </div>
         <div class='col-sm-12 col-md-6'>
             <div class='set-width'>
-                <md-item ng-repeat="song in currentPlaylistSongs">
-                    <div class='font-set'>{{song.title}}</div>
-                    <md-button ng-click="removeSongfromPlaylist($index)" class='md-warn button-yeah' aria-label='remove'>
-                        <ng-md-icon class='delete' icon="clear" size='15'></ng-md-icon>
-                    </md-button>
-                </md-item>
+
                 <h2>Your Subcriptions:</h2>
-                <md-content>
-                    <md-list class='font-set'>
-                    <h4 ng-if='currentUserSubscriptions.length===0'>Discover new music with Subscriptions!</h4>
-                        <md-item ng-repeat="subscription in currentUserSubscriptions">
-                            <md-item-content>
-                                <div class='md-tile-content left-float' ng-click="getSpecificUser($index)">{{subscription.name}}</div>
-                                <md-button ng-click="removeSubscription($index)" aria-label='remove' class='md-warn button-yeah'>
-                                    <ng-md-icon class='delete' icon="clear" size='15'></ng-md-icon>
-                                </md-button>
-                            </md-item-content>
-                            <md-divider ng-if="!$last"></md-divider>
-                        </md-item>
-                    </md-list>
-                </md-content>
-                <h3>Search for users to follow</h3>
-                <input type="text" ng-model="nameFilter" placeholder="Search..." />
-                <md-button class='md-raised' ng-disabled = "!nameFilter" ng-click="getUsers(nameFilter)">Search</md-button>
-                <br>
-                <h4 ng-if='userList'><strong>Search Results</strong></h4>
-                <md-content>
-                    <md-list class='userList'>
-                        <md-item ng-repeat='user in userList'>
-                            <md-item-content>
-                                <div class='md-tile-content'>
-                                    <div class='left-float'>
-                                        {{user.name}}</div>
-                                    <md-button class='button-yeah' aria-label='add' ng-click="subscribe($index)" class='follow-button'>
-                                        <ng-md-icon icon='add' size='20'></ng-md-icon>
-                                    </md-button>
-                                </div>
-                            </md-item-content>
-                            <md-divider ng-if="!$last"></md-divider>
-                        </md-item>
-                    </md-list>
-                </md-content>
+
                 <br>
             </div>
         </div>
-    </div>
+        </div>
 </row>
