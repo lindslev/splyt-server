@@ -1,10 +1,12 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('SearchPageCtrl', function ($scope, search, manage, Auth) {
+  .controller('SearchPageCtrl', function ($scope, search, manage, Auth, $modalInstance) {
     $scope.SCResults;
     $scope.YTResults;
     $scope.playlist_tabs = [];
+    $scope.youtube = false;
+    $scope.soundcloud = false;
 
     var playlistPromise = manage.getPlaylists();
     playlistPromise.success(function(playlists) {
@@ -17,6 +19,15 @@ angular.module('splytApp')
       }
     });
 
+    $scope.chooseYT = function(){
+      $scope.soundcloud = false;
+      $scope.youtube = true;
+    }    
+
+    $scope.chooseSC = function(){
+      $scope.youtube = false;
+      $scope.soundcloud = true;
+    }
 
       //search bar stuff.
   $scope.searchSC = function(query) {
@@ -48,4 +59,13 @@ angular.module('splytApp')
     });
   }
   console.log($scope.SCResults);
+
+  $scope.ok = function () {
+    $modalInstance.close();
+  };
+
+  $scope.cancel = function () {
+    $modalInstance.dismiss('cancel');
+  };
+
 });
