@@ -12,7 +12,6 @@ angular.module('splytApp')
     $scope.user = {
       status : Auth.isLoggedIn()
     }
-    console.log($scope.user.status);
     function cb(res) { console.log('Message sent!', res) }
     if(Auth.isLoggedIn()) {
       var token = Auth.getToken();

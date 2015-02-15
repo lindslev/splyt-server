@@ -51,12 +51,16 @@
     <div ng-show='SCResults.length>0'>
         <md-item ng-repeat='song in SCResults'>
             <md-item-content>
-                <div class='md-tile-content'>
+            <md-list>
+                <div class='md-tile-content song_results'>
                     <layout='row' layout-align='left'>
-                        <div flex='50' class='left'>
-                            <h3><a href="{{song.permalink_url}}" target="_blank">{{song.title}}</a></h3>
+                    <div flex='10' class='md-tile-left'>
+                      <img src='{{song.artwork_url}}' class='SCimg' />
+                    </div>
+                        <div flex='80' class='md-tile-center song_title'>
+                            <h4><a href="{{song.permalink_url}}" target="_blank">{{song.title}}</a></h4>
                         </div>
-                        <div flex='33' class='right'>
+                        <div flex='20' class='md-tile-right add_button'>
                             <div class="btn-group" dropdown is-open="status.isopen">
                                 <button type="button" class="btn btn-xs dropdown-toggle">
                                     Add to <span class="caret"></span>
@@ -71,5 +75,6 @@
             </md-item-content>
             <md-divider inset></md-divider>
         </md-item>
+      </md-list>
     </div>
 </div>

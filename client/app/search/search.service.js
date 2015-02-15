@@ -10,7 +10,7 @@ angular.module('splytApp')
       searchSC: function (query, cb) {
           SC.get('/tracks', {q: query, limit: 25 }, function(data) {
             for (var i = 0; i < data.length; i++) {
-              console.log(data[i].title);
+              console.log(data);
             }
             cb(data)
           });
@@ -18,6 +18,7 @@ angular.module('splytApp')
 
       searchYT: function(query, cb) {
         $http.get('/api/youtubes/search/videos/' + query).success(function(data){
+          console.log('data');
             cb(data);
         })
       },
@@ -61,7 +62,8 @@ angular.module('splytApp')
             link: song.permalink_url,
             audioSource: audio,
             source: 'SoundCloud',
-            addedUser: Auth.getCurrentUser()._id
+            addedUser: Auth.getCurrentUser()._id,
+            thumbnail: song.artwork_url
           };
         $http.post('/api/users/addSong/'+Auth.getCurrentUser()._id + '/playlist/' + playlist, song_obj)
         .success(function(model) {
