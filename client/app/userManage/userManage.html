@@ -50,15 +50,17 @@
             </md-tab>
 
 
-            <md-tab label='Friend Subscriptions'>
+            <md-tab label='Friend Music Feed'>
                 <div layout="column" layout-align="center">
                     <md-content>
                     <div class='friend_list'>
+                      <div ng-if='currentUserSubscriptions.length>0'>
                       <h3>Users you are currently following</h3>
+                    </div>
                         <md-list class='font-set'>
                             <div ng-if='currentUserSubscriptions.length===0'>
                                 <h4>Discover new music with Subscriptions!</h4>
-                                <h3>Search for users to follow</h3>
+                                <h4>Search for users to follow</h4>
                         <input type="text" ng-model="nameFilter" placeholder="Search..." />
                         <md-button class='md-raised' ng-disabled="!nameFilter" ng-click="getUsers(nameFilter)">Search</md-button>
                         <br>
