@@ -2,8 +2,24 @@ input {
   margin-right: 10px;
 }
 
+h3 {
+  font-size: 24px !important;
+}
+
+.friends {
+  width: 80%;
+}
+
+.playlists {
+  width: 80%;
+  margin: 0 auto;
+}
 .left-float {
-  float: left;
+  text-align: center;
+}
+
+.center {
+  text-align: left;
 }
 
 .icon {
@@ -22,9 +38,12 @@ input {
 
 .button-yeah {
   float: right;
-  height: 25px;
-  padding-top: 0px;
-  padding-bottom: 5px;
+  margin-top: -30px;
+}
+
+.button-remove-friends {
+  float: right;
+  margin-top: -46px;
 }
 
 .button-add {
@@ -45,6 +64,44 @@ input {
 
 .dark-bar {
   height: 100px;
+}
+
+.playlist_list, .create_list, .friend_list, .search_friend{
+  margin: 30px auto;
+  margin-top: 30px;
+  background-color: #dedfdf;
+  padding: 10px 20px;
+  width:50%;
+  min-height: 200px;
+  text-align: center;
+}
+
+.playlist_list {
+  padding-bottom: 0px;
+}
+
+.create_list {
+  padding-top: 10px;
+  width: 50%;
+}
+
+/*.md-warn {
+  top: -40px !important;
+  float:right;
+}
+*/
+md-tile-content {
+  text-align: center;
+  padding:0px;
+}
+
+
+md-tabs.md-default-theme md-tabs-ink-bar {
+  background-color: #009688;
+}
+
+md-tabs.md-default-theme md-tab.active {
+  background-color: #009688;
 }
 
 

@@ -9,6 +9,7 @@
 
 .buttons {
   float: right;
+  cursor: pointer;
 }
 
 .font-white {
@@ -32,4 +33,11 @@ md-toolbar.md-default-theme li.activeClass {
   top: 0;
   right: 0;
   display:inline-block;
+}
+.dropdown-menu {
+  cursor: pointer;
+}
+
+md-list h3 {
+  margin-left: 50px;
 }
