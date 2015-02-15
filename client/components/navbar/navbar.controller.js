@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth, $sanitize, $sce) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, $sanitize, $sce, $modal) {
     var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
 
     $scope.menu = [{
@@ -22,6 +22,14 @@ angular.module('splytApp')
       Auth.logout();
       $location.path('/login');
     };
+
+    $scope.open = function(){
+      var modalInstance = $modal.open({
+        templateUrl: '/app/SearchPage/SearchPage.html',
+        controller: 'SearchPageCtrl',
+        size: 'lg'
+      });
+    }
 
     $scope.isActive = function(route) {
       return route === $location.path();

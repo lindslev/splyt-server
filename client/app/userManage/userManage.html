@@ -59,22 +59,22 @@
                       <div ng-if='currentUserSubscriptions.length>0'>
                       <h3>Users you are currently following</h3>
                     </div>
-                        <md-list class='font-set'>
+                        <md-list>
                             <div ng-if='currentUserSubscriptions.length===0'>
                                 <h4>Discover new music with Subscriptions!</h4>
                                 <h4>Search for users to follow</h4>
                         <input type="text" ng-model="nameFilter.name" placeholder="Search..." />
-                        <md-button class='md-raised' ng-disabled="!nameFilter" ng-click="getUsers(nameFilter)">Search</md-button>
+                        <md-button class='md-raised' ng-disabled="!nameFilter.name" ng-click="getUsers(nameFilter.name)">Search</md-button>
                         <br>
                         <h4 ng-if='userList'><strong>Search Results</strong></h4>
                         <md-content>
-                            <md-list class='userList font-set'>
+                            <md-list class='userList'>
                                 <md-item ng-repeat='user in userList'>
                                     <md-item-content>
                                         <div class='md-tile-content hover'>
                                             <div class='left-float'>
                                                 {{user.name}}</div>
-                                            <md-button class='button-remove-friends' aria-label='add' ng-click="subscribe($index)" class='follow-button'>
+                                            <md-button class='button-yeah' aria-label='add' ng-click="subscribe($index)" class='follow-button'>
                                                 <ng-md-icon icon='add' size='20'></ng-md-icon>
                                             </md-button>
                                         </div>
@@ -117,7 +117,7 @@
                                         <div class='md-tile-content'>
                                             <div class='left-float'>
                                                 {{user.name}}</div>
-                                            <md-button class='button-remove-friends' aria-label='add' ng-click="subscribe($index)" class='follow-button'>
+                                            <md-button class='button-yeah' aria-label='add' ng-click="subscribe($index)" class='follow-button'>
                                                 <ng-md-icon icon='add' size='20'></ng-md-icon>
                                             </md-button>
                                         </div>
