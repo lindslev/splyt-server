@@ -8,7 +8,7 @@ angular.module('splytApp')
     return {
 
       searchSC: function (query, cb) {
-          SC.get('/tracks', {q: query }, function(data) {
+          SC.get('/tracks', {q: query, limit: 25 }, function(data) {
             for (var i = 0; i < data.length; i++) {
               console.log(data[i].title);
             }
