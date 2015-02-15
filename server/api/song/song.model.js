@@ -12,7 +12,8 @@ var SongSchema = new Schema({
   link: { type: String },
   audioSource: { type: String, default: null },
   source: {type: String, required: true },
-  addedUser: { type: Schema.Types.ObjectId, ref: 'User' }
+  addedUser: { type: Schema.Types.ObjectId, ref: 'User' },
+  thumbnail: String
 });
 
 //obj for returning song objects in proper format according to song source

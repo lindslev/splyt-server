@@ -12,7 +12,6 @@ angular.module('splytApp')
     $scope.user = {
       status : Auth.isLoggedIn()
     }
-    console.log($scope.user.status);
     function cb(res) { console.log('Message sent!', res) }
     if(Auth.isLoggedIn()) {
       var token = Auth.getToken();
@@ -52,4 +51,12 @@ angular.module('splytApp')
     $scope.$on('$destroy', function () {
       socket.unsyncUpdates('thing');
     });
+
+     $scope.open = function(){
+      var modalInstance = $modal.open({
+        templateUrl: '/app/SearchPage/SearchPage.html',
+        controller: 'SearchPageCtrl',
+        size: 'lg'
+      });
+    }
   });
