@@ -4,6 +4,14 @@ var _ = require('lodash');
 var Youtube = require('./youtube.model');
 var request = require('request');
 var youtubeStream = require('youtube-audio-stream');
+var eventMachine = require('./events');
+
+// Emit event from ext to player.controller.js on client side
+exports.registerAction = function(req, res) {
+  var actionForPlayerController = req.params.action;
+  eventMachine.trigger('updatePlayer', { action: actionForPlayerController })
+  res.send(200);
+}
 
 // Make api call to youtube for video info
 exports.getYouTube = function(req, res) {

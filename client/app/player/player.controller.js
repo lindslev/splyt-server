@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm, Auth, $q) {
+  .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm, Auth, $q, socket) {
+    var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
 
     var music = document.getElementById('music'); // id for audio element
     var duration; // Duration of audio clip
@@ -14,6 +15,7 @@ angular.module('splytApp')
     $scope.musicPlaying = false;
     var currentAudioProvider;
     $scope.currentlyPlaying;
+
 
     QueuePlayerComm.onChangeSong = function(song) {
       $scope.currentlyPlaying && $scope.currentlyPlaying._id == song._id ? $scope.toggle() : $scope.changeSong(song);
@@ -77,6 +79,7 @@ angular.module('splytApp')
         $scope.audioProvider.play();
         $scope.musicPlaying = true;
       }
+      tellExtension();
       QueuePlayerComm.trigger('globalPlayerToggle', $scope.currentlyPlaying);
     }
 
@@ -199,4 +202,21 @@ angular.module('splytApp')
       })
     }
 
+    ////// chat with extension ///////
+    function cb(res) { console.log('Message sent!', res) }
+    function tellExtension() {
+      chrome.runtime.sendMessage(ext_id, { action: 'PLAYERUPDATE', method: $scope.musicPlaying },
+       function(response) {
+           cb(response);
+       });
+    }
+
+    chrome.runtime.sendMessage(ext_id, { action: 'PLAYERINIT', method: $scope.musicPlaying },
+       function(response) {
+           cb(response);
+       });
+
+    socket.socket.on('updatePlayer', function(data){
+      $scope.toggle();
+    })
   });
