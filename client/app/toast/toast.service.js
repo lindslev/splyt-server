@@ -89,6 +89,14 @@ angular.module('splytApp')
               .position(getToastPosition())
               .hideDelay(3000)
           );
+        },
+        friendAddedSong : function(song) {
+          $mdToast.show(
+            $mdToast.simple()
+              .content('A friend just added ' + song.title + '!')
+              .position(getToastPosition())
+              .hideDelay(3000)
+          );
         }
       }
 });

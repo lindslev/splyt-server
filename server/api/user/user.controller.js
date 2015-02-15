@@ -7,6 +7,7 @@ var jwt = require('jsonwebtoken');
 var request = require('request');
 var Song = require('../song/song.model');
 var Playlist = require('../playlist/playlist.model')
+var eventMachine = require('./userEvents')
 
 var validationError = function(res, err) {
     return res.json(422, err);
@@ -45,8 +46,9 @@ exports.addSong = function(req, res) {
 
     //find the user
     User.findById(req.params.id, function(err, user) {
+        eventMachine.pass('user', user._id)
+        eventMachine.pass('playlist', req.params.listid)
         user.addSong(song_obj, function(err, data) {
-            console.log('User controller addSong', data);
           User.propagateToFollowers(data, user.followers, function(err, model) {
             res.json(200, data);
           });

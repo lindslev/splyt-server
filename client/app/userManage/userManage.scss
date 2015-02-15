@@ -6,6 +6,14 @@ h3 {
   font-size: 24px !important;
 }
 
+.friends {
+  width: 80%;
+}
+
+.playlists {
+  width: 80%;
+  margin: 0 auto;
+}
 .left-float {
   text-align: center;
 }
@@ -30,9 +38,12 @@ h3 {
 
 .button-yeah {
   float: right;
-  height: 25px;
-  padding-top: 0px;
-  padding-bottom: 5px;
+  margin-top: -30px;
+}
+
+.button-remove-friends {
+  float: right;
+  margin-top: -46px;
 }
 
 .button-add {
@@ -74,11 +85,11 @@ h3 {
   width: 50%;
 }
 
-.md-warn {
-  top: -25px !important;
+/*.md-warn {
+  top: -40px !important;
   float:right;
 }
-
+*/
 md-tile-content {
   text-align: center;
   padding:0px;

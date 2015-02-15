@@ -2,7 +2,9 @@
 
 angular.module('splytApp')
     .controller('UserManageCtrl', function($scope, Auth, manage, user, toast, $log) {
-
+      $scope.nameFilter = {
+        name: ''
+      }
       //Tabs functionality
 
 
@@ -46,8 +48,9 @@ angular.module('splytApp')
                         }
                     }
                 }
+                $scope.nameFilter.name = '';
             })
-            $scope.nameFilter = '';
+
         }
 
 
@@ -89,6 +92,7 @@ angular.module('splytApp')
                     $scope.currentUserSubscriptions.push($scope.userList[index]);
                     toast.subscribed();
                     $scope.userList = null;
+                    $scope.nameFilter.name = '';
                 })
             } else {
                 toast.alreadySubscribed();

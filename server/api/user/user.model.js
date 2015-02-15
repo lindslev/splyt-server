@@ -7,6 +7,7 @@ var authTypes = ['github', 'twitter', 'facebook', 'google'];
 var Song = require('../song/song.model');
 var Playlist = require('../playlist/playlist.model');
 var _ = require('lodash');
+var eventMachine = require('./userEvents')
 
 var UserSchema = new Schema({
     name: String,
@@ -220,6 +221,9 @@ UserSchema.methods = {
     //user adds new song
     addSong: function(song_obj, cb) {
       Song.createSong(song_obj, function(err, song) {
+        var user = eventMachine.receive('user')
+        var playlist = eventMachine.receive('playlist')
+        eventMachine.trigger('newSong', { song: song, user: user, playlist: playlist })
         cb(err, song);
       });
     }
