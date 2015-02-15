@@ -2,7 +2,7 @@
 
 angular.module('splytApp')
 
-  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, QueuePlayerComm, toast, $mdDialog) {
+  .controller('QueueCtrl', function ($http, playlist, $scope, youtube, $sanitize, $sce, manage, $log, $stateParams, $state, QueuePlayerComm, toast, $modal) {
 
     //youtube iframe api include
     var tag = document.createElement('script');
@@ -52,6 +52,16 @@ angular.module('splytApp')
       toast.removedSong();
     }
 
+//DIALOGS
+
+    $scope.open = function(){
+      var modalInstance = $modal.open({
+        templateUrl: '/app/SearchPage/SearchPage.html',
+        controller: 'SearchPageCtrl',
+        size: 'lg'
+      });
+    }
+    
     $scope.showConfirm = function(ev, index) {
     var confirm = $mdDialog.confirm()
         .title('Are you sure you want to delete this song?')
