@@ -63,7 +63,7 @@
                             <div ng-if='currentUserSubscriptions.length===0'>
                                 <h4>Discover new music with Subscriptions!</h4>
                                 <h4>Search for users to follow</h4>
-                        <input type="text" ng-model="nameFilter" placeholder="Search..." />
+                        <input type="text" ng-model="nameFilter.name" placeholder="Search..." />
                         <md-button class='md-raised' ng-disabled="!nameFilter" ng-click="getUsers(nameFilter)">Search</md-button>
                         <br>
                         <h4 ng-if='userList'><strong>Search Results</strong></h4>

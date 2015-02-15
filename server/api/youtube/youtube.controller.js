@@ -24,7 +24,7 @@ exports.getYouTube = function(req, res) {
 
 // Make a YouTube search
 exports.searchYouTube = function(req, res) {
-  request('https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + req.params.query + '&type=video&videoCategoryId=10&key=AIzaSyC_eZm_iimb5fx5So3Bt4h96ZuKQqd7ARU',
+  request('https://www.googleapis.com/youtube/v3/search?part=snippet&q=' + req.params.query + '&type=video&videoCategoryId=10&key=AIzaSyC_eZm_iimb5fx5So3Bt4h96ZuKQqd7ARU&maxResults=25',
     function(err, response, body) {
       if(err) return handleError(res, err)
         res.send(body);
