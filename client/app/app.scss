@@ -93,6 +93,10 @@ a {
   border: 0 !important;
 }
 
+a:hover {
+  text-decoration: none;
+  color: #009688;
+}
 
 // Component styles are injected through grunt
 // injector

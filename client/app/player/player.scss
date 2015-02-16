@@ -57,6 +57,7 @@
   border-radius: 15px;
   // background: rgba(0,0,0,.3);
   background: rgba(255,255,255,.7);
+  cursor: pointer;
 
 }
 #playhead{
@@ -64,7 +65,7 @@
   height: 18px;
   border-radius: 50%;
   margin-top: 1px;
-  background: rgba(0, 0, 0, 1);
+  background: rgba(0, 150, 136, 1);
 }
 @media (max-width: 800px) {
   #timeline, #playhead {
