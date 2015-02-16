@@ -36,7 +36,6 @@ exports.addYouTube = function(req, res) {
   request('https://www.googleapis.com/youtube/v3/videos?part=snippet&id=' + req.params.id + '&key=AIzaSyC_eZm_iimb5fx5So3Bt4h96ZuKQqd7ARU',
     function(err, response, body) {
       if(err) return handleError(res, err)
-      console.log('youtube video lookup ', body);
       res.send(body);
     })
 }
