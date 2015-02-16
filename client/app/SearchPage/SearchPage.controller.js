@@ -22,7 +22,7 @@ angular.module('splytApp')
     $scope.chooseYT = function(){
       $scope.soundcloud = false;
       $scope.youtube = true;
-    }    
+    }
 
     $scope.chooseSC = function(){
       $scope.youtube = false;
@@ -44,6 +44,7 @@ angular.module('splytApp')
     search.searchYT(query, function(data) {
       $scope.YTResults = data.items;
       $scope.search.YTquery= "";
+      console.log($scope.YTResults);
     });
   }
 
@@ -58,7 +59,7 @@ angular.module('splytApp')
       console.log(data);
     });
   }
-  console.log($scope.SCResults);
+
 
   $scope.ok = function () {
     $modalInstance.close();
