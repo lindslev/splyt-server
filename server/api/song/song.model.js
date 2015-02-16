@@ -32,7 +32,8 @@ var transformations = {
       artist: artist,
       link: song_obj.song.args.song.permalink_url,
       source: 'YouTube',
-      addedUser: song_obj.userid
+      addedUser: song_obj.userid,
+      thumbnail: 'http://lorempixel.com/100/100/abstract/?'
     }
   },
    newSCSong: function(song_obj) {
@@ -56,7 +57,8 @@ var transformations = {
       artist: song_obj.song.args.info.artists[0].name,
       link: song_obj.song.args.song.permalink_url,
       source: 'Spotify',
-      addedUser: song_obj.userid
+      addedUser: song_obj.userid,
+      thumbnail: 'http://lorempixel.com/100/100/abstract/?'
     }
   },
    newTumblrSong: function(song_obj) {
@@ -66,7 +68,8 @@ var transformations = {
       link: song_obj.song.args.song.permalink_url,
       audioSource: song_obj.song.args.iframeSrc,
       source: 'Tumblr',
-      addedUser: song_obj.userid
+      addedUser: song_obj.userid,
+      thumbnail: 'http://lorempixel.com/100/100/abstract/?'
     }
   }
 }

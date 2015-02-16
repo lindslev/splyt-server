@@ -79,7 +79,7 @@ angular.module('splytApp')
         size: 'lg'
       });
     }
-    
+
     $scope.showConfirm = function(ev, index) {
     var confirm = $mdDialog.confirm()
         .title('Are you sure you want to delete this song?')
@@ -137,6 +137,12 @@ angular.module('splytApp')
       $mdSidenav('right').close()
     };
 
+    $scope.open = function(){
+      var modalInstance = $modal.open({
+        templateUrl: '/app/SearchPage/SearchPage.html',
+        controller: 'SearchPageCtrl',
+        size: 'lg'
+      });
+    }
+
 });
-
-

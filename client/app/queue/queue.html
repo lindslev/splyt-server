@@ -1,3 +1,17 @@
+<!-- <div ng-include="'components/navbar/navbar.html'"></div>
+<div class="container">
+   <input id="filterBox" type="text" ng-model="searchTerm" placeholder="filter by song, artist, remix"></input>
+  <md-tabs>
+  <md-tab ng-repeat='tab in tabs' label='{{tab.title}}' ng-click='update_songs(tab._id); update_index($index)' ng-class="{'really_active': selectedIndex == $index}">
+  <div label='column' layout-align='center'>
+    <md-content>
+      <songslist></songslist>
+    </md-content>
+  </div>
+
+  </md-tab>
+</md-tabs> -->
+
 <div ng-include="'components/navbar/navbar.html'"></div>
 <div class="container">
   <section layout='row' flex>
@@ -6,7 +20,6 @@
         <!-- Sidebar -->
         <h1 class="md-toolbar-tools font-white">Your Playlists</h1>
         <md-content class="md-padding">
-        <input id="filterBox" type="text" ng-model="searchTerm" placeholder="filter by song, artist, remix"></input>
             <ul>
                 <li class='hover' ng-class = "{'activeClass': isActive(tab._id)}"
                                   ng-repeat='tab in tabs'
@@ -19,6 +32,7 @@
         <md-content flex class="md-padding">
         <!-- Page Content -->
          <div layout="column" layout-fill layout-align="left" class='right-column'>
+            <input id="filterBox" type="text" ng-model="searchTerm" placeholder="filter by song, artist, remix"></input>
             <songslist></songslist>
         </div>
       </md-content>
@@ -26,3 +40,4 @@
   </section>
   </div>
 </div>
+
