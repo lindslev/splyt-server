@@ -45,7 +45,8 @@ var transformations = {
       link: song_obj.song.args.song.permalink_url,
       audioSource: audio,
       source:'SoundCloud',
-      addedUser: song_obj.userid
+      addedUser: song_obj.userid,
+      thumbnail: song_obj.song.args.song.artwork_url
     }
   },
    newSpotifySong: function(song_obj) {

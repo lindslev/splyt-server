@@ -41,3 +41,36 @@ md-toolbar.md-default-theme li.activeClass {
 md-list h3 {
   margin-left: 50px;
 }
+
+.SCimg {
+  border-radius: 30px;
+  border: 1px solid #ddd;
+  width: 48px;
+  margin: 0;
+  margin-top: -11px;
+  position: absolute;
+  left: 0;
+}
+
+.add_button {
+  position:absolute;
+  right: 0;
+}
+
+.song_title {
+  position: absolute;
+  left: 15%;
+  font-size: 16px;
+  margin: 0;
+  margin-top: -10px;
+}
+
+.song_results {
+  width: 175%;
+  height: 60px;
+}
+
+.content_list {
+  width: 95%;
+  margin: 0 auto;
+}

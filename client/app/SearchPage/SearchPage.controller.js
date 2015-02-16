@@ -63,7 +63,7 @@ angular.module('splytApp')
       console.log(data);
     });
   }
-  console.log($scope.SCResults);
+
 
   $scope.ok = function () {
     $modalInstance.close();
