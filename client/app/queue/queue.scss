@@ -192,3 +192,11 @@ md-toolbar.md-default-theme li.activeClass {
   right: 0;
   display:inline-block;
 }
+
+.active {
+  color: rgb(255,255,255);
+}
+
+.really_active {
+  color: black !important;
+}
