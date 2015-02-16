@@ -23,7 +23,7 @@ angular.module('splytApp')
       },
 
       addYT: function(song, playlist, cb) {
-        var random = Math.floor(Math.random() * 100));
+        var random = Math.floor(Math.random() * 100);
         var random_image = 'http://lorempixel.com/100/100/abstract/' + random;
 
         $http.get('api/youtubes/search/addnew/videos/' + song).success(function(song){
