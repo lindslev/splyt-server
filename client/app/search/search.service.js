@@ -23,6 +23,9 @@ angular.module('splytApp')
       },
 
       addYT: function(song, playlist, cb) {
+        var random = Math.floor(Math.random() * 100));
+        var random_image = 'http://lorempixel.com/100/100/abstract/' + random;
+
         $http.get('api/youtubes/search/addnew/videos/' + song).success(function(song){
           var title = song.items[0].snippet.title.split(' - ')[1];
           var artist = song.items[0].snippet.title.split(' - ')[0];
@@ -36,8 +39,9 @@ angular.module('splytApp')
             artist: artist,
             link: 'https://www.youtube.com/watch?v=' + song.items[0].id.videoId,
             source: 'YouTube',
-            addedUser: Auth.getCurrentUser()._id
-          };
+            addedUser: Auth.getCurrentUser()._id,
+            thumbnail: random_image
+          }
           $http.post('/api/users/addSong/'+Auth.getCurrentUser()._id + '/playlist/' + playlist, song_obj)
           .success(function(model) {
             cb(err, model);
