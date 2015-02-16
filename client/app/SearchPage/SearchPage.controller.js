@@ -53,6 +53,7 @@ angular.module('splytApp')
   }
 
   $scope.addYTSong = function(playlist, song) {
+    console.log('adding song');
     search.addYT(song, playlist, function(data) {
       console.log(data);
     });
