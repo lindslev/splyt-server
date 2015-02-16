@@ -13,6 +13,8 @@ angular.module('splytApp')
 
     var currentUser = Auth.getCurrentUser();
 
+    $scope.selectedIndex = 0;
+
     socket.socket.on('newSong', function(data){
       if(data.user == currentUser._id) {
         if(playlist._id == data.playlist) {
@@ -35,8 +37,9 @@ angular.module('splytApp')
 
     //Updating playlist songs when user clicks on new tab
 
-    $scope.update_songs = function(id) {
+    $scope.update_songs = function(id, index) {
       $state.go('queue', { playlist_id: id }, true);
+      $scope.selectedIndex = index;
     }
 
     $scope.isActive = function(id){
