@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('MainCtrl', function ($scope, $http, socket, youtube, Auth, $sanitize, $sce) {
+  .controller('MainCtrl', function ($state, $scope, $http, socket, youtube, Auth, $sanitize, $sce) {
     //DONT FORGET TO CHANGE TO YOUR EXT ID
     var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
     var api = "AIzaSyABJumn6ZK-Ru4vt1U0hq7wQA99Z6EhXLE";
@@ -19,6 +19,7 @@ angular.module('splytApp')
        function(response) {
            cb(response);
        });
+      $state.go('queue', { playlist_id: $scope.currentUser.playlist[0] })
     }
 
     $http.get('/api/things').success(function(awesomeThings) {
