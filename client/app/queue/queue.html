@@ -20,6 +20,7 @@
         <!-- Sidebar -->
         <h1 class="md-toolbar-tools font-white">Your Playlists</h1>
         <md-content class="md-padding">
+          <input id="filterBox" type="text" ng-model="searchTerm" placeholder="filter by song, artist, remix"></input>
             <ul>
                 <li class='hover' ng-class = "{'activeClass': isActive(tab._id)}"
                                   ng-repeat='tab in tabs'
@@ -32,7 +33,6 @@
         <md-content flex class="md-padding">
         <!-- Page Content -->
          <div layout="column" layout-fill layout-align="left" class='right-column'>
-            <input id="filterBox" type="text" ng-model="searchTerm" placeholder="filter by song, artist, remix"></input>
             <songslist></songslist>
         </div>
       </md-content>

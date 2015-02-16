@@ -2,10 +2,11 @@
 
 angular.module('splytApp')
   .factory('YoutubeAudio', function () {
-    var callback, timerInterval;
+    var callback;
 
     var YoutubeAudioSource = function(song) {
       var self = this;
+      this.timerInterval;
       this.onReadyFunctions = [];
       $('#youtubePlayer').remove();
       this.domElement = $('<div id="youtubePlayer"></div>')
@@ -40,7 +41,7 @@ angular.module('splytApp')
       this.player.seekTo(num, true);
     }
     YoutubeAudioSource.prototype.currentTime = function() {
-      return this.player.getCurrentTime();
+      if(this.player.getCurrentTime) return this.player.getCurrentTime();
     }
     YoutubeAudioSource.prototype.duration = function() {
       if(this.player.getDuration) return this.player.getDuration();
@@ -51,7 +52,7 @@ angular.module('splytApp')
     }
     YoutubeAudioSource.prototype.timer = function(playerTimeUpdate) {
       var x = 0, self = this;
-      timerInterval = setInterval(function() {
+      this.timerInterval = setInterval(function() {
         if(x !== self.currentTime()) {
           x = self.currentTime();
           playerTimeUpdate();
@@ -64,7 +65,7 @@ angular.module('splytApp')
     }
 
     YoutubeAudioSource.prototype.stop = function(newSong) {
-      clearInterval(timerInterval);
+      clearInterval(this.timerInterval);
       if(newSong.source !== 'YouTube') $('#youtubePlayer').remove();
       //doesnt work from youtube to youtube bc this removes the element before new song can run this.player.playVideo
     }

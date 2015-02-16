@@ -49,7 +49,7 @@ angular.module('splytApp')
         })
       },
 
-      addSC: function(song, playlist, cd) {
+      addSC: function(song, playlist, cb) {
         var audio;
         song.streamable ? audio = song.stream_url : audio = null;
         var title = song.title.split(' - ')[1];
