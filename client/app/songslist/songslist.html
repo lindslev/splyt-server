@@ -1,15 +1,9 @@
 <div class="md-content">
-        <md-toolbar md-scroll-shrink>
-            <div class='md-toolbar-tools'>
-        <h3>
-          <span class='font-white'>{{playlist.title}}</span>
-        </h3>
+
                 <md-button class="md-primary" style="color:white; margin-left: 120px;" ng-click="open()">
                     Search for new songs to add!
                 </md-button>
-            </div>
-        </md-toolbar>
-        <md-content>
+
             <md-list>
 
                 <h3 ng-if='songs.length===0 && !playlist.friend_stream && playlist.title != "Spotify Bookmarks"'>Use the extension or <a ng-click='open()'>go here</a> to search and add some songs to your playlist!</h3>

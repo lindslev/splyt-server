@@ -10,6 +10,8 @@ angular.module('splytApp')
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     ///
+    $scope.selectedIndex;
+    console.log($scope.selectedIndex);
 
     var currentUser = Auth.getCurrentUser();
 
@@ -36,7 +38,12 @@ angular.module('splytApp')
     //Updating playlist songs when user clicks on new tab
 
     $scope.update_songs = function(id) {
-      $state.go('queue', { playlist_id: id }, true);
+      $state.go('queue', { playlist_id: id}, true);
+    }
+
+    $scope.update_index = function(index) {
+      console.log('passed in index: ', index);
+      $scope.selectedIndex = index;
     }
 
     $scope.isActive = function(id){
