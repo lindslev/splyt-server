@@ -13,7 +13,6 @@ angular.module('splytApp')
     playlistPromise.success(function(playlists) {
       $scope.playlists = [];
       for (var i = 0; i < playlists.length; i++) {
-        console.log(i + ' is' + playlists[i].title);
         if (i !== 1 && i !== 2) {
           $scope.playlist_tabs.push(playlists[i]);
         }
