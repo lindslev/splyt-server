@@ -2,7 +2,7 @@
 <div class="container">
    <input id="filterBox" type="text" ng-model="searchTerm" placeholder="filter by song, artist, remix"></input>
   <md-tabs>
-  <md-tab ng-repeat='tab in tabs' label='{{tab.title}}' ng-click='update_songs(tab._id, $index)' ng-class="{'active': selectedIndex == $index}">
+  <md-tab ng-repeat='tab in tabs' label='{{tab.title}}' ng-click='update_songs(tab._id); update_index($index)' ng-class="{'really_active': selectedIndex == $index}">
   <div label='column' layout-align='center'>
     <md-content>
       <songslist></songslist>
