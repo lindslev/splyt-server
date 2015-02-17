@@ -49,8 +49,8 @@ exports.addSong = function(req, res) {
         eventMachine.pass('user', user._id)
         eventMachine.pass('playlist', req.params.listid)
         user.addSong(song_obj, function(err, data) {
+          res.json(200, data);
           User.propagateToFollowers(data, user.followers, function(err, model) {
-            res.json(200, data);
           });
         });
     });
