@@ -41,6 +41,7 @@ PlaylistSchema.statics.removeSong = function(playlistid, songid, cb){
     {$pull:{'songs': songid}},
     function(err, data){
       console.log('playlist model', data);
+      cb(err, data);
     })
 }
 
