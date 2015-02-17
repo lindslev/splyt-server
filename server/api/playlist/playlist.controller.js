@@ -90,6 +90,7 @@ exports.destroy = function(req, res) {
 exports.removeSongfromPlaylist = function(req, res) {
     Playlist.removeSong(req.params.id, req.params.songid, function(err, song){
       console.log('playlist controller', song);
+      res.json(200, song);
     });
 };
 
