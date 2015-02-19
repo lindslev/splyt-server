@@ -69,6 +69,18 @@ md-list h3 {
   margin-top: -10px;
 }
 
+@media screen and (max-width:650px) {
+  .song_title {
+    position: absolute;
+    left: 0;
+    margin-left: 0;
+  }
+
+  .empty_text {
+    text-align: center;
+  }
+}
+
 .song_results {
   width: 175%;
   height: 60px;
