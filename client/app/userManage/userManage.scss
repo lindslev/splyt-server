@@ -108,4 +108,10 @@ md-tabs.md-default-theme md-tab.active {
   background-color: #009688;
 }
 
+@media screen and (max-width:650px) {
+  .playlist_list, .create_list, .friend_list, .search_friend {
+    width: 80%;
+  }
+}
+
 
