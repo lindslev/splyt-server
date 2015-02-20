@@ -53,9 +53,22 @@ angular.module('splytApp')
     //Updating playlist songs when user clicks on new tab
 
     $scope.update_songs = function(id) {
+      $scope.user_playlists = dropdown($scope.user_playlists, id);
+      console.log('userplayyy', $scope.user_playlists);
       $state.go('queue', { playlist_id: id }, true);
     }
 
+    var dropdown = function (arr, id){
+      var index = arr.map(function(x) {return x._id; }).indexOf(id);
+      if (index != -1){
+        arr.splice(index, 1)
+        return arr;
+      }
+      else{
+        return arr;
+      }
+    }
+    
     $scope.isActive = function(id){
       if($stateParams.playlist_id === id){
         return true;
@@ -73,6 +86,7 @@ angular.module('splytApp')
       }
     }).then(function(){
       $scope.user_playlists = $scope.playlist_tabs.slice(3);
+      console.log('YESSSSSSS', $scope.user_playlists);
     });
 
     $scope.add_to_playlist = function(playlistid, songid) {
