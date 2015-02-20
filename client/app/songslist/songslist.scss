@@ -42,9 +42,7 @@ md-toolbar.md-default-theme li.activeClass {
   cursor: pointer;
 }
 
-md-list h3 {
-  margin-left: 50px;
-}
+
 
 .SCimg {
   border-radius: 30px;
@@ -94,4 +92,10 @@ md-list h3 {
 
 .md-content {
   height: 100vh;
+}
+
+@media screen and (min-width:650px) {
+  md-list h3 {
+    margin-left: 50px;
+  }
 }
