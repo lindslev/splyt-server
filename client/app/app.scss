@@ -104,6 +104,10 @@ a:hover {
   cursor: pointer;
 }
 
+md-toolbar.md-default-theme {
+  background-color: #303030;
+}
+
 // Component styles are injected through grunt
 // injector
 @import 'SearchPage/SearchPage.scss';
