@@ -13,17 +13,20 @@
 <md-button class= "fa fa-youtube fa-5x center_icon" aria-label='add' ng-click = "chooseYT()"></md-button>
 <container class='move-down'>
     <div ng-show ='soundcloud' class='search'>
+        <form>
         <input type="text" ng-model="search.SCquery" placeholder="Search..." />
         <div>
-        <md-button class='md-raised search_text' ng-disabled="!search.SCquery" aria-label='add' ng-click="searchSC(search.SCquery)">Search Soundcloud</md-button>
+        <md-button type='submit' class='md-raised search_text' ng-disabled="!search.SCquery" aria-label='add' ng-click="searchSC(search.SCquery)">Search Soundcloud</md-button>
       </div>
+      </form>
     </div>
     <div class='search' ng-show ='youtube'>
-
+        <form>
         <input type="text" ng-model="search.YTquery" placeholder="Search..." />
         <div>
-        <md-button class='md-raised search_text' ng-disabled="!search.YTquery" aria-label='add' ng-click="searchYT(search.YTquery)">Search Youtube</md-button>
+        <md-button type='submit' class='md-raised search_text' ng-disabled="!search.YTquery" aria-label='add' ng-click="searchYT(search.YTquery)">Search Youtube</md-button>
       </div>
+      </form>
     </div>
 </div>
 
