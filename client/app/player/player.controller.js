@@ -114,7 +114,6 @@ angular.module('splytApp')
 
     //when a song is in the process of playing and another song is selected
     function switchTracks() {
-      //need to set the OLD currentlyplaying.playing to play_arrow - do this in changeSong currentlyPlaying.playing = 'play_arrow'
       currentAudioProvider.stop($scope.currentlyPlaying);
       $scope.audioProvider.play();
       QueuePlayerComm.trigger('globalPlayerToggle', $scope.currentlyPlaying);
@@ -204,13 +203,14 @@ angular.module('splytApp')
 
     ////// chat with extension ///////
     function cb(res) { console.log('Message sent!', res) }
-    function tellExtension() {
+    function tellExtension() { //tells extension when an UPDATE has been made to player
       chrome.runtime.sendMessage(ext_id, { action: 'PLAYERUPDATE', method: $scope.musicPlaying },
        function(response) {
            cb(response);
        });
     }
 
+    //initializes 'player' in extension
     chrome.runtime.sendMessage(ext_id, { action: 'PLAYERINIT', method: $scope.musicPlaying },
        function(response) {
            cb(response);

@@ -23,7 +23,6 @@ angular.module('splytApp')
        return $window.innerWidth;
     }, function(value) {
        $scope.media_width = value;
-       console.log(value);
    });
 
     $scope.updateIndex = function(index) {

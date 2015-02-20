@@ -29,12 +29,12 @@ angular.module('splytApp')
     }
 
     TumblrAudioSource.prototype.addEndedListener = function(cb) {
-      return music.addEventListener("ended",function() {
-        cb();
-      });
+      this.onEndCB = cb;
+      return music.addEventListener("ended", cb);
     }
 
     TumblrAudioSource.prototype.stop = function() {
+      music.removeEventListener("ended", this.onEndCB);
       music.pause();
       music.currentTime = 0;
     }
