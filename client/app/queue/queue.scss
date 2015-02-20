@@ -181,7 +181,6 @@ md-toolbar.md-default-theme li.activeClass {
   width: 75%;
   margin-left:300px !important;
   display: inline-block;
-  /*float:right;*/
 }
 
 .right {
@@ -193,10 +192,16 @@ md-toolbar.md-default-theme li.activeClass {
   display:inline-block;
 }
 
-.active {
-  color: rgb(255,255,255);
+.default-tab {
+  color: rgb(178,223,219);
 }
 
 .really_active {
   color: black !important;
+}
+
+.top_hat {
+  margin-left:310px;
+  width: 80%;
+  margin-top: 17px;
 }

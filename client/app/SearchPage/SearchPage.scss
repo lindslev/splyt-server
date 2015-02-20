@@ -1,9 +1,11 @@
 .move-down {
   margin-top:100px;
+  width: 80%;
 }
+
 .input {
 	margin: 0 auto;
-	width: 27%;
+	width: 50%;
 }
 
 .fa-5x {
@@ -14,6 +16,7 @@
 	width: 334px;
 	padding-bottom: 25px;
 	padding-top: 25px;
+  margin: 0 auto;
 }
 
 .results {
@@ -52,4 +55,43 @@
 
 .input {
   padding-top: 20px;
+  margin: 0 auto;
 }
+
+.close_link {
+  font-size: 75%;
+  position: absolute;
+  right: 5%;
+  top: 5%;
+}
+
+.white_button {
+  color: rgb(255,255,255);
+  float:right;
+}
+
+.search_header {
+  width: 80%;
+}
+
+.right_close {
+width: auto;
+float: right;
+position: absolute;
+top: 10%;
+right: 2%;
+display: inline-block;
+margin: 0 auto;
+}
+
+.center_icon {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.search_text {
+  margin-top: 10px;
+}
+
+
+

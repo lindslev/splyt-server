@@ -2,7 +2,7 @@
 
 angular.module('splytApp')
 
-  .controller('QueueCtrl', function ($http, socket, Auth, playlist, $scope, youtube, $sanitize, manage, $log, $stateParams, $state, QueuePlayerComm, toast, $mdDialog, $modal) {
+  .controller('QueueCtrl', function ($http, socket, Auth, playlist, $scope, youtube, $sanitize, manage, $log, $stateParams, $state, QueuePlayerComm, toast, $mdDialog, $modal, $window, selectedIndex) {
 
     //youtube iframe api include
     var tag = document.createElement('script');
@@ -12,6 +12,23 @@ angular.module('splytApp')
     ///
 
     var currentUser = Auth.getCurrentUser();
+
+    $scope.media_width = $window.innerWidth;
+
+
+    $scope.selectedIndex = selectedIndex.myNum;
+
+    //function to access media width for responsiveness
+    $scope.$watch(function(){
+       return $window.innerWidth;
+    }, function(value) {
+       $scope.media_width = value;
+       console.log(value);
+   });
+
+    $scope.updateIndex = function(index) {
+      selectedIndex.myNum = index;
+    }
 
     socket.socket.on('newSong', function(data){
       if(data.user == currentUser._id) {

@@ -1,21 +1,29 @@
 <md-toolbar>
-    <h2 class="md-toolbar-tools">
-        <span style = "color:white">Search!</span>
-      </h2>
+    <div class="md-toolbar-tools search_header">
+        <h2><span style = "color:white">Search!</span></h2>
+          <md-button ng-click='ok()' class="md-primary right_close" aria-label='none'>
+      <ng-md-icon class='white_button' ng-click='ok()'icon="clear" size='20'></ng-md-icon>
+    </md-button>
+    </div>
 </md-toolbar>
 
 
 <div class = "input">
-<md-button class= "fa fa-soundcloud fa-5x" aria-label='add' ng-click = "chooseSC()"></md-button>
-<md-button class= "fa fa-youtube fa-5x" aria-label='add' ng-click = "chooseYT()"></md-button>
+<md-button class= "fa fa-soundcloud fa-5x center_icon" aria-label='add' ng-click = "chooseSC()"></md-button>
+<md-button class= "fa fa-youtube fa-5x center_icon" aria-label='add' ng-click = "chooseYT()"></md-button>
 <container class='move-down'>
     <div ng-show ='soundcloud' class='search'>
         <input type="text" ng-model="search.SCquery" placeholder="Search..." />
-        <md-button class='md-raised' ng-disabled="!search.SCquery" aria-label='add' ng-click="searchSC(search.SCquery)">Search Soundcloud</md-button>
+        <div>
+        <md-button class='md-raised search_text' ng-disabled="!search.SCquery" aria-label='add' ng-click="searchSC(search.SCquery)">Search Soundcloud</md-button>
+      </div>
     </div>
     <div class='search' ng-show ='youtube'>
-        <input type="text"  ng-model="search.YTquery" placeholder="Search..." />
-        <md-button class='md-raised' ng-disabled="!search.YTquery" aria-label='add' ng-click="searchYT(search.YTquery)">Search Youtube</md-button>
+
+        <input type="text" ng-model="search.YTquery" placeholder="Search..." />
+        <div>
+        <md-button class='md-raised search_text' ng-disabled="!search.YTquery" aria-label='add' ng-click="searchYT(search.YTquery)">Search Youtube</md-button>
+      </div>
     </div>
 </div>
 
@@ -60,7 +68,7 @@
                 <div class='md-tile-content song_results'>
                     <layout='row' layout-align='left'>
                     <div flex='10' class='md-tile-left'>
-                      <img src='{{song.artwork_url}}' class='SCimg' />
+                      <img src='{{song.artwork_url}}' ng-hide='media_width <= 800' class='SCimg' />
                     </div>
                         <div flex='80' class='md-tile-center song_title'>
                             <h4><a href="{{song.permalink_url}}" target="_blank">{{song.title}}</a></h4>

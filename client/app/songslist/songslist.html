@@ -1,5 +1,5 @@
 <div class="md-content">
-        <md-toolbar md-scroll-shrink>
+        <md-toolbar md-scroll-shrink ng-show='media_width >= 970'>
             <div class='md-toolbar-tools'>
         <h3>
           <span class='font-white'>{{playlist.title}}</span>
@@ -12,17 +12,17 @@
         <md-content>
             <md-list>
 
-                <h3 ng-if='songs.length===0 && !playlist.friend_stream && playlist.title != "Spotify Bookmarks"'>Use the extension or <a ng-click='open()'>go here</a> to search and add some songs to your playlist!</h3>
-                <h3 ng-if='songs.length===0 && playlist.friend_stream'>Your friends haven't heard any new music! Follow more people in your <a ng-href="/user/{{getCurrentUser()._id}}">Playlist Settings</a>.</h3>
+                <h3 ng-if='songs.length===0 && !playlist.friend_stream && playlist.title != "Spotify Bookmarks"' class='empty_text'>Use the extension or <a ng-click='open()'>go here</a> to search and add some songs to your playlist!</h3>
+                <h3 ng-if='songs.length===0 && playlist.friend_stream' class='empty_text'>Your friends haven't heard any new music! Follow more people in your <a ng-href="/user/{{getCurrentUser()._id}}">Playlist Settings</a>.</h3>
 
-                <h3 ng-if='songs.length===0 && playlist.title === "Spotify Bookmarks"'>You don't have any songs here yet.
+                <h3 ng-if='songs.length===0 && playlist.title === "Spotify Bookmarks"' class='empty_text'>You don't have any songs here yet.
       Bookmark your favorite songs from Spotify!</h3>
     <md-item ng-repeat='song in songs | filter:searchTerm'>
     <md-item-content class='content_list'>
     <md-list>
     <div class='md-tile-content song_results'>
       <layout='row' layout-align='left' >
-      <div flex='10' class='md-tile-left'>
+      <div flex='10' class='md-tile-left' ng-hide='media_width <= 800'>
         <img src='{{song.thumbnail}}' class='SCimg' />
       </div>
       <div flex='80' class='md-tile-center song_title'>
