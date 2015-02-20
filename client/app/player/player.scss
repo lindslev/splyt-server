@@ -1,12 +1,13 @@
 #audioplayer{
   width: 100%;
-  background: #24343c !important;
+  // background: #24343c !important;
+  background: #303030 !important;
   height: 60px;
   top: 30;
   position: fixed;
   margin: 0 auto auto auto;
   z-index: 100;
-  border-bottom: 3px solid #009688;
+  // border-bottom: 3px solid #009688;
 }
 
 .player-buttons {
@@ -18,6 +19,9 @@
   float:left;
   outline:none;
   color: #009688;
+  &:hover {
+    color: #666666;
+  }
 }
 
 #songinfo {
