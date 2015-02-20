@@ -54,6 +54,10 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
   color: white;
 }
 
+.md-toolbar-tools {
+  background: #303030 !important;
+}
+
 .hover:hover{
   background-color: #b2dfdb;
   color: white;
@@ -62,6 +66,7 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
 
 .activeClass{
   background-color: #009688;
+  font-weight: 400;
   color: white;
 }
 
