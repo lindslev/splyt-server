@@ -53,20 +53,7 @@ angular.module('splytApp')
     //Updating playlist songs when user clicks on new tab
 
     $scope.update_songs = function(id) {
-      $scope.user_playlists = dropdown($scope.user_playlists, id);
-      console.log('userplayyy', $scope.user_playlists);
       $state.go('queue', { playlist_id: id }, true);
-    }
-
-    var dropdown = function (arr, id){
-      var index = arr.map(function(x) {return x._id; }).indexOf(id);
-      if (index != -1){
-        arr.splice(index, 1)
-        return arr;
-      }
-      else{
-        return arr;
-      }
     }
     
     $scope.isActive = function(id){
@@ -75,6 +62,9 @@ angular.module('splytApp')
       }
       else{return false};
     }
+
+
+//PLAYLISTS
 
     var playlistPromise = manage.getPlaylists();
 
@@ -86,7 +76,7 @@ angular.module('splytApp')
       }
     }).then(function(){
       $scope.user_playlists = $scope.playlist_tabs.slice(3);
-      console.log('YESSSSSSS', $scope.user_playlists);
+      $scope.user_playlists = dropdown($scope.user_playlists, playlist._id);
     });
 
     $scope.add_to_playlist = function(playlistid, songid) {
@@ -99,6 +89,17 @@ angular.module('splytApp')
       var removeSongfromPlaylistPromise = manage.removeSongfromPlaylist(playlist, $scope.songs[index]);
       $scope.songs.splice(index, 1);
       toast.removedSong();
+    }
+
+    var dropdown = function (arr, id){
+      var index = arr.map(function(x) {return x._id; }).indexOf(id);
+      if (index != -1){
+        arr.splice(index, 1)
+        return arr;
+      }
+      else{
+        return arr;
+      }
     }
 
 //DIALOGS
@@ -123,6 +124,9 @@ angular.module('splytApp')
       });
     };
 
+
+//PLAYER CONFIG
+
     $scope.songs = playlist.songs.map(function(song) { song.playing = 'play_arrow'; return song; });
     QueuePlayerComm.getSongsFromQueue($scope.songs);
 
@@ -143,6 +147,8 @@ angular.module('splytApp')
     QueuePlayerComm.on('globalPlayerToggle', function(song) {
       song.playing == 'pause' ? song.playing = 'play_arrow' : song.playing = 'pause';
     });
+
+//SIDEBAR
 
     $scope.toggleLeft = function() {
       $mdSidenav('left').toggle()
@@ -167,13 +173,5 @@ angular.module('splytApp')
     $scope.close = function() {
       $mdSidenav('right').close()
     };
-
-    $scope.open = function(){
-      var modalInstance = $modal.open({
-        templateUrl: '/app/SearchPage/SearchPage.html',
-        controller: 'SearchPageCtrl',
-        size: 'lg'
-      });
-    }
 
 });
