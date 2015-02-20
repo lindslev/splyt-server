@@ -113,3 +113,11 @@ a {
     font-size: 12px;
   }
 }
+
+.fixed_always {
+  position: fixed;
+}
+
+.dont_hide {
+  visibility: visible !important;
+}
