@@ -1,43 +1,42 @@
-<!-- <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="container">
-   <input id="filterBox" type="text" ng-model="searchTerm" placeholder="filter by song, artist, remix"></input>
-  <md-tabs>
-  <md-tab ng-repeat='tab in tabs' label='{{tab.title}}' ng-click='update_songs(tab._id); update_index($index)' ng-class="{'really_active': selectedIndex == $index}">
-  <div label='column' layout-align='center'>
-    <md-content>
-      <songslist></songslist>
-    </md-content>
-  </div>
-
-  </md-tab>
-</md-tabs> -->
-
 <div ng-include="'components/navbar/navbar.html'"></div>
-<div class="container">
-  <section layout='row' flex>
-     <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-md')">
-     <md-toolbar class="md-theme-teal">
-        <!-- Sidebar -->
-        <h1 class="md-toolbar-tools font-white">Your Playlists</h1>
-        <md-content class="md-padding">
-          <input id="filterBox" type="text" ng-model="searchTerm" placeholder="filter by song, artist, remix"></input>
-            <ul>
-                <li class='hover' ng-class = "{'activeClass': isActive(tab._id)}"
-                                  ng-repeat='tab in tabs'
-                                  ng-click='update_songs(tab._id)'>
-                    {{tab.title}}
-                  </li>
-            </ul>
-          </md-content>
-        </md-sidenav>
-        <md-content flex class="md-padding">
-        <!-- Page Content -->
-         <div layout="column" layout-fill layout-align="left" class='right-column'>
-            <songslist></songslist>
-        </div>
-      </md-content>
-    </md-sidenav>
-  </section>
-  </div>
+
+
+<div class='container' ng-hide='media_width >= 970'>
+    <input id="filterBox" type="text" ng-model="searchTerm" placeholder="filter by song, artist, remix"></input>
+    <md-tabs>
+        <md-tab ng-repeat='tab in tabs' label='{{tab.title}}' ng-click='update_songs(tab._id); updateIndex($index)' class='active' ng-class="{'really_active': selectedIndex == $index}">
+            <div label='column' layout-align='center'>
+                <md-content>
+                    <songslist></songslist>
+                </md-content>
+            </div>
+        </md-tab>
+    </md-tabs>
 </div>
 
+
+<div class="container" ng-show='media_width >= 970'>
+    <section layout='row' flex>
+        <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-md')">
+            <md-toolbar class="md-theme-teal">
+                <!-- Sidebar -->
+                <h1 class="md-toolbar-tools font-white">Your Playlists</h1>
+                <md-content class="md-padding">
+                    <input id="filterBox" type="text" ng-model="searchTerm" placeholder="filter by song, artist, remix"></input>
+                    <ul>
+                        <li class='hover' ng-class="{'activeClass': isActive(tab._id)}" ng-repeat='tab in tabs' ng-click='update_songs(tab._id)'>
+                            {{tab.title}}
+                        </li>
+                    </ul>
+                </md-content>
+        </md-sidenav>
+        <md-content flex class="md-padding">
+            <!-- Page Content -->
+            <div layout="column" layout-fill layout-align="left" class='right-column'>
+                <songslist></songslist>
+            </div>
+        </md-content>
+        </md-sidenav>
+    </section>
+</div>
+</div>
