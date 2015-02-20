@@ -37,8 +37,10 @@
                     <div class='create_list'>
                             <h3>Create A New Playlist</h3>
                             <div>
+                                <form>
                                 <input ng-model="newPlaylist.title">
-                                <md-button class='md-raised' ng-disabled="!newPlaylist.title" ng-click="createPlaylist()">Create!</md-button>
+                                <md-button type= 'submit' class='md-raised' ng-disabled="!newPlaylist.title" ng-click="createPlaylist()">Create!</md-button>
+                                </form>
                             </div>
                             <md-item ng-repeat="song in currentPlaylistSongs">
                                 <div class='font-set'>{{song.title}}</div>
@@ -63,8 +65,10 @@
                             <div ng-if='currentUserSubscriptions.length===0'>
                                 <h4>Discover new music with Subscriptions!</h4>
                                 <h4>Search for users to follow</h4>
+                        <form>
                         <input type="text" ng-model="nameFilter.name" placeholder="Search..." />
-                        <md-button class='md-raised' ng-disabled="!nameFilter.name" ng-click="getUsers(nameFilter.name)">Search</md-button>
+                        <md-button type = 'submit' class='md-raised' ng-disabled="!nameFilter.name" ng-click="getUsers(nameFilter.name)">Search</md-button>
+                        </form>
                         <br>
                         <h4 ng-if='userList'><strong>Search Results</strong></h4>
                         <md-content>
@@ -106,8 +110,10 @@
                 <div layout="column" layout-align="center">
                   <div class='search_friend' layout-align='center center'>
                         <h3>Search for users to follow</h3>
+                        <form>
                         <input type="text" ng-model="nameFilter.name" placeholder="Search..." />
-                        <md-button class='md-raised' ng-disabled="!nameFilter.name" ng-click="getUsers(nameFilter.name)">Search</md-button>
+                        <md-button type='submit' class='md-raised' ng-disabled="!nameFilter.name" ng-click="getUsers(nameFilter.name)">Search</md-button>
+                        </form>
                         <br>
                         <h4 ng-if='userList'><strong>Search Results</strong></h4>
                         <md-content>
