@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm, Auth, $q, socket) {
+  .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm, Auth, $q, socket, LogoutFactory) {
     var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
 
     var music = document.getElementById('music'); // id for audio element
@@ -16,6 +16,10 @@ angular.module('splytApp')
     var currentAudioProvider;
     $scope.currentlyPlaying;
 
+    LogoutFactory.on('userLogout', function(){
+      if($scope.audioProvider) $scope.audioProvider.stop($scope.currentlyPlaying);
+      $scope.currentlyPlaying = null;
+    })
 
     QueuePlayerComm.onChangeSong = function(song) {
       $scope.currentlyPlaying && $scope.currentlyPlaying._id == song._id ? $scope.toggle() : $scope.changeSong(song);
