@@ -70,7 +70,10 @@ angular.module('splytApp')
           };
         $http.post('/api/users/addSong/'+Auth.getCurrentUser()._id + '/playlist/' + playlist, song_obj)
         .success(function(model) {
-          cb(err, model);
+          cb(model);
+        })
+        .error(function(err){
+          cb(err);
         })
       }
 
