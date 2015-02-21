@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('MainCtrl', function ($state, $scope, $http, socket, youtube, Auth, $sanitize, $sce) {
+  .value('loggedInOnce', { flag: false })
+  .controller('MainCtrl', function ($state, $scope, $http, socket, youtube, Auth, $sanitize, $sce, loggedInOnce) {
     //DONT FORGET TO CHANGE TO YOUR EXT ID
     var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
     var api = "AIzaSyABJumn6ZK-Ru4vt1U0hq7wQA99Z6EhXLE";
@@ -12,6 +13,7 @@ angular.module('splytApp')
     $scope.user = {
       status : Auth.isLoggedIn()
     }
+
     function cb(res) { console.log('Message sent!', res) }
     if(Auth.isLoggedIn()) {
       var token = Auth.getToken();
@@ -19,7 +21,10 @@ angular.module('splytApp')
        function(response) {
            cb(response);
        });
-      $state.go('queue', { playlist_id: $scope.currentUser.playlist[0] })
+      if(!loggedInOnce.flag) {
+        loggedInOnce.flag = true;
+        $state.go('queue', { playlist_id: $scope.currentUser.playlist[0] })
+      }
     }
 
     $http.get('/api/things').success(function(awesomeThings) {
