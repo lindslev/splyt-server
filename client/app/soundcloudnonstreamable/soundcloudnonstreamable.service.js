@@ -15,7 +15,6 @@ angular.module('splytApp')
       $('#soundcloud_widget').attr('src', trustSrc(this.url));
       this.widget = SC.Widget(document.getElementById('soundcloud_widget'));
       this.widget.bind(SC.Widget.Events.READY, function() {
-        console.log(self.onReadyFunctions)
         self.onReadyFunctions.forEach(function(fn){
           fn();
         })

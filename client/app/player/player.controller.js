@@ -17,7 +17,8 @@ angular.module('splytApp')
     $scope.currentlyPlaying;
 
     LogoutFactory.on('userLogout', function(){
-      if($scope.audioProvider) $scope.audioProvider.stop($scope.currentlyPlaying);
+      console.log('in here??')
+      if($scope.audioProvider) $scope.audioProvider.stop('LOGOUT');
       $scope.currentlyPlaying = null;
     })
 
@@ -145,8 +146,11 @@ angular.module('splytApp')
     music.addEventListener("timeupdate", timeUpdate, false); // timeupdate event listener
     timeline.addEventListener("click", function (event) { //Makes timeline clickable
       moveplayhead(event);
-      music.currentTime = duration * clickPercent(event);
-      // $scope.audioProvider.seek(duration*clickPercent(event))
+      if(music.currentTime) music.currentTime = duration * clickPercent(event); //need the if(music.currentTime) for when user tries to seek a youtube or sc widget song first
+      $q.when($scope.audioProvider.duration()).then(function(dur){
+        $scope.audioProvider.seek(dur*clickPercent(event))
+        // music.addEventListener('timeupdate', timeUpdate, false);
+      })
     }, false);
 
     function clickPercent(e) { // returns click as decimal (.77) of the total timelineWidth
@@ -221,6 +225,6 @@ angular.module('splytApp')
        });
 
     socket.socket.on('updatePlayer', function(data){
-      $scope.toggle();
+      if($scope.currentlyPlaying) $scope.toggle();
     })
   });
