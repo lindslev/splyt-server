@@ -93,10 +93,31 @@ body {
   text-align: center;
 }
 
-
-
 a {
   color: black;
   text-decoration: none;
   font-weight: Thin 100;
+}
+
+@media (max-width: 370px) {
+  .features {
+    font-size: 10px;
+    padding: 10px 0 0 0;
+  }
+
+  .feature_row {
+    padding: 0;
+  }
+
+  .footer {
+    font-size: 12px;
+  }
+}
+
+.fixed_always {
+  position: fixed;
+}
+
+.dont_hide {
+  visibility: visible !important;
 }
