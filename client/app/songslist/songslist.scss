@@ -1,5 +1,8 @@
 a {
   color: #009688;
+  &:hover {
+    color: $oddur;
+  }
 }
 
 .action {
@@ -92,6 +95,10 @@ md-toolbar.md-default-theme li.activeClass {
 
 .md-content {
   height: 100vh;
+}
+
+.purple {
+  color: $oddur;
 }
 
 @media screen and (min-width:650px) {

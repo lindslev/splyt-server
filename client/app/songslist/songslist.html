@@ -27,7 +27,7 @@
       </div>
       <div flex='80' class='md-tile-center song_title'>
           <h4 ng-if='playlist.friend_stream'>Added by {{song.addedUser.name}}</h4>
-          <h4><a href="{{song.link}}" target="_blank">{{song.title}}</a></h4>
+          <h4><a href="{{song.link}}" target="_blank" ng-class="{'purple' : song.playing == 'pause'}">{{song.title}}</a></h4>
           <h4>{{song.artist}}</h4>
           <p>{{song.source}}</p>
         </div>

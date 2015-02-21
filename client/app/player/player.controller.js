@@ -17,7 +17,6 @@ angular.module('splytApp')
     $scope.currentlyPlaying;
 
     LogoutFactory.on('userLogout', function(){
-      console.log('in here??')
       if($scope.audioProvider) $scope.audioProvider.stop('LOGOUT');
       $scope.currentlyPlaying = null;
     })
