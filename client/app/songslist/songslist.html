@@ -32,7 +32,7 @@
           <p>{{song.source}}</p>
         </div>
           <div flex='20' class='md-tile-right add_button'>
-            <div class="btn-group" dropdown is-open="status.isopen" ng-if='playlist_tabs.length>3'>
+            <div class="btn-group" dropdown is-open="status.isopen" ng-if='playlist_tabs.length>3 && user_playlists.length!= 0'>
                 <button type="button" class="btn btn-xs dropdown-toggle">
                     Add to <span class="caret"></span>
                 </button>
