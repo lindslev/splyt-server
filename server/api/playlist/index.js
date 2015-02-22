@@ -13,6 +13,7 @@ router.get('/default/:id', controller.show);
 router.post('/user/:id', controller.create);
 router.post('/playlist/:id/song/:songid', controller.addSong);
 router.put('/:id', controller.update);
+router.put('/listchange/:id', controller.updateOrder);
 router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 router.delete('/:id/song/:songid', controller.removeSongfromPlaylist)
