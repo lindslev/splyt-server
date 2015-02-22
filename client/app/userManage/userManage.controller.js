@@ -65,13 +65,15 @@ angular.module('splytApp')
 
 
         //Create Playlist
-        $scope.newPlaylist = {};
+        $scope.newPlaylist = {
+            title : ''
+        };
 
         $scope.createPlaylist = function() {
             var createPlaylistPromise = manage.createPlaylist($scope.newPlaylist);
             createPlaylistPromise.success(function(playlist) {
                 $scope.playlists.push(playlist);
-                $scope.newPlaylist = null;
+                $scope.newPlaylist.title = '';
                 toast.createdPlaylist();
             })
         }

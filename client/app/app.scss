@@ -116,6 +116,18 @@ a:hover {
   cursor: pointer;
 }
 
+md-toolbar.md-default-theme {
+  background-color: #303030 !important;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: white;
+}
+
+.navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {
+  background-color: #00BCD4;
+}
+
 // Component styles are injected through grunt
 // injector
 @import 'SearchPage/SearchPage.scss';
