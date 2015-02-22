@@ -37,10 +37,10 @@ angular.module('splytApp')
             tag: song.items[0].id,
             title: title,
             artist: artist,
-            link: 'https://www.youtube.com/watch?v=' + song.items[0].id.videoId,
+            link: 'https://www.youtube.com/watch?v=' + song.items[0].id,
             source: 'YouTube',
             addedUser: Auth.getCurrentUser()._id,
-            thumbnail: random_image
+            thumbnail: song.items[0].snippet.thumbnails.default.url
           }
           $http.post('/api/users/addSong/'+Auth.getCurrentUser()._id + '/playlist/' + playlist, song_obj)
           .success(function(model) {
