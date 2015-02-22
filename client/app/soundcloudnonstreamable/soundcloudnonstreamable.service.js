@@ -76,5 +76,9 @@ angular.module('splytApp')
       $('#soundcloud_widget').remove();
     }
 
+    SoundcloudNonstreamableAudioSource.prototype.setVolume = function(num) {
+      this.widget.setVolume(num/100);
+    }
+
     return SoundcloudNonstreamableAudioSource;
   });

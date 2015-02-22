@@ -70,5 +70,9 @@ angular.module('splytApp')
       //doesnt work from youtube to youtube bc this removes the element before new song can run this.player.playVideo
     }
 
+    YoutubeAudioSource.prototype.setVolume = function(num) {
+      this.player.setVolume(num);
+    }
+
     return YoutubeAudioSource;
   });

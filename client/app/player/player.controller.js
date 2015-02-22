@@ -21,6 +21,11 @@ angular.module('splytApp')
       $scope.currentlyPlaying = null;
     })
 
+    $scope.volume = 75;
+    $scope.$watch('volume', function(newValue, oldValue) {
+      if($scope.audioProvider) $scope.audioProvider.setVolume(newValue);
+    })
+
     QueuePlayerComm.onChangeSong = function(song) {
       $scope.currentlyPlaying && $scope.currentlyPlaying._id == song._id ? $scope.toggle() : $scope.changeSong(song);
     }

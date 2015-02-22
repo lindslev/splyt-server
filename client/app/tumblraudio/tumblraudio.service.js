@@ -39,5 +39,9 @@ angular.module('splytApp')
       music.currentTime = 0;
     }
 
+    TumblrAudioSource.prototype.setVolume = function(num) {
+      music.volume = num/100;
+    }
+
     return TumblrAudioSource;
   });

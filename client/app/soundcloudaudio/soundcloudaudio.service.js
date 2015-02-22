@@ -40,5 +40,9 @@ angular.module('splytApp')
       music.currentTime = 0;
     }
 
+    SoundcloudAudioSource.prototype.setVolume = function(num) {
+      music.volume = num/100;
+    }
+
     return SoundcloudAudioSource;
   });
