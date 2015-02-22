@@ -26,9 +26,9 @@
 
 #songinfo {
   color: white !important;
-  padding-left: 30px;
-  margin-top: 18px;
-  font-size: 13.5px;
+  padding-left: 10px;
+  margin-top: 20px;
+  font-size: 10px;
 }
 
 #youtubePlayer, #soundcloud_widget {
@@ -71,11 +71,27 @@
   margin-top: 1px;
   background: rgba(0, 150, 136, 1);
 }
+
+#volume-slider {
+  width: 100px;
+  margin-top: 5px;
+  background: none;
+}
+
+#sliderdiv {
+  display: inline-block;
+  float: right;
+  margin-right: 20px;
+}
+
+@media (max-width: 1080px) {
+  #songinfo {
+    display: none;
+  }
+}
+
 @media (max-width: 800px) {
   #timeline, #playhead {
     display: none;
-  }
-  #songinfo {
-    font-size: 10px;
   }
 }

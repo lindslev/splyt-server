@@ -5,7 +5,8 @@
     <span class="glyphicon glyphicon-forward player-buttons" ng-click="nextSong()"></span>
     <div id="timeline"><div id="playhead"></div></div>
   </div>
-  <p id="songinfo">{{currentlyPlaying.title}}</p>
+  <div style="display: inline-block;"><p ng-show="currentlyPlaying" id="songinfo">{{currentlyPlaying.title | limitTo:60 }}...</p></div>
+  <div id="sliderdiv"><md-slider flex min="0" aria-label = "volume" max="100" ng-model="volume" id="volume-slider" class></md-slider></div>
 </div>
 
 <div id="youtubePlayer"></div>

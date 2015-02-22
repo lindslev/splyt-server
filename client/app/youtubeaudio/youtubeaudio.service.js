@@ -66,8 +66,12 @@ angular.module('splytApp')
 
     YoutubeAudioSource.prototype.stop = function(newSong) {
       clearInterval(this.timerInterval);
-      if(newSong.source !== 'YouTube') $('#youtubePlayer').remove();
+      if(newSong.source !== 'YouTube' || newSong == 'LOGOUT') $('#youtubePlayer').remove();
       //doesnt work from youtube to youtube bc this removes the element before new song can run this.player.playVideo
+    }
+
+    YoutubeAudioSource.prototype.setVolume = function(num) {
+      this.player.setVolume(num);
     }
 
     return YoutubeAudioSource;

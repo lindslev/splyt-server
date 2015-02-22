@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm, Auth, $q, socket) {
+  .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm, Auth, $q, socket, LogoutFactory) {
     var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
 
     var music = document.getElementById('music'); // id for audio element
@@ -16,6 +16,15 @@ angular.module('splytApp')
     var currentAudioProvider;
     $scope.currentlyPlaying;
 
+    LogoutFactory.on('userLogout', function(){
+      if($scope.audioProvider) $scope.audioProvider.stop('LOGOUT');
+      $scope.currentlyPlaying = null;
+    })
+
+    $scope.volume = 75;
+    $scope.$watch('volume', function(newValue, oldValue) {
+      if($scope.audioProvider) $scope.audioProvider.setVolume(newValue);
+    })
 
     QueuePlayerComm.onChangeSong = function(song) {
       $scope.currentlyPlaying && $scope.currentlyPlaying._id == song._id ? $scope.toggle() : $scope.changeSong(song);
@@ -114,7 +123,6 @@ angular.module('splytApp')
 
     //when a song is in the process of playing and another song is selected
     function switchTracks() {
-      //need to set the OLD currentlyplaying.playing to play_arrow - do this in changeSong currentlyPlaying.playing = 'play_arrow'
       currentAudioProvider.stop($scope.currentlyPlaying);
       $scope.audioProvider.play();
       QueuePlayerComm.trigger('globalPlayerToggle', $scope.currentlyPlaying);
@@ -142,8 +150,11 @@ angular.module('splytApp')
     music.addEventListener("timeupdate", timeUpdate, false); // timeupdate event listener
     timeline.addEventListener("click", function (event) { //Makes timeline clickable
       moveplayhead(event);
-      music.currentTime = duration * clickPercent(event);
-      // $scope.audioProvider.seek(duration*clickPercent(event))
+      if(music.currentTime) music.currentTime = duration * clickPercent(event); //need the if(music.currentTime) for when user tries to seek a youtube or sc widget song first
+      $q.when($scope.audioProvider.duration()).then(function(dur){
+        $scope.audioProvider.seek(dur*clickPercent(event))
+        // music.addEventListener('timeupdate', timeUpdate, false);
+      })
     }, false);
 
     function clickPercent(e) { // returns click as decimal (.77) of the total timelineWidth
@@ -204,19 +215,20 @@ angular.module('splytApp')
 
     ////// chat with extension ///////
     function cb(res) { console.log('Message sent!', res) }
-    function tellExtension() {
+    function tellExtension() { //tells extension when an UPDATE has been made to player
       chrome.runtime.sendMessage(ext_id, { action: 'PLAYERUPDATE', method: $scope.musicPlaying },
        function(response) {
            cb(response);
        });
     }
 
+    //initializes 'player' in extension
     chrome.runtime.sendMessage(ext_id, { action: 'PLAYERINIT', method: $scope.musicPlaying },
        function(response) {
            cb(response);
        });
 
     socket.socket.on('updatePlayer', function(data){
-      $scope.toggle();
+      if($scope.currentlyPlaying) $scope.toggle();
     })
   });

@@ -10,12 +10,13 @@
         </div>
     </md-toolbar>
     <md-content>
-    <ul class='drag' as-sortable='dragControlListeners' ng-model='songs'>
-        <md-list >
-            <h3 ng-if='songs.length===0 && !playlist.friend_stream && playlist.title != "Spotify Bookmarks"' class='empty_text'>Use the extension or <a ng-click='open()'>go here</a> to search and add some songs to your playlist!</h3>
+    <h3 ng-if='songs.length===0 && !playlist.friend_stream && playlist.title != "Spotify Bookmarks"' class='empty_text'>Use the extension or <a ng-click='open()'>go here</a> to search and add some songs to your playlist!</h3>
             <h3 ng-if='songs.length===0 && playlist.friend_stream' class='empty_text'>Your friends haven't heard any new music! Follow more people in your <a ng-href="/user/{{getCurrentUser()._id}}">Playlist Settings</a>.</h3>
             <h3 ng-if='songs.length===0 && playlist.title === "Spotify Bookmarks"' class='empty_text'>You don't have any songs here yet.
       Bookmark your favorite songs from Spotify!</h3>
+    <ul class='drag' as-sortable='dragControlListeners' ng-model='songs'>
+        <md-list >
+
              <li as-sortable-item ng-repeat='song in songs | filter:searchTerm'>
             <md-item class='item-set-height'>
 
@@ -23,19 +24,19 @@
                     <md-list>
                         <div class='md-tile-content song_results'>
                             <layout='row' layout-align='left'>
-                            <div <div as-sortable-item-handle class='number'>{{$index + 1}}</div>
+                            <div as-sortable-item-handle class='number'>{{$index + 1}}</div>
                                 <div flex='10' class='md-tile-left' ng-hide='media_width <= 800'>
                                     <img src='{{song.thumbnail}}' class='SCimg' />
                                 </div>
                                <div flex='80' class='md-tile-center song_title'>
                                     <h4 ng-if='playlist.friend_stream'>Added by {{song.addedUser.name}}</h4>
-                                    <h4><a href="{{song.link}}" target="_blank">{{song.title}}</a></h4>
-
-                                    <h4>{{song.source}}</h4>
+                                    <h4><a href="{{song.link}}" target="_blank" ng-class="{'purple' : song.playing == 'pause'}">{{song.title}}</a></h4>
+                                    <h4>{{song.artist}}</h4>
+                                    <p>{{song.source}}</p>
 
                                 </div>
                                 <div flex='20' class='md-tile-right add_button'>
-                                    <div class="btn-group" dropdown is-open="status.isopen" ng-if='playlist_tabs.length>3'>
+                                    <div class="btn-group" dropdown is-open="status.isopen" ng-if='playlist_tabs.length>3 && user_playlists.length != 0'>
                                         <button type="button" class="btn btn-xs dropdown-toggle">
                                             Add to <span class="caret"></span>
                                         </button>
@@ -60,4 +61,4 @@
       </md-list>
     </ul>
   </md-content>
-
+</div>

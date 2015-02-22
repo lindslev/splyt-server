@@ -37,14 +37,17 @@ angular.module('splytApp')
             tag: song.items[0].id,
             title: title,
             artist: artist,
-            link: 'https://www.youtube.com/watch?v=' + song.items[0].id.videoId,
+            link: 'https://www.youtube.com/watch?v=' + song.items[0].id,
             source: 'YouTube',
             addedUser: Auth.getCurrentUser()._id,
-            thumbnail: random_image
+            thumbnail: song.items[0].snippet.thumbnails.default.url
           }
           $http.post('/api/users/addSong/'+Auth.getCurrentUser()._id + '/playlist/' + playlist, song_obj)
-          .success(function(err, model) {
-            cb(err, model);
+          .success(function(model) {
+            cb(model);
+          })
+          .error(function(err){
+            cb(err);
           })
         })
       },
@@ -70,7 +73,10 @@ angular.module('splytApp')
           };
         $http.post('/api/users/addSong/'+Auth.getCurrentUser()._id + '/playlist/' + playlist, song_obj)
         .success(function(model) {
-          cb(err, model);
+          cb(model);
+        })
+        .error(function(err){
+          cb(err);
         })
       }
 

@@ -1,9 +1,17 @@
 a {
   color: #009688;
+  &:hover {
+    color: $oddur;
+  }
 }
 
 .md-content {
   margin-left: 5px;
+}
+
+.empty_text {
+  height: 50px;
+  text-align: center;
 }
 
 .action {
@@ -91,6 +99,10 @@ md-toolbar.md-default-theme li.activeClass {
 
 .number {
   float: left;
+}
+
+.purple {
+  color: $oddur;
 }
 
 @media screen and (min-width:650px) {

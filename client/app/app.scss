@@ -8,6 +8,18 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
  * App-wide Styles
  */
 
+::-moz-selection { /* Code for Firefox */
+  color: white;
+  background: #47008F;
+}
+
+::selection {
+  color: white;
+  background: #47008F;
+}
+
+$oddur: #6A1B9A;
+
  body {
   padding-top: 50px;
  }
