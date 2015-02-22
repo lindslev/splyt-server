@@ -5,6 +5,15 @@ a {
   }
 }
 
+.md-content {
+  margin-left: 5px;
+}
+
+.empty_text {
+  height: 50px;
+  text-align: center;
+}
+
 .action {
   position: relative;
   float: right;
@@ -27,6 +36,8 @@ md-toolbar.md-default-theme li.activeClass {
   color: rgb(255,255,255);
 }
 
+
+
 .left{
   width: 50%;
   margin: 0;
@@ -45,16 +56,14 @@ md-toolbar.md-default-theme li.activeClass {
   cursor: pointer;
 }
 
-
-
 .SCimg {
   border-radius: 30px;
   border: 1px solid #ddd;
   width: 48px;
   margin: 0;
-  margin-top: -11px;
+  margin-top: 5px;
   position: absolute;
-  left: 0;
+  left: 5%;
 }
 
 .add_button {
@@ -67,7 +76,7 @@ md-toolbar.md-default-theme li.activeClass {
   left: 15%;
   font-size: 16px;
   margin: 0;
-  margin-top: -10px;
+  margin-top: 5px;
 }
 
 @media screen and (max-width:650px) {
@@ -84,17 +93,12 @@ md-toolbar.md-default-theme li.activeClass {
 
 .song_results {
   width: 175%;
-  height: 60px;
+  height: 100px;
+
 }
 
-.content_list {
-  width: 95%;
-  margin: 0 auto;
-  margin-bottom: 30px;
-}
-
-.md-content {
-  height: 100vh;
+.number {
+  float: left;
 }
 
 .purple {

@@ -59,6 +59,16 @@ exports.addSong = function(req, res) {
       }
     );
   });
+};
+
+// updates re-ordered player
+exports.updateOrder = function(req, res) {
+  var id = req.params.id;
+  var playlist = req.body;
+  Playlist.updateOrder(id, playlist, function(err, data) {
+
+    return res.json(200, data);
+  });
 }
 
 // Updates an existing playlist in the DB.
@@ -89,7 +99,6 @@ exports.destroy = function(req, res) {
 // Remove Song from a playlist from the DB.
 exports.removeSongfromPlaylist = function(req, res) {
     Playlist.removeSong(req.params.id, req.params.songid, function(err, song){
-      console.log('playlist controller', song);
       res.json(200, song);
     });
 };

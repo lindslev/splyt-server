@@ -54,7 +54,7 @@ angular.module('splytApp')
     $scope.update_songs = function(id) {
       $state.go('queue', { playlist_id: id }, true);
     }
-    
+
     $scope.isActive = function(id){
       if($stateParams.playlist_id === id){
         return true;
@@ -172,5 +172,24 @@ angular.module('splytApp')
     $scope.close = function() {
       $mdSidenav('right').close()
     };
+
+    //DRAG N DROP
+    $scope.dragControlListeners = {
+      accept: function (sourceItemHandleScope, destSortableScope) {
+        return sourceItemHandleScope.itemScope.sortableScope._id === destSortableScope._id;
+      },
+      itemMoved: function (event) {
+      },
+      orderChanged: function(event) {
+        var new_list = [];
+        for (var i = 0; i < $scope.songs.length; i++) {
+          new_list.push($scope.songs[i]._id);
+        }
+        $http.put('/api/playlists/listchange/' +  $scope.playlist._id, new_list).success(function(err, data) {
+          if(err) console.log(err);
+        })
+      }
+    };
+
 
 });
