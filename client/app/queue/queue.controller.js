@@ -182,6 +182,15 @@ angular.module('splytApp')
       itemMoved: function (event) {
       },
       orderChanged: function(event) {
+        var new_list = [];
+        for (var i = 0; i < $scope.songs.length; i++) {
+          new_list.push($scope.songs[i]._id);
+        }
+        console.log("new list ", new_list);
+        $http.put('/api/playlists/listchange/' +  $scope.playlist._id, new_list).success(function(err, data) {
+          console.log(new_list);
+          if(err) console.log(err);
+        })
       }
     };
 

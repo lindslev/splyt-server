@@ -65,7 +65,9 @@ exports.addSong = function(req, res) {
 exports.updateOrder = function(req, res) {
   var id = req.params.id;
   var playlist = req.body;
+  console.log('plsylist in ', playlist);
   Playlist.updateOrder(id, playlist, function(err, data) {
+
     return res.json(200, data);
   });
 }
