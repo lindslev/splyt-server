@@ -1,105 +1,105 @@
 <md-toolbar>
     <div class="md-toolbar-tools search_header">
         <h2><span style = "color:white">Search!</span></h2>
-          <md-button ng-click='ok()' class="md-primary right_close" aria-label='none'>
-      <ng-md-icon class='white_button' ng-click='ok()'icon="clear" size='20'></ng-md-icon>
-    </md-button>
+        <md-button ng-click='ok()' class="md-primary right_close" aria-label='none'>
+            <ng-md-icon class='white_button' ng-click='ok()' icon="clear" size='20'></ng-md-icon>
+        </md-button>
     </div>
 </md-toolbar>
 
 
-<div class = "input">
-<md-button class= "fa fa-soundcloud fa-5x center_icon" aria-label='add' ng-click = "chooseSC()"></md-button>
-<md-button class= "fa fa-youtube fa-5x center_icon" aria-label='add' ng-click = "chooseYT()"></md-button>
-<container class='move-down'>
-    <div ng-show ='soundcloud' class='search'>
-        <form>
-        <input type="text" ng-model="search.SCquery" placeholder="Search..." />
-        <div>
-        <md-button type='submit' class='md-raised search_text' ng-disabled="!search.SCquery" aria-label='add' ng-click="searchSC(search.SCquery)">Search Soundcloud</md-button>
-      </div>
-      </form>
-    </div>
-    <div class='search' ng-show ='youtube'>
-        <form>
-        <input type="text" ng-model="search.YTquery" placeholder="Search..." />
-        <div>
-        <md-button type='submit' class='md-raised search_text' ng-disabled="!search.YTquery" aria-label='add' ng-click="searchYT(search.YTquery)">Search Youtube</md-button>
-      </div>
-      </form>
-    </div>
+<div class="input">
+    <md-button class="fa fa-soundcloud fa-5x center_icon" aria-label='add' ng-click="chooseSC()"></md-button>
+    <md-button class="fa fa-youtube fa-5x center_icon" aria-label='add' ng-click="chooseYT()"></md-button>
+    <container class='move-down'>
+        <div ng-show='soundcloud' class='search'>
+            <form>
+                <input type="text" ng-model="search.SCquery" placeholder="Search SoundCloud" />
+                    <md-button type='submit' class='md-raised search_text' ng-disabled="!search.SCquery" aria-label='add' ng-click="searchSC(search.SCquery)">Search</md-button>
+
+            </form>
+        </div>
+        <div class='search' ng-show='youtube'>
+            <form>
+                <input type="text" ng-model="search.YTquery" placeholder="Search Youtube" />
+
+                    <md-button type='submit' class='md-raised search_text' ng-disabled="!search.YTquery" aria-label='add' ng-click="searchYT(search.YTquery)">Search</md-button>
+
+            </form>
+        </div>
 </div>
 
 
 
-<md-toolbar ng-if = 'YTResults || SCResults'>
+<md-toolbar ng-if='YTResults || SCResults'>
     <h2 class="md-toolbar-tools">
         <span style = "color:white">Results</span>
       </h2>
 </md-toolbar>
-    <!-- Youtube search results -->
-<div class = 'results'>
+<!-- Youtube search results -->
+<div class='results'>
     <div ng-show='YTResults.length>0'>
         <md-item ng-repeat='song in YTResults'>
             <md-item-content>
-            <md-list>
-                <div class='md-tile-content song_results'>
-                    <layout='row' layout-align='left'>
-                    <div flex='10' class='md-tile-left'>
-                      <img src='{{song.snippet.thumbnails.default.url}}' ng-hide='media_width <= 800' class='SCimg' />
-                    </div>
-                        <div flex='80' class='md-tile-center song_title'>
-                            <h4><a href="https://www.youtube.com/watch?v={{song.id.videoId}}" target="_blank">{{song.snippet.title}}</a></h4>
-                        </div>
-                        <div flex='20' class='md-tile-right add_button'>
-                            <div class="btn-group" dropdown is-open="status.isopen">
-                                <button type="button" class="btn btn-xs dropdown-toggle">
-                                    Add to <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li ng-repeat='playlist in playlist_tabs' ng-click='addYTSong(playlist._id, song.id.videoId)'>{{playlist.title}}</li>
-                                </ul>
+                <md-list>
+                    <div class='md-tile-content song_results'>
+                        <layout='row' layout-align='left'>
+                            <div flex='10' class='md-tile-left'>
+                                <img src='{{song.snippet.thumbnails.default.url}}' ng-hide='media_width <= 800' class='SCimg' />
                             </div>
-                        </div>
-                    </layout>
-                </div>
+                            <div flex='80' class='md-tile-center song_title'>
+                                <h4><a href="https://www.youtube.com/watch?v={{song.id.videoId}}" target="_blank">{{song.snippet.title}}</a></h4>
+                            </div>
+                            <div flex='20' class='md-tile-right add_button'>
+                                <div class="btn-group" dropdown is-open="status.isopen">
+                                    <button type="button" class="btn btn-xs dropdown-toggle">
+                                        Add to <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li ng-repeat='playlist in playlist_tabs' ng-click='addYTSong(playlist._id, song.id.videoId)'>{{playlist.title}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </layout>
+                    </div>
             </md-item-content>
             <md-divider inset></md-divider>
         </md-item>
-    </md-list>
+        </md-list>
     </div>
     <!--Soundcloud Search Results -->
     <div ng-show='SCResults.length>0'>
         <md-item ng-repeat='song in SCResults'>
             <md-item-content>
-            <md-list>
-                <div class='md-tile-content song_results'>
-                    <layout='row' layout-align='left'>
-                    <div flex='10' class='md-tile-left'>
-                      <img src='{{song.artwork_url}}' ng-hide='media_width <= 800' class='SCimg' />
-                    </div>
-                        <div flex='80' class='md-tile-center song_title'>
-                            <h4><a href="{{song.permalink_url}}" target="_blank">{{song.title}}</a></h4>
-                        </div>
-                        <div flex='20' class='md-tile-right add_button'>
-                            <div class="btn-group" dropdown is-open="status.isopen">
-                                <button type="button" class="btn btn-xs dropdown-toggle">
-                                    Add to <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li ng-repeat='playlist in playlist_tabs' ng-click='addSCSong(playlist._id, song)'>{{playlist.title}}</li>
-                                </ul>
+                <md-list>
+                    <div class='md-tile-content song_results'>
+                        <layout='row' layout-align='left'>
+                            <div flex='10' class='md-tile-left'>
+                                <img src='{{song.artwork_url}}' ng-hide='media_width <= 800' class='SCimg' />
                             </div>
-                        </div>
-                    </layout>
-                </div>
+                            <div flex='80' class='md-tile-center song_title'>
+                                <h4><a href="{{song.permalink_url}}" target="_blank">{{song.title}}</a></h4>
+                            </div>
+                            <div flex='20' class='md-tile-right add_button'>
+                                <div class="btn-group" dropdown is-open="status.isopen">
+                                    <button type="button" class="btn btn-xs dropdown-toggle">
+                                        Add to <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li ng-repeat='playlist in playlist_tabs' ng-click='addSCSong(playlist._id, song)'>{{playlist.title}}</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            </layout>
+                    </div>
             </md-item-content>
             <md-divider inset></md-divider>
         </md-item>
-      </md-list>
+        </md-list>
     </div>
 </div>
 
 <div layout="row" layout-sm="column" layout-align="space-around">
-<ng-if='progress' md-progress-circular md-mode="indeterminate"></md-progress-circular>
+    <ng-if='progress' md-progress-circular md-mode="indeterminate">
+        </md-progress-circular>
 </div>
