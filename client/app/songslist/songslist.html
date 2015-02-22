@@ -10,12 +10,15 @@
         </div>
     </md-toolbar>
     <md-content>
-        <md-list as-sortable='dragControlListeners' ng-model='songs'>
+    <ul as-sortable='dragControlListeners' ng-model='songs'>
+        <md-list >
             <h3 ng-if='songs.length===0 && !playlist.friend_stream && playlist.title != "Spotify Bookmarks"' class='empty_text'>Use the extension or <a ng-click='open()'>go here</a> to search and add some songs to your playlist!</h3>
             <h3 ng-if='songs.length===0 && playlist.friend_stream' class='empty_text'>Your friends haven't heard any new music! Follow more people in your <a ng-href="/user/{{getCurrentUser()._id}}">Playlist Settings</a>.</h3>
             <h3 ng-if='songs.length===0 && playlist.title === "Spotify Bookmarks"' class='empty_text'>You don't have any songs here yet.
       Bookmark your favorite songs from Spotify!</h3>
-            <md-item ng-repeat='song in songs | filter:searchTerm' as-sortable-item>
+             <li as-sortable-item ng-repeat='song in songs | filter:searchTerm'>
+            <md-item>
+
                 <md-item-content class='content_list'>
                     <md-list>
                         <div class='md-tile-content song_results'>
@@ -23,7 +26,7 @@
                                 <div flex='10' class='md-tile-left' ng-hide='media_width <= 800'>
                                     <img src='{{song.thumbnail}}' class='SCimg' />
                                 </div>
-                                <div flex='80' class='md-tile-center song_title'>
+                 b               <div flex='80' class='md-tile-center song_title'>
                                     <h4 ng-if='playlist.friend_stream'>Added by {{song.addedUser.name}}</h4>
                                     <h4><a href="{{song.link}}" target="_blank">{{song.title}}</a></h4>
                                     <h4>{{song.artist}}</h4>
@@ -47,9 +50,13 @@
                                     </md-button>
                                 </div>
                         </div>
+                      </md-list>
                 </md-item-content>
                 <md-divider inset></md-divider>
+
             </md-item>
+          </li>
       </md-list>
+    </ul>
   </md-content>
 

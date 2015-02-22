@@ -174,16 +174,14 @@ angular.module('splytApp')
       $mdSidenav('right').close()
     };
 
-        //DRAG N DROP
+    //DRAG N DROP
     $scope.dragControlListeners = {
       accept: function (sourceItemHandleScope, destSortableScope) {
         return sourceItemHandleScope.itemScope.sortableScope._id === destSortableScope._id;
       },
       itemMoved: function (event) {
-        console.log('moved');
       },
       orderChanged: function(event) {
-        console.log('changed order');
       }
     };
 
