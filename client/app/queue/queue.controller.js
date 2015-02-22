@@ -55,7 +55,7 @@ angular.module('splytApp')
     $scope.update_songs = function(id) {
       $state.go('queue', { playlist_id: id }, true);
     }
-    
+
     $scope.isActive = function(id){
       if($stateParams.playlist_id === id){
         return true;
@@ -173,5 +173,19 @@ angular.module('splytApp')
     $scope.close = function() {
       $mdSidenav('right').close()
     };
+
+        //DRAG N DROP
+    $scope.dragControlListeners = {
+      accept: function (sourceItemHandleScope, destSortableScope) {
+        return sourceItemHandleScope.itemScope.sortableScope._id === destSortableScope._id;
+      },
+      itemMoved: function (event) {
+        console.log('moved');
+      },
+      orderChanged: function(event) {
+        console.log('changed order');
+      }
+    };
+
 
 });

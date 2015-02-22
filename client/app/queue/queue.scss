@@ -1,5 +1,9 @@
 md-toolbar.md-default-theme
 
+.dragging {
+  background-color: black;
+}
+
 .toolbardemoScrollShrink .face {
   width: 48px;
   margin: 16px;
@@ -204,4 +208,33 @@ md-toolbar.md-default-theme li.activeClass {
   margin-left:310px;
   width: 80%;
   margin-top: 17px;
+}
+
+.as-sortable-item, .as-sortable-placeholder{
+  width: 100% !important;
+  background-color: black !important;
+}
+
+div[as-sortable] {
+  background-color: black;
+}
+
+
+.as-sortable-item {
+    -ms-touch-action: none;
+    touch-action: none;
+      width: 300px !important;
+      height: 100px !important;
+    margin: 2px;
+  border-radius: 5px;
+  list-style: none;
+  border: 5px dashed red;
+}
+
+.as-sortable-placeholder {
+  background: black;
+  height: 100px !important;
+  width: 300px !important;
+  position: absolute;
+  right: 50%;
 }
