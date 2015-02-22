@@ -65,7 +65,6 @@ exports.addSong = function(req, res) {
 exports.updateOrder = function(req, res) {
   var id = req.params.id;
   var playlist = req.body;
-  console.log('plsylist in ', playlist);
   Playlist.updateOrder(id, playlist, function(err, data) {
 
     return res.json(200, data);
@@ -100,7 +99,6 @@ exports.destroy = function(req, res) {
 // Remove Song from a playlist from the DB.
 exports.removeSongfromPlaylist = function(req, res) {
     Playlist.removeSong(req.params.id, req.params.songid, function(err, song){
-      console.log('playlist controller', song);
       res.json(200, song);
     });
 };

@@ -208,21 +208,30 @@ md-toolbar.md-default-theme li.activeClass {
   margin-left:310px;
   width: 80%;
   margin-top: 17px;
+  margin-bottom: 100px;
 }
 
-.as-sortable-item, .as-sortable-placeholder{
-
+.as-sortable-item, .as-sortable-placeholder, .content_list, .item-set-height {
+  height: 100px;
+  margin: 0 auto;
+  padding: 0;
 }
 
 div[as-sortable] {
 
 }
 
+.drag {
+  padding: 0;
+}
+
 
 .as-sortable-item {
+ background-color: rgb(255,255,255);
+
 
 }
 
 .as-sortable-placeholder {
-  background-color: black;
+  background-color: grey;
 }

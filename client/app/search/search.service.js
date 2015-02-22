@@ -43,7 +43,7 @@ angular.module('splytApp')
             thumbnail: random_image
           }
           $http.post('/api/users/addSong/'+Auth.getCurrentUser()._id + '/playlist/' + playlist, song_obj)
-          .success(function(model) {
+          .success(function(err, model) {
             cb(err, model);
           })
         })

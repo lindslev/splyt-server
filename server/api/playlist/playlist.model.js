@@ -45,12 +45,9 @@ PlaylistSchema.statics.removeSong = function(playlistid, songid, cb){
 }
 
 PlaylistSchema.statics.updateOrder = function(playlistid, playlist, cb) {
-
-  console.log('playlistid', playlist);
   this.findByIdAndUpdate(playlistid,
     {'songs': playlist }, function(err, new_playlist) {
       if(err) console.log(err);
-      console.log(new_playlist);
       cb(err, new_playlist);
     });
 }
