@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('NavbarCtrl', function ($scope, $location, Auth, $sanitize, $sce, $modal) {
+  .controller('NavbarCtrl', function ($scope, $location, Auth, $sanitize, $sce, $modal, LogoutFactory) {
     var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
 
     $scope.menu = [{
@@ -20,6 +20,7 @@ angular.module('splytApp')
            cb(response);
        });
       Auth.logout();
+      LogoutFactory.trigger('userLogout');
       $location.path('/login');
     };
 
