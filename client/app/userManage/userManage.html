@@ -123,6 +123,8 @@
                                         <div class='md-tile-content'>
                                             <div class='left-float'>
                                                 {{user.name}}</div>
+                                            <div class='left-float'>
+                                                {{user.email}}</div>
                                             <md-button class='button-yeah' aria-label='add' ng-click="subscribe($index)" class='follow-button'>
                                                 <ng-md-icon icon='add' size='20'></ng-md-icon>
                                             </md-button>
@@ -135,8 +137,33 @@
                       </div>
                 </div>
             </md-tab>
+            <md-tab label='Followers'>
 
+                <div layout="column" layout-align="center">
+                    <md-content>
 
+                    <div class='followers_list'>
+                        <md-list class='font-set'>
+                        <h3>Your Followers</h3>
+                        <div ng-if='currentUserFollowers.length===0'>
+                                <h4>You currently have no followers yet</h4>
+                                <h4>Don't let your friends miss out on the great music you come across!</h4>
+                        </div>
+                            <md-item ng-repeat="follower in currentUserFollowers">
+                                <md-item-content>
+                                <div class='followers'>
+                                    <div class="md-tile-content hover">
+                                        <div class='left-float'>{{follower.name}}</div>
+                                    </div>
+                                  </div>
+                                </md-item-content>
+                                <md-divider></md-divider>
+                            </md-item>
+                        </md-list>
+                      </div>
+                    </md-content>
+                </div>
+            </md-tab>
         </md-tabs>
       </div>
 </row>
