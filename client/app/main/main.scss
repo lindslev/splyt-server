@@ -99,6 +99,84 @@ a {
   font-weight: Thin 100;
 }
 
+#features {
+  background: #303030;
+  color: white;
+  width: 100%;
+}
+
+#odd-feature, #even-feature {
+  padding: 15px;
+  p {
+    font-weight: 100;
+  }
+}
+
+#odd-feature {
+  // background: #E6E6E6;
+  h3 {
+    color: #009688;
+  }
+}
+
+#even-feature {
+  h3 {
+    color: white;
+  }
+}
+
+
+#extension-desc {
+  padding-top: 25px;
+  img {
+    width: 300px;
+    height: 300px;
+  }
+  .col-md-7 {
+    h2, p {
+      padding: 0px 50px;
+    }
+  }
+}
+
+#app-desc {
+  img {
+    width: 500px;
+    height: 300px;
+    margin: 0px 50px;
+  }
+  .col-md-7 {
+    h2, p {
+      padding: 0px 50px;
+    }
+  }
+}
+
+#contact {
+  p {
+    padding: 0px 150px;
+  }
+}
+
+.navbar-toggle {
+  &:hover, &:active {
+    background: #303030 !important;
+  }
+}
+
+@media (max-width: 500px) {
+  #app-desc img {
+    width: 400px;
+    height: 250px;
+    margin: 0 auto;
+  }
+  #contact {
+    p {
+      padding: 0px 30px;
+    }
+  }
+}
+
 @media (max-width: 370px) {
   .features {
     font-size: 10px;

@@ -8,17 +8,19 @@ $fa-font-path: "/bower_components/font-awesome/fonts";
  * App-wide Styles
  */
 
+
+$oddur: #6A1B9A;
+$darkpurp: #47008F;
+
 ::-moz-selection { /* Code for Firefox */
   color: white;
-  background: #47008F;
+  background: $oddur;
 }
 
 ::selection {
   color: white;
-  background: #47008F;
+  background: $oddur;
 }
-
-$oddur: #6A1B9A;
 
  body {
   padding-top: 50px;
@@ -47,6 +49,7 @@ $oddur: #6A1B9A;
   width: 100%;
   top: 0;
   margin-bottom: 24px;
+  font-weight: 300;
 }
 
 .navbar-hide {
