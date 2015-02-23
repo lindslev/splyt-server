@@ -4,7 +4,7 @@ angular.module('splytApp')
   .value('loggedInOnce', { flag: false })
   .controller('MainCtrl', function ($state, $scope, $http, socket, youtube, Auth, $sanitize, $sce, loggedInOnce) {
     //DONT FORGET TO CHANGE TO YOUR EXT ID
-    var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
+    var ext_id = "henladmnfccaaeianobnecgofahdfngb";
     var api = "AIzaSyABJumn6ZK-Ru4vt1U0hq7wQA99Z6EhXLE";
 
 
