@@ -7,7 +7,6 @@ angular.module('splytApp')
       }
       //Tabs functionality
 
-
         //Getting Playlists
         var getPlaylistPromise = manage.getPlaylists();
 
