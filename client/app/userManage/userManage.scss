@@ -10,7 +10,7 @@ input {
   width: 80%;
 }
 
-.playlists {
+.playlists, .followers {
   width: 80%;
   margin: 0 auto;
 }
@@ -66,7 +66,7 @@ input {
   height: 100px;
 }
 
-.playlist_list, .create_list, .friend_list, .search_friend{
+.playlist_list, .create_list, .friend_list, .search_friend, .followers_list{
   margin: 30px auto;
   margin-top: 30px;
   background-color: #dedfdf;
@@ -76,11 +76,11 @@ input {
   text-align: center;
 }
 
-.playlist_list {
+.playlist_list, .followers_list {
   padding-bottom: 0px;
 }
 
-.playlist_list h3 {
+.playlist_list h3, .followers_list h3 {
   margin-left: 0px;
 }
 

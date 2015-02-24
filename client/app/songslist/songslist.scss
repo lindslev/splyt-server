@@ -108,6 +108,10 @@ md-toolbar.md-default-theme li.activeClass {
   color: $oddur;
 }
 
+.md-content {
+  overflow: none !important;
+}
+
 @media screen and (min-width:650px) {
   md-list h3 {
     margin-left: 50px;
