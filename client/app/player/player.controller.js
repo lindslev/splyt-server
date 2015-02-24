@@ -2,7 +2,7 @@
 
 angular.module('splytApp')
   .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm, Auth, $q, socket, LogoutFactory) {
-    var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
+    var ext_id = "dekmhppoomofnjclcollpbdknpldlgnd";
 
     var music = document.getElementById('music'); // id for audio element
     var duration; // Duration of audio clip
@@ -216,17 +216,21 @@ angular.module('splytApp')
     ////// chat with extension ///////
     function cb(res) { console.log('Message sent!', res) }
     function tellExtension() { //tells extension when an UPDATE has been made to player
-      chrome.runtime.sendMessage(ext_id, { action: 'PLAYERUPDATE', method: $scope.musicPlaying },
-       function(response) {
-           cb(response);
-       });
+      if(chrome.runtime) {
+        chrome.runtime.sendMessage(ext_id, { action: 'PLAYERUPDATE', method: $scope.musicPlaying },
+         function(response) {
+             cb(response);
+         });
+      }
     }
 
     //initializes 'player' in extension
-    chrome.runtime.sendMessage(ext_id, { action: 'PLAYERINIT', method: $scope.musicPlaying },
-       function(response) {
-           cb(response);
-       });
+    if(chrome.runtime) {
+      chrome.runtime.sendMessage(ext_id, { action: 'PLAYERINIT', method: $scope.musicPlaying },
+         function(response) {
+             cb(response);
+         });
+    }
 
     socket.socket.on('updatePlayer', function(data){
       if($scope.currentlyPlaying) $scope.toggle();
