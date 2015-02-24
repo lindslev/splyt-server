@@ -215,6 +215,8 @@ md-toolbar.md-default-theme li.activeClass {
   height: 100px;
   margin: 0 auto;
   padding: 0;
+  border-bottom: 1px solid #C2C2C2;
+  overflow: hidden;
 }
 
 div[as-sortable] {

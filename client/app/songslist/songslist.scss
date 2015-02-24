@@ -80,12 +80,17 @@ md-toolbar.md-default-theme li.activeClass {
 @media screen and (max-width:650px) {
   .song_title {
     position: absolute;
-    left: 0;
+    left: 10%;
     margin-left: 0;
+    margin-top: 2px;
   }
 
   .empty_text {
     text-align: center;
+  }
+
+  .md-tile-content h4 {
+    font-size: 0.88em;
   }
 }
 
