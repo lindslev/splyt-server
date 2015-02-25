@@ -264,7 +264,7 @@ UserSchema.statics = {
          _.forEach(user.playlist, function(playlist) {
           if (playlist.friend_stream === true) {
            Playlist.findByIdAndUpdate(playlist._id,
-            { $push:{ "songs" : {$each:[song], $slice: -10} }},
+            { $push:{ "songs" : {$each:[song], $position: 0, $slice: 2} }},
             function( err, model ) {
               cb(err, model);
             }
