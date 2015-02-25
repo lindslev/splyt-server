@@ -4,8 +4,6 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var crypto = require('crypto');
 var authTypes = ['github', 'twitter', 'facebook', 'google'];
-var Song = require('../song/song.model');
-var Playlist = require('../playlist/playlist.model');
 var _ = require('lodash');
 var eventMachine = require('./userEvents')
 
@@ -139,6 +137,7 @@ UserSchema
 //create aggregate default playlist
 UserSchema
     .pre('save', function(next) {
+        var Playlist = require('../playlist/playlist.model');
         if (!this.isNew) return next();
         var that = this;
         Playlist.create({
@@ -153,6 +152,7 @@ UserSchema
 //create aggregate spotify bookmarks
 UserSchema
     .pre('save', function(next) {
+        var Playlist = require('../playlist/playlist.model');
         if (!this.isNew) return next();
         var that = this;
         Playlist.create({
@@ -168,6 +168,7 @@ UserSchema
 //create friends' stream playlist
 UserSchema
     .pre('save', function(next) {
+        var Playlist = require('../playlist/playlist.model');
         if (!this.isNew) return next();
         var that = this;
         Playlist.create({
@@ -220,10 +221,9 @@ UserSchema.methods = {
 
     //user adds new song
     addSong: function(song_obj, cb) {
+      var Song = require('../song/song.model');
       Song.createSong(song_obj, function(err, song) {
-        var user = eventMachine.receive('user')
-        var playlist = eventMachine.receive('playlist')
-        eventMachine.trigger('newSong', { song: song, user: user, playlist: playlist })
+        eventMachine.emit('newSong', { song: song, user: song_obj.userid, playlist: song_obj.playlist })
         cb(err, song);
       });
     }
@@ -257,6 +257,7 @@ UserSchema.statics = {
    *
    */
   propagateToFollowers : function(song, follower_array, cb) {
+    var Playlist = require('../playlist/playlist.model');
     var Users = this;
     _.forEach(follower_array, function(id) {
       Users.findById(id).populate('playlist').exec(function(err, user){
@@ -316,13 +317,9 @@ UserSchema.statics = {
       this.findByIdAndUpdate(currentUser,
         {$pull: {'subscriptions': removeSubscription._id}},
         function(err, data){
-            console.log('first errrrrr', err);
-            console.log('first data', data);
             Users.findByIdAndUpdate(removeSubscription._id,
                 {$pull: {'followers': currentUser}},
                 function(err, data2){
-                    console.log('second errrrrr', err);
-                    console.log('second data', data2);
                     cb(err, data, data2);
                 })
       })

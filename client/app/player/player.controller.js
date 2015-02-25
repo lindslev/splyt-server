@@ -1,8 +1,14 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('PlayerCtrl', function ($scope, AudioSources, QueuePlayerComm, Auth, $q, socket, LogoutFactory) {
-    var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
+  .controller('PlayerCtrl', function ($rootScope, $scope, AudioSources, QueuePlayerComm, Auth, $q, socket, LogoutFactory) {
+    var ext_id = "dekmhppoomofnjclcollpbdknpldlgnd";
+
+    $scope.volume = 75;
+    $rootScope.$on('user:login', setInitialVolume);
+    function setInitialVolume() {
+      $('.md-thumb-container').css({ '-webkit-transform' : 'translate3d(75px, 0px, 0px)' })
+    }
 
     var music = document.getElementById('music'); // id for audio element
     var duration; // Duration of audio clip
@@ -11,6 +17,7 @@ angular.module('splytApp')
     var timeline = document.getElementById('timeline'); // timeline
 
     $scope.isLoggedIn = Auth.isLoggedIn;
+    $scope.currentUser = Auth.getCurrentUser();
 
     $scope.musicPlaying = false;
     var currentAudioProvider;
@@ -21,8 +28,9 @@ angular.module('splytApp')
       $scope.currentlyPlaying = null;
     })
 
-    $scope.volume = 75;
     $scope.$watch('volume', function(newValue, oldValue) {
+      var x = 'translate3d(' + newValue + 'px, 0px, 0px)';
+      $('.md-thumb-container').css({ '-webkit-transform' : x })
       if($scope.audioProvider) $scope.audioProvider.setVolume(newValue);
     })
 
@@ -216,19 +224,23 @@ angular.module('splytApp')
     ////// chat with extension ///////
     function cb(res) { console.log('Message sent!', res) }
     function tellExtension() { //tells extension when an UPDATE has been made to player
-      chrome.runtime.sendMessage(ext_id, { action: 'PLAYERUPDATE', method: $scope.musicPlaying },
-       function(response) {
-           cb(response);
-       });
+      if(chrome.runtime) {
+        chrome.runtime.sendMessage(ext_id, { action: 'PLAYERUPDATE', method: $scope.musicPlaying },
+         function(response) {
+             cb(response);
+         });
+      }
     }
 
     //initializes 'player' in extension
-    chrome.runtime.sendMessage(ext_id, { action: 'PLAYERINIT', method: $scope.musicPlaying },
-       function(response) {
-           cb(response);
-       });
+    if(chrome.runtime) {
+      chrome.runtime.sendMessage(ext_id, { action: 'PLAYERINIT', method: $scope.musicPlaying },
+         function(response) {
+             cb(response);
+         });
+    }
 
     socket.socket.on('updatePlayer', function(data){
-      if($scope.currentlyPlaying) $scope.toggle();
+      if($scope.currentlyPlaying && data.user._id == $scope.currentUser._id) $scope.toggle();
     })
   });

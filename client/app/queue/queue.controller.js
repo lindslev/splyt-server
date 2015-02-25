@@ -105,7 +105,7 @@ angular.module('splytApp')
 
     $scope.open = function(){
       var modalInstance = $modal.open({
-        templateUrl: '/app/SearchPage/SearchPage.html',
+        templateUrl: 'app/SearchPage/SearchPage.html',
         controller: 'SearchPageCtrl',
         size: 'lg'
       });
