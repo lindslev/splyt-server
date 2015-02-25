@@ -8,7 +8,7 @@ var router = express.Router();
 router.use(cors());
 
 router.get('/', controller.index);
-router.get('/player/:action', controller.registerAction)
+router.post('/player/:action', controller.registerAction)
 router.get('/stream/:id', controller.getStream)
 router.get('/search/videos/:query', controller.searchYouTube);
 router.get('/search/addnew/videos/:id', controller.addYouTube);

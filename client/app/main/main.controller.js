@@ -2,7 +2,7 @@
 
 angular.module('splytApp')
   .value('loggedInOnce', { flag: false })
-  .controller('MainCtrl', function ($state, $scope, $http, socket, youtube, Auth, $sanitize, $sce, loggedInOnce) {
+  .controller('MainCtrl', function ($rootScope, $state, $scope, $http, socket, youtube, Auth, $sanitize, $sce, loggedInOnce) {
     var ext_id = "dekmhppoomofnjclcollpbdknpldlgnd";
 
     $scope.currentUser = Auth.getCurrentUser();
@@ -11,23 +11,27 @@ angular.module('splytApp')
     }
 
     function cb(res) { console.log('Message sent!', res) }
-    if(Auth.isLoggedIn()) {
-      var token = Auth.getToken();
-      if(chrome.runtime) {
-        chrome.runtime.sendMessage(ext_id, { action: 'LOGIN', method: '', user: $scope.currentUser, token: token },
-         function(response) {
-             cb(response);
-         });
-      }
-      if(!loggedInOnce.flag) {
-        loggedInOnce.flag = true;
-        $state.go('queue', { playlist_id: $scope.currentUser.playlist[0] })
+    function logInRedirect() {
+      if(Auth.isLoggedIn()) {
+        var token = Auth.getToken();
+        if(chrome.runtime) {
+          chrome.runtime.sendMessage(ext_id, { action: 'LOGIN', method: '', user: $scope.currentUser, token: token },
+           function(response) {
+               cb(response);
+           });
+        }
+        if(!loggedInOnce.flag) {
+          loggedInOnce.flag = true;
+          $state.go('queue', { playlist_id: $scope.currentUser.playlist[0] })
+        }
       }
     }
 
+    $rootScope.$on('user:login', logInRedirect);
+
      $scope.open = function(){
       var modalInstance = $modal.open({
-        templateUrl: '/app/SearchPage/SearchPage.html',
+        templateUrl: 'app/SearchPage/SearchPage.html',
         controller: 'SearchPageCtrl',
         size: 'lg'
       });

@@ -28,7 +28,6 @@ exports.index = function(req, res) {
  *
  */
 exports.getUsers = function(req, res) {
-    console.log('req.params', req.params);
     User.find({name: new RegExp(req.params.name, 'gi')}).exec(function(err, users){
         if (err) return res.send(500, err);
         res.json(200, users);
@@ -46,8 +45,6 @@ exports.addSong = function(req, res) {
 
     //find the user
     User.findById(req.params.id, function(err, user) {
-        eventMachine.pass('user', user._id)
-        eventMachine.pass('playlist', req.params.listid)
         user.addSong(song_obj, function(err, data) {
           res.json(200, data);
           User.propagateToFollowers(data, user.followers, function(err, model) {
@@ -78,7 +75,6 @@ exports.getFollowersandSubscriptions = function(req, res) {
  * Set Subscription
  */
 exports.setSubscription = function(req, res) {
-    console.log('req.body setSubscription', req.body);
     User.setSubscription(req.params.id, req.body, function(err, user) {
         res.json(200, user);
     });
@@ -87,7 +83,6 @@ exports.setSubscription = function(req, res) {
  * Remove Subscription
  */
 exports.removeSubscription = function(req, res) {
-    console.log('req.body removeSubscription controller', req.body);
     User.removeSubscription(req.params.id, req.body, function(err, user) {
         res.json(200, user);
     });

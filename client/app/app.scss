@@ -119,6 +119,10 @@ a:hover {
   cursor: pointer;
 }
 
+md-backdrop, .md-dialog-container {
+  position: fixed !important;
+}
+
 md-toolbar.md-default-theme {
   background-color: #303030 !important;
 }

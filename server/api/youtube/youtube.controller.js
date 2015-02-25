@@ -9,7 +9,8 @@ var eventMachine = require('./events');
 // Emit event from ext to player.controller.js on client side
 exports.registerAction = function(req, res) {
   var actionForPlayerController = req.params.action;
-  eventMachine.trigger('updatePlayer', { action: actionForPlayerController })
+  var theUser = req.body;
+  eventMachine.emit('updatePlayer', { action: actionForPlayerController, user: theUser })
   res.send(200);
 }
 

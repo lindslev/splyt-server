@@ -46,7 +46,7 @@ body {
   background-color: black;
   margin: -70px auto 0 auto;
   display: block;
-  background-image:url('../assets/images/background.jpg');
+  background-image:url('https://i.imgur.com/LMre3oP.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   width:100%;
@@ -150,6 +150,10 @@ a {
       padding: 0px 50px;
     }
   }
+}
+
+.row {
+  margin-right: 0px !important;
 }
 
 #contact {

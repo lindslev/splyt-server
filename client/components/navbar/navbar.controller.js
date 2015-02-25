@@ -2,7 +2,7 @@
 
 angular.module('splytApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth, $sanitize, $sce, $modal, LogoutFactory) {
-    var ext_id = "fccjgnomcnlfiedbadofibbhilpbdjpl";
+    var ext_id = "dekmhppoomofnjclcollpbdknpldlgnd";
 
     $scope.menu = [{
       'title': 'Home',
@@ -11,14 +11,17 @@ angular.module('splytApp')
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
+    console.log('inside navbar ctrl', Auth.isLoggedIn())
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.logout = function() {
-      chrome.runtime.sendMessage(ext_id, { action: 'LOGOUT', method: '', user: $scope.currentUser },
-       function(response) {
-           cb(response);
-       });
+      if(chrome.runtime) {
+        chrome.runtime.sendMessage(ext_id, { action: 'LOGOUT', method: '', user: $scope.currentUser },
+         function(response) {
+             cb(response);
+         });
+      }
       Auth.logout();
       LogoutFactory.trigger('userLogout');
       $location.path('/login');
@@ -26,7 +29,7 @@ angular.module('splytApp')
 
     $scope.open = function(){
       var modalInstance = $modal.open({
-        templateUrl: '/app/SearchPage/SearchPage.html',
+        templateUrl: 'app/SearchPage/SearchPage.html',
         controller: 'SearchPageCtrl',
         size: 'lg'
       });
