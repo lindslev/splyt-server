@@ -3,6 +3,7 @@
 angular.module('splytApp')
   .controller('PlayerCtrl', function ($rootScope, $scope, AudioSources, QueuePlayerComm, Auth, $q, socket, LogoutFactory) {
     var ext_id = "dekmhppoomofnjclcollpbdknpldlgnd";
+    var chrome = chrome;
 
     $scope.volume = 75;
     $rootScope.$on('user:login', setInitialVolume);
@@ -226,7 +227,7 @@ angular.module('splytApp')
       //console.log('Message sent!', res)
     }
     function tellExtension() { //tells extension when an UPDATE has been made to player
-      if(chrome.runtime) {
+      if(chrome && chrome.runtime) {
         chrome.runtime.sendMessage(ext_id, { action: 'PLAYERUPDATE', method: $scope.musicPlaying },
          function(response) {
              cb(response);
@@ -235,11 +236,14 @@ angular.module('splytApp')
     }
 
     //initializes 'player' in extension
-    if(chrome.runtime) {
-      chrome.runtime.sendMessage(ext_id, { action: 'PLAYERINIT', method: $scope.musicPlaying },
-         function(response) {
-             cb(response);
-         });
+
+    if(chrome) {
+      if(chrome.runtime) {
+        chrome.runtime.sendMessage(ext_id, { action: 'PLAYERINIT', method: $scope.musicPlaying },
+           function(response) {
+               cb(response);
+           });
+      }
     }
 
     socket.socket.on('updatePlayer', function(data){
