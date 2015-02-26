@@ -5,6 +5,15 @@ angular.module('splytApp')
   .controller('MainCtrl', function ($rootScope, $state, $scope, $http, socket, youtube, Auth, $sanitize, $sce, loggedInOnce) {
     var ext_id = "dekmhppoomofnjclcollpbdknpldlgnd";
 
+    [' ________  ________  ___           ___    ___ _________',
+    '|\\   ____\\|\\   __  \\|\\  \\         |\\  \\  /  /|\\___   ___\\',
+    '\\ \\  \\___|\\ \\  \\|\\  \\ \\  \\        \\ \\  \\/  / ||___ \\  \\_|',
+    ' \\ \\_____  \\ \\   ____\\ \\  \\        \\ \\    / /     \\ \\  \\',
+    '  \\|____|\\  \\ \\  \\___|\\ \\  \\____    \\/  /  /       \\ \\  \\',
+    '    ____\\_\\  \\ \\__\\    \\ \\_______\\__/  / /          \\ \\__\\',
+    '   |\\_________\\|__|     \\|_______|\\___/ /            \\|__|',
+    '   \\|_________|                  \\|___|/'].forEach(function(ln){ console.log(ln) })
+
     $scope.currentUser = Auth.getCurrentUser();
     $scope.user = {
       status : Auth.isLoggedIn()
