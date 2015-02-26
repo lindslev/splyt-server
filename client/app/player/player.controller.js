@@ -222,7 +222,9 @@ angular.module('splytApp')
     }
 
     ////// chat with extension ///////
-    function cb(res) { console.log('Message sent!', res) }
+    function cb(res) {
+      //console.log('Message sent!', res)
+    }
     function tellExtension() { //tells extension when an UPDATE has been made to player
       if(chrome.runtime) {
         chrome.runtime.sendMessage(ext_id, { action: 'PLAYERUPDATE', method: $scope.musicPlaying },

@@ -10,7 +10,9 @@ angular.module('splytApp')
       status : Auth.isLoggedIn()
     }
 
-    function cb(res) { console.log('Message sent!', res) }
+    function cb(res) {
+      //console.log('Message sent!', res)
+    }
     function logInRedirect() {
       if(Auth.isLoggedIn()) {
         var token = Auth.getToken();

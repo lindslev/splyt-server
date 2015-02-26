@@ -301,7 +301,6 @@ UserSchema.statics = {
                 {$push: {'followers': currentUser}},
                 { safe: true, upsert: true},
                 function (err, model2) {
-                    console.log('model2', model2);
                     cb(err, model, model2);
 
                 });

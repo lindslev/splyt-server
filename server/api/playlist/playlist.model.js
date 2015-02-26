@@ -19,7 +19,6 @@ PlaylistSchema.statics.addNewSong = function(song, playlist, userid, cb) {
     function( err, model) {
       if ( playlist.aggregate_stream === false ) {
         User.findById(userid, function(err, user) {
-          console.log('user', user);
           _.findWhere(user.playlists, {'aggregate_stream': true }, function(err, playlist) {
             Playlist.findByIdAndUpdate(playlist,
               { $push: {"songs" : song }},

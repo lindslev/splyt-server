@@ -17,7 +17,6 @@ angular.module('splytApp')
 
       searchYT: function(query, cb) {
         $http.get('/api/youtubes/search/videos/' + query).success(function(data){
-          console.log('data');
             cb(data);
         })
       },

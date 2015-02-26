@@ -19,7 +19,6 @@ var SongSchema = new Schema({
 //obj for returning song objects in proper format according to song source
 var transformations = {
   newYoutubeSong: function(song_obj) {
-    console.log('songobject', song_obj);
     var title = song_obj.song.args.info.items[0].snippet.title.split(' - ')[1];
     var artist = song_obj.song.args.info.items[0].snippet.title.split(' - ')[0];
     if (title === undefined) {

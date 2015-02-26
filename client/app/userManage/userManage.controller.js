@@ -15,10 +15,7 @@ angular.module('splytApp')
             for (var i = 0; i < playlists.length; i++) {
                 if (playlists[i].friend_stream === false) {
                     $scope.playlists.push(playlists[i]);
-
-
                 } else if (playlists[i].friend_stream === true) {
-                    console.log(playlists[i]);
                 }
             }
         });
@@ -36,7 +33,6 @@ angular.module('splytApp')
             getUsersPromise.success(function(data) {
                 if (data.length === 0) {
                     toast.showNoUsers();
-                    console.log("no users");
                 } else {
                     $scope.userList = data;
                     var index = $scope.userList.map(function(x) {return x._id; }).indexOf(Auth.getCurrentUser()._id);
@@ -98,13 +94,11 @@ angular.module('splytApp')
             } else {
                 toast.alreadySubscribed();
                 $scope.userList = null;
-                console.log('already subscribed');
             }
         }
 
         //Remove subscriptions
         $scope.removeSubscription = function(index) {
-            console.log('front end', $scope.currentUserSubscriptions[index])
             var removeSubscriptionPromise = user.removeSubscription($scope.currentUserSubscriptions[index]);
             $scope.currentUserSubscriptions.splice(index, 1);
             toast.removedSubscription();
@@ -116,8 +110,6 @@ angular.module('splytApp')
         }
         //Remove Song from Playlist
         $scope.removeSongfromPlaylist = function(index) {
-            console.log('front end', $scope.currentPlaylistSongs[index])
-            console.log('currentPlaylist', $scope.currentPlaylist);
             var removeSongfromPlaylistPromise = manage.removeSongfromPlaylist($scope.currentPlaylist, $scope.currentPlaylistSongs[index]);
             $scope.currentPlaylistSongs.splice(index, 1);
         }

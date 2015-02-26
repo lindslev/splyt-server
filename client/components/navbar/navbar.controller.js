@@ -11,7 +11,7 @@ angular.module('splytApp')
 
     $scope.isCollapsed = true;
     $scope.isLoggedIn = Auth.isLoggedIn;
-    console.log('inside navbar ctrl', Auth.isLoggedIn())
+
     $scope.isAdmin = Auth.isAdmin;
     $scope.getCurrentUser = Auth.getCurrentUser;
 

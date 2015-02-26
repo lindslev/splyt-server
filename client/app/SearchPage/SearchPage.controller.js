@@ -24,7 +24,6 @@ angular.module('splytApp')
          return $window.innerWidth;
       }, function(value) {
          $scope.media_width = value;
-         console.log(value);
    });
 
     $scope.chooseYT = function(){
@@ -62,13 +61,11 @@ angular.module('splytApp')
   $scope.addYTSong = function(playlist, song) {
     console.log('adding song');
     search.addYT(song, playlist, function(data) {
-      console.log(data);
     });
   }
 
   $scope.addSCSong = function(playlist, song) {
     search.addSC(song, playlist, function(data) {
-      console.log(data);
     });
   }
 

@@ -34,7 +34,7 @@ angular.module('splytApp')
                           embed: '<iframe width="200" height="200" src="https://www.youtube.com/embed/u4PAOG83nh8?rel=0" frameborder="0" allowfullscreen></iframe>'
                         }
                     } else {
-                        console.log('Category Id does not match');
+                        // console.log('Category Id does not match');
                     }
                 });
             },

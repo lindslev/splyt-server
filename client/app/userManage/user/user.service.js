@@ -15,7 +15,6 @@ angular.module('splytApp')
                 return $http.post('api/users/' + Auth.getCurrentUser()._id, user);
             },
             removeSubscription: function(subscription) {
-                console.log('user.service', subscription);
                 return $http.post('api/users/subscription/'+ Auth.getCurrentUser()._id, subscription)
             }
         };
