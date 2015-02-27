@@ -77,6 +77,7 @@ md-toolbar.md-default-theme li.activeClass {
   margin-top: 5px;
 }
 
+
 @media screen and (max-width:650px) {
   .song_title {
     position: absolute;
@@ -93,6 +94,8 @@ md-toolbar.md-default-theme li.activeClass {
     font-size: 0.88em;
   }
 }
+
+
 
 .song_results {
   width: 175%;
@@ -120,8 +123,13 @@ md-toolbar.md-default-theme li.activeClass {
 
 .playlist_dropdown{
   position: fixed;
-  right: 15%;
+  right: 12%;
+  margin-top:13px;
   z-index: 100;
+}
+
+.as-sortable-drag .playlist_dropdown {
+  visibility: hidden;
 }
 
 .open > .dropdown-menu {
@@ -134,4 +142,12 @@ md-toolbar.md-default-theme li.activeClass {
   background-color: $oddur;
   color: rgb(255,255,255);
 
+}
+
+
+@media screen and (max-width:580px) {
+  .playlist_dropdown{
+    right: 48%;
+    margin-top:46px;
+  }
 }
