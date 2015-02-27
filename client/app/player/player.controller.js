@@ -1,9 +1,14 @@
 'use strict';
 
 angular.module('splytApp')
-  .controller('PlayerCtrl', function ($rootScope, $scope, AudioSources, QueuePlayerComm, Auth, $q, socket, LogoutFactory) {
+  .controller('PlayerCtrl', function ($rootScope, $scope, AudioSources, QueuePlayerComm, Auth, $q, socket, LogoutFactory, $window) {
     var ext_id = "dekmhppoomofnjclcollpbdknpldlgnd";
     var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1; //samuel mccords 'solid' chrome check
+
+    // so player in the ext doesnt exist when tab is closed
+    $window.addEventListener("beforeunload", function (event) {
+      playerInit();
+    });
 
     $scope.volume = 75;
     $rootScope.$on('user:login', setInitialVolume);
@@ -242,15 +247,17 @@ angular.module('splytApp')
     }
 
     //initializes 'player' in extension
-
-    if(is_chrome) {
-      if(chrome.runtime) {
-        chrome.runtime.sendMessage(ext_id, { action: 'PLAYERINIT', method: $scope.musicPlaying },
-           function(response) {
-               cb(response);
-           });
+    function playerInit() {
+      if(is_chrome) {
+        if(chrome.runtime) {
+          chrome.runtime.sendMessage(ext_id, { action: 'PLAYERINIT', method: $scope.musicPlaying },
+             function(response) {
+                 cb(response);
+             });
+        }
       }
     }
+    playerInit();
 
     socket.socket.on('updatePlayer', function(data){
       if($scope.currentlyPlaying && data.user._id == $scope.currentUser._id) $scope.toggle();
