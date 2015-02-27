@@ -3,7 +3,7 @@
 angular.module('splytApp')
   .controller('NavbarCtrl', function ($scope, $location, Auth, $sanitize, $sce, $modal, LogoutFactory) {
     var ext_id = "dekmhppoomofnjclcollpbdknpldlgnd";
-    var chrome = chrome;
+    var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1; //samuel mccords 'solid' chrome check
 
     $scope.menu = [{
       'title': 'Home',
@@ -17,7 +17,7 @@ angular.module('splytApp')
     $scope.getCurrentUser = Auth.getCurrentUser;
 
     $scope.logout = function() {
-      if(chrome && chrome.runtime) {
+      if(is_chrome && chrome.runtime) {
         chrome.runtime.sendMessage(ext_id, { action: 'LOGOUT', method: '', user: $scope.currentUser },
          function(response) {
              cb(response);

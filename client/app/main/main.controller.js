@@ -4,7 +4,7 @@ angular.module('splytApp')
   .value('loggedInOnce', { flag: false })
   .controller('MainCtrl', function ($rootScope, $state, $scope, $http, socket, youtube, Auth, $sanitize, $sce, loggedInOnce) {
     var ext_id = "dekmhppoomofnjclcollpbdknpldlgnd";
-    var chrome = chrome;
+    var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1; //samuel mccords 'solid' chrome check
 
     [' ________  ________  ___           ___    ___ _________',
     '|\\   ____\\|\\   __  \\|\\  \\         |\\  \\  /  /|\\___   ___\\',
@@ -26,7 +26,8 @@ angular.module('splytApp')
     function logInRedirect() {
       if(Auth.isLoggedIn()) {
         var token = Auth.getToken();
-        if(chrome && chrome.runtime) {
+        console.log('...', chrome)
+        if(is_chrome && chrome.runtime) {
           chrome.runtime.sendMessage(ext_id, { action: 'LOGIN', method: '', user: $scope.currentUser, token: token },
            function(response) {
                cb(response);
@@ -39,6 +40,7 @@ angular.module('splytApp')
       }
     }
 
+    logInRedirect();
     $rootScope.$on('user:login', logInRedirect);
 
      $scope.open = function(){
