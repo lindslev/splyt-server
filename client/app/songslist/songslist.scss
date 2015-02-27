@@ -117,3 +117,21 @@ md-toolbar.md-default-theme li.activeClass {
     margin-left: 50px;
   }
 }
+
+.playlist_dropdown{
+  position: fixed;
+  right: 15%;
+  z-index: 100;
+}
+
+.open > .dropdown-menu {
+  margin-left: 59px;
+  margin-top: -23px;
+  padding: 0 2px;
+}
+
+.playlist_item:hover {
+  background-color: $oddur;
+  color: rgb(255,255,255);
+
+}
