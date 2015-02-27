@@ -129,15 +129,17 @@ angular.module('splytApp')
     $scope.songs = playlist.songs.map(function(song) { song.playing = 'play_arrow'; return song; });
     QueuePlayerComm.getSongsFromQueue($scope.songs);
 
-    if(document.getElementById('pButton').className == 'pause') {
+    // if(document.getElementById('pButton').className == 'pause') {
       //then a song is already playing and we're coming back from a diff state
       var currently = QueuePlayerComm.giveCurrentlyPlaying();
-      $scope.songs.forEach(function(s, i){
-        if(s._id == currently._id) {
-          $scope.songs[i] = currently; //this makes it possible to move between states and have the icon logic remain functional
-        }
-      })
-    }
+      if(currently) {
+        $scope.songs.forEach(function(s, i){
+          if(s._id == currently._id) {
+            $scope.songs[i] = currently; //this makes it possible to move between states and have the icon logic remain functional
+          }
+        })
+      }
+    // }
 
     $scope.play = function(song) {
       QueuePlayerComm.onChangeSong(song);

@@ -71,7 +71,7 @@ angular.module('splytApp')
     }
 
     $scope.prevSong = function() {
-      $scope.currentlyPlaying ? $scope.changeSong(prevSongInQueue($scope.currentlyPlaying)) : $scope.changeSong($scope.queue[0]);
+      if($scope.queue.length) $scope.currentlyPlaying ? $scope.changeSong(prevSongInQueue($scope.currentlyPlaying)) : $scope.changeSong($scope.queue[0]);
     }
 
     function nextSongInQueue(song) { //takes just played song and returns the next song in the queue
@@ -85,7 +85,7 @@ angular.module('splytApp')
     }
 
     $scope.nextSong = function() {
-      $scope.currentlyPlaying ? $scope.changeSong(nextSongInQueue($scope.currentlyPlaying)) : $scope.changeSong($scope.queue[0]);
+      if($scope.queue.length) $scope.currentlyPlaying ? $scope.changeSong(nextSongInQueue($scope.currentlyPlaying)) : $scope.changeSong($scope.queue[0]);
     }
 
     $scope.toggle = function() {
@@ -102,7 +102,13 @@ angular.module('splytApp')
     }
 
     $scope.changeSong = function(song, next) {
-      if(song == 'done' || song == 'top') return; //queue is over
+      if(song == 'done' || song == 'top') {
+        if(song == 'done') { //only when playlist runs its course naturally reset
+          $scope.musicPlaying = false;
+          $scope.currentlyPlaying = null;
+        }
+        return; //queue is over
+      }
       if(next) { //next will be sent as true from onEnded listener callbacks
         $scope.changeSong(nextSongInQueue($scope.currentlyPlaying));
         return;

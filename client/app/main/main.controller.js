@@ -26,7 +26,6 @@ angular.module('splytApp')
     function logInRedirect() {
       if(Auth.isLoggedIn()) {
         var token = Auth.getToken();
-        console.log('...', chrome)
         if(is_chrome && chrome.runtime) {
           chrome.runtime.sendMessage(ext_id, { action: 'LOGIN', method: '', user: $scope.currentUser, token: token },
            function(response) {
