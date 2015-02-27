@@ -101,7 +101,7 @@ exports.create = function(req, res, next) {
         var token = jwt.sign({
             _id: user._id
         }, config.secrets.session, {
-            expiresInMinutes: 60 * 5
+            expiresInMinutes: 60 * 1000000000000
         });
         res.json({
             token: token
