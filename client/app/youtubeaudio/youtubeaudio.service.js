@@ -32,6 +32,7 @@ angular.module('splytApp')
       // this.timer();
     }
     YoutubeAudioSource.prototype.play = function() {
+      this.player.unMute();
       this.player.playVideo();
     }
     YoutubeAudioSource.prototype.pause = function() {
