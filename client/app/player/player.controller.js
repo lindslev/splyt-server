@@ -111,6 +111,7 @@ angular.module('splytApp')
         if(song == 'done') { //only when playlist runs its course naturally reset
           $scope.musicPlaying = false;
           $scope.currentlyPlaying = null;
+          playerInit();
         }
         return; //queue is over
       }
