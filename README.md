@@ -1,7 +1,7 @@
 Splyt - the web app
 ================
 
-The web app side of the revolutionary Chrome music experience, where users can listen to playlists they make and follow their friends.
+The web app side of the revolutionary Chrome music experience, where users can listen to playlists they make and follow their friends. Check it out at [www.splytmusic.io](http://splytmusic.io).
 
 ## Demo
 

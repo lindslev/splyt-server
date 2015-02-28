@@ -5,6 +5,7 @@
 'use strict';
 
 var config = require('./environment');
+var redisApp = require('redis');
 
 // When the user disconnects.. perform this
 function onDisconnect(socket) {
@@ -58,4 +59,17 @@ module.exports = function (socketio) {
     onConnect(socket);
     console.info('[%s] CONNECTED', socket.address);
   });
+
+  // if(process.env.NODE_ENV === 'production') {
+  //  var socketpub = redisApp.createClient(config.redis.port, config.redis.host, {auth_pass: config.redis.pass, return_buffers: true});
+  //  var socketsub = redisApp.createClient(config.redis.port, config.redis.host, {auth_pass: config.redis.pass, return_buffers: true});
+  //  var client = redisApp.createClient(config.redis.port, config.redis.host, {auth_pass: config.redis.pass, return_buffers: true});
+  //  socketio.adapter(redis({
+  //    pubClient: socketpub,
+  //    subClient: socketsub,
+  //    redisClient: client
+  //  }));
+  // } else {
+  //  socketio.adapter(redis(config.redis));
+  // }
 };
