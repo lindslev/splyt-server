@@ -5,7 +5,7 @@ The web app side of the revolutionary Chrome music experience, where users can l
 
 ## Demo
 
-[![ScreenShot](http://puu.sh/g1yqq/3034a266e5.png)](http://youtu.be/Q1AfK59BCjU)
+[![ScreenShot](http://puu.sh/g1yqq/3034a266e5.png)](http://youtu.be/C6bM_RRIjcg)
 
 ## How it Works
 
