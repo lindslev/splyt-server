@@ -32,7 +32,7 @@ var transformations = {
       link: song_obj.song.args.song.permalink_url,
       source: 'YouTube',
       addedUser: song_obj.userid,
-      thumbnail: 'http://lorempixel.com/100/100/abstract/?'
+      thumbnail: song_obj.song.args.info.items[0].snippet.thumbnails.default.url
     }
   },
    newSCSong: function(song_obj) {
