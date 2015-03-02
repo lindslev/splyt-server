@@ -41,3 +41,34 @@ md-card md-card-content{
 .btn-google-plus {
   margin-top: 60px;
 }
+
+.login_page {
+background-color: black;
+margin: 0 auto;
+margin-top: -135px;
+display: block;
+background-image: url("http://i.imgur.com/T4pgfbz.jpg");
+background-repeat: no-repeat;
+background-size: cover;
+height: 100%;
+min-height: 800px;
+width: 100%;
+float: left;
+left: 0%;
+position: relative;
+}
+
+.md-default-theme {
+  margin: 0;
+}
+
+.login_card {
+  margin-top: 145px;
+  opacity: 0.9;
+  color: black;
+
+}
+
+.login_text {
+  color: black;
+}
