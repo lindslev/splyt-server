@@ -6,7 +6,12 @@ angular.module('splytApp')
       .state('userManage', {
         url: '/user/:id',
         templateUrl: 'app/userManage/userManage.html',
-        controller: 'UserManageCtrl'
+        controller: 'UserManageCtrl',
+        resolve: {
+        	currentUser: function(Auth){
+        		return Auth.getCurrentUser().$promise;
+        	}
+        }
       });
 
 
