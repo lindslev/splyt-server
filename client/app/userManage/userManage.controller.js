@@ -6,7 +6,6 @@ angular.module('splytApp')
         name: ''
       }
       //Tabs functionality
-        console.log('currentUser', currentUser);
         //Getting Playlists
         var getPlaylistPromise = manage.getPlaylists();
 
