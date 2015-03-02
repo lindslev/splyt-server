@@ -56,7 +56,7 @@
                                         Add to <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li ng-repeat='playlist in playlist_tabs' ng-click='addYTSong(playlist._id, song.id.videoId)'>{{playlist.title}}</li>
+                                        <li ng-repeat='playlist in playlist_tabs' ng-click='addYTSong(playlist._id, song.id.videoId)' class='playlist_item'>{{playlist.title}}</li>
                                     </ul>
                                 </div>
                             </div>
@@ -86,7 +86,7 @@
                                         Add to <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu">
-                                        <li ng-repeat='playlist in playlist_tabs' ng-click='addSCSong(playlist._id, song)'>{{playlist.title}}</li>
+                                        <li ng-repeat='playlist in playlist_tabs' ng-click='addSCSong(playlist._id, song)' class='playlist_item'>{{playlist.title}}</li>
                                     </ul>
                                 </div>
                             </div>
