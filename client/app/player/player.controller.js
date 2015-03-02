@@ -57,10 +57,8 @@ angular.module('splytApp')
         var nextSong = nextSongInQueue($scope.currentlyPlaying);
         $scope.audioProvider.stop(nextSong);
         if(nextSong == 'done') {
-          $window.location.reload();
-          // $scope.musicPlaying = false;
-          // $scope.currentlyPlaying.playing = 'play_arrow';
-          // $scope.currentlyPlaying = null;
+          $scope.musicPlaying = false;
+          $scope.currentlyPlaying = null;
         } else {
           $scope.changeSong(nextSong);
         }
@@ -112,6 +110,7 @@ angular.module('splytApp')
       if(song == 'done' || song == 'top') {
         if(song == 'done') { //only when playlist runs its course naturally reset
           $scope.musicPlaying = false;
+          $scope.currentlyPlaying.playing = 'play_arrow';
           $scope.currentlyPlaying = null;
           playerInit();
         }
