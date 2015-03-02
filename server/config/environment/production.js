@@ -12,6 +12,11 @@ module.exports = {
   port:     process.env.OPENSHIFT_NODEJS_PORT ||
             process.env.PORT ||
             8080,
+            redis: {
+              host: process.env.REDISTOGO_HOST,
+              port: process.env.REDISTOGO_PORT,
+              pass: process.env.REDISTOGO_PASS
+            },
 
   // MongoDB connection options
   mongo: {
