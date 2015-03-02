@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('splytApp')
-    .controller('UserManageCtrl', function($scope, Auth, manage, user, toast, $log) {
+    .controller('UserManageCtrl', function($scope, Auth, manage, user, toast, $log, currentUser) {
       $scope.nameFilter = {
         name: ''
       }
       //Tabs functionality
-
+        console.log('currentUser', currentUser);
         //Getting Playlists
         var getPlaylistPromise = manage.getPlaylists();
 
