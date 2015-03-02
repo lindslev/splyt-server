@@ -57,9 +57,10 @@ angular.module('splytApp')
         var nextSong = nextSongInQueue($scope.currentlyPlaying);
         $scope.audioProvider.stop(nextSong);
         if(nextSong == 'done') {
-          $scope.musicPlaying = false;
-          $scope.currentlyPlaying.playing = 'play_arrow';
-          $scope.currentlyPlaying = null;
+          $window.location.reload();
+          // $scope.musicPlaying = false;
+          // $scope.currentlyPlaying.playing = 'play_arrow';
+          // $scope.currentlyPlaying = null;
         } else {
           $scope.changeSong(nextSong);
         }

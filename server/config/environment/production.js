@@ -1,5 +1,6 @@
 'use strict';
 
+console.log('inside prod.db', process.env.REDISTOGO_HOST, process.env.REDISTOGO_PORT, process.env.REDISTOGO_PASS)
 // Production specific configuration
 // =================================
 module.exports = {
