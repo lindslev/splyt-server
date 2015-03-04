@@ -61,14 +61,15 @@ module.exports = function (socketio) {
   });
 
   if(process.env.NODE_ENV === 'production') {
-   var socketpub = redisApp.createClient(config.redis.port, config.redis.host, {auth_pass: config.redis.pass, return_buffers: true});
-   var socketsub = redisApp.createClient(config.redis.port, config.redis.host, {auth_pass: config.redis.pass, return_buffers: true});
-   var client = redisApp.createClient(config.redis.port, config.redis.host, {auth_pass: config.redis.pass, return_buffers: true});
-   socketio.adapter(redis({
+    console.log('config.redis', config.redis)
+    var socketpub = redisApp.createClient(config.redis.port, config.redis.host, {auth_pass: config.redis.pass, return_buffers: true});
+    var socketsub = redisApp.createClient(config.redis.port, config.redis.host, {auth_pass: config.redis.pass, detect_buffers: true});
+    var client = redisApp.createClient(config.redis.port, config.redis.host, {auth_pass: config.redis.pass, return_buffers: true});
+    socketio.adapter(redis({
      pubClient: socketpub,
      subClient: socketsub,
      redisClient: client
-   }));
+    }));
   } else {
    socketio.adapter(redis(config.redis));
   }

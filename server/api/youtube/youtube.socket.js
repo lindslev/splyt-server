@@ -9,6 +9,7 @@ var eventMachine = require('./events')
 
 exports.register = function(socket) {
   eventMachine.on('updatePlayer', function(data){
+    console.log('** ~~ ABOUT TO SOCKET EMIT updatePlayer ~~ **')
     socket.emit('updatePlayer', data);
   })
 }

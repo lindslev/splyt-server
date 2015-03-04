@@ -106,7 +106,7 @@ angular.module('splytApp')
       QueuePlayerComm.trigger('globalPlayerToggle', $scope.currentlyPlaying);
     }
 
-    $scope.changeSong = function(song, next) {
+    $scope.changeSong = function(song, next, scTested) {
       if(song == 'done' || song == 'top') {
         if(song == 'done') { //only when playlist runs its course naturally reset
           $scope.musicPlaying = false;
@@ -125,7 +125,15 @@ angular.module('splytApp')
       $scope.musicPlaying ? songChangeHandler = switchTracks : songChangeHandler = $scope.toggle; //if a song was already playing, use switchTracks
       $scope.currentlyPlaying = song;
       currentAudioProvider = $scope.audioProvider;
-      var AudioSource = AudioSources[handleSongSource(song)];
+      if(!scTested) {
+        var songSourceHandled = handleSongSource(song);
+        if(songSourceHandled == 'waiting') {
+          return;
+        }
+      } else {
+        var songSourceHandled = scTested;
+      }
+      var AudioSource = AudioSources[songSourceHandled];
       $scope.audioProvider = new AudioSource(song);
       if(typeof $scope.audioProvider.onReady === 'function') { //for soundcloud nonstreamable and youtube embeds
         $scope.audioProvider.onReady(function(){
@@ -150,9 +158,32 @@ angular.module('splytApp')
       QueuePlayerComm.trigger('globalPlayerToggle', $scope.currentlyPlaying);
     }
 
+    //tests whether sc gave a bullshit streamUrl thanks for NOTHING SC YOU RUINED EVERYTHING
+    var aud = document.getElementById("tester");
+    aud.onerror = function() {
+      $scope.changeSong($scope.currentlyPlaying, false, 'SoundCloudNonstreamable')
+    }
+
+    aud.onloadeddata = function() {
+      $scope.changeSong($scope.currentlyPlaying, false, 'SoundCloud')
+    }
+
+    function doubleCheckSource(src) {
+      $('#tester').attr('src', src + '?client_id=7af759eb774be5664395ed9afbd09c46');
+    }
+    // end bs sc test //
+
     function handleSongSource(song) {
-      if(song.source == 'SoundCloud') return song.audioSource ? 'SoundCloud' : 'SoundCloudNonstreamable';
-      return song.source;
+      if(song.source == 'SoundCloud') {
+        if(song.audioSource) {
+          doubleCheckSource(song.audioSource)
+          return 'waiting';
+        } else {
+          return 'SoundCloudNonstreamable';
+        }
+      } else {
+        return song.source;
+      }
     }
 
     function addDuration() {
