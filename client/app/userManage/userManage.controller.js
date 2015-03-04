@@ -25,8 +25,8 @@ angular.module('splytApp')
                 $scope.currentUserSubscriptions = user.subscriptions;
                 $scope.currentUserFollowers = user.followers;
             })
-            //Gets users
 
+        //Gets users
         $scope.getUsers = function(selectedUser) {
             var getUsersPromise = user.getUsers(selectedUser)
             getUsersPromise.success(function(data) {
@@ -43,9 +43,9 @@ angular.module('splytApp')
                     }
                 }
                 $scope.nameFilter.name = '';
-            })
-
-        }
+              user.removeCurrentFollowers(data, $scope.currentUserSubscriptions);
+        })
+      }
 
 
         //Get Specific Playlist
