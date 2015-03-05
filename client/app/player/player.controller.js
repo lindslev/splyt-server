@@ -108,10 +108,13 @@ angular.module('splytApp')
 
     $scope.changeSong = function(song, next, scTested) {
       if(song == 'done' || song == 'top') {
-        if(song == 'done') { //only when playlist runs its course naturally reset
+        if(song == 'done') { //only when playlist runs its course naturally reset or someone tries to hit >> on last song
+          playhead.style.marginLeft = "0px";
           $scope.musicPlaying = false;
           $scope.currentlyPlaying.playing = 'play_arrow';
-          $scope.currentlyPlaying = null;
+          $scope.currentlyPlaying = undefined;
+          $scope.audioProvider.stop('LOGOUT');
+          $scope.audioProvider = undefined;
           playerInit();
         }
         return; //queue is over
