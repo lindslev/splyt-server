@@ -9,11 +9,13 @@ angular.module('splytApp')
       var self = this;
       this.timerInterval;
       this.onReadyFunctions = [];
-      this.domElement = $('<iframe id="soundcloud_widget" width="100%" height="166" scrolling="no" frameborder="no" src=""></iframe>')
+      this.domElement = $('<iframe style="display:none;" width="100%" height="166" scrolling="no" frameborder="no" src=""></iframe>')
+      this.domElement.attr('id', song.tag)
+      this.songTag = song.tag;
       $('body').append(this.domElement);
       this.url = "https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/" + song.tag + "&color=0066cc";
-      $('#soundcloud_widget').attr('src', trustSrc(this.url));
-      this.widget = SC.Widget(document.getElementById('soundcloud_widget'));
+      $('#' + song.tag).attr('src', trustSrc(this.url));
+      this.widget = SC.Widget(document.getElementById(this.songTag));
       this.widget.bind(SC.Widget.Events.READY, function() {
         self.onReadyFunctions.forEach(function(fn){
           fn();
@@ -71,9 +73,11 @@ angular.module('splytApp')
       }, 100);
     }
 
-    SoundcloudNonstreamableAudioSource.prototype.stop = function() {
+    SoundcloudNonstreamableAudioSource.prototype.stop = function(newSong) {
       clearInterval(this.timerInterval);
-      $('#soundcloud_widget').remove();
+      this.widget.pause();
+      this.widget.seekTo(0);
+      $('#' + this.songTag).remove();
     }
 
     SoundcloudNonstreamableAudioSource.prototype.setVolume = function(num) {
