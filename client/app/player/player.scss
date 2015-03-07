@@ -84,6 +84,24 @@
   margin-right: 20px;
 }
 
+#repeat {
+  p {
+    span {
+      cursor: pointer;
+      color: white;
+      font-size: 20px;
+    }
+  }
+  display: inline;
+  float: right;
+  margin-top: 20px;
+  margin-right: 20px;
+}
+
+.repeat {
+  color: #009688 !important;
+}
+
 @media (max-width: 1080px) {
   #songinfo {
     display: none;

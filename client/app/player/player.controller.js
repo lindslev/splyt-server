@@ -120,7 +120,7 @@ angular.module('splytApp')
         return; //queue is over
       }
       if(next) { //next will be sent as true from onEnded listener callbacks
-        $scope.changeSong(nextSongInQueue($scope.currentlyPlaying));
+        $scope.repeat ? $scope.changeSong($scope.currentlyPlaying) : $scope.changeSong(nextSongInQueue($scope.currentlyPlaying));
         return;
       }
       if($scope.currentlyPlaying) $scope.currentlyPlaying.playing = 'play_arrow';
@@ -298,4 +298,10 @@ angular.module('splytApp')
     socket.socket.on('updatePlayer', function(data){
       if($scope.currentlyPlaying && data.user._id == $scope.currentUser._id) $scope.toggle();
     })
+
+    //repeat functionality
+    $scope.repeat = false;
+    $scope.toggleRepeat = function() {
+      $scope.repeat ? $scope.repeat = false : $scope.repeat = true;
+    }
   });
