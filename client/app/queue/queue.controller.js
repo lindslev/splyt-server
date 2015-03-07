@@ -1,7 +1,24 @@
 'use strict';
 
 angular.module('splytApp')
+  .controller('NewListCtrl', function($scope, $modalInstance, manage, toast, middleman){
+    $scope.newPlaylist = {
+        title : ''
+    };
+    $scope.create = function() {
+      var createPlaylistPromise = manage.createPlaylist($scope.newPlaylist);
+      createPlaylistPromise.success(function(playlist) {
+          middleman.push(playlist);
+          $scope.newPlaylist.title = '';
+          toast.createdPlaylist();
+          $modalInstance.close();
+      })
+    }
 
+    $scope.abort = function() {
+      $modalInstance.close()
+    }
+  })
   .controller('QueueCtrl', function ($http, socket, Auth, playlist, $scope, youtube, $sanitize, manage, $log, $stateParams, $state, QueuePlayerComm, toast, $mdDialog, $modal, $window, selectedIndex) {
 
     //youtube iframe api include
@@ -193,5 +210,22 @@ angular.module('splytApp')
       }
     };
 
+    //add new playlist
+    $scope.addNewPlaylist = function() {
+      var modalInstance = $modal.open({
+        templateUrl: 'app/queue/newListDialog.html',
+        controller: 'NewListCtrl',
+        size: 'sm',
+        resolve: {
+          middleman: function() {
+            return $scope.tabs;
+          }
+        }
+      });
+    }
+
+    $scope.answer = function(answer) {
+      console.log('test')
+    }
 
 });

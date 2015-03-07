@@ -1,0 +1,25 @@
+<center>
+  <div id="newListDialog">
+    <md-content>
+      <p>Create New Playlist</p>
+      <input placeholder="new list name" ng-model="newPlaylist.title"></input>
+    </md-content>
+    <md-button ng-click="abort()">
+     Nevermind
+    </md-button>
+    <md-button ng-disabled="!newPlaylist.title.length" ng-click="create()" class="md-primary">
+      Create
+    </md-button>
+  </div>
+</center>
+
+<style>
+  #newListDialog {
+    padding: 20px;
+    text-align: center;
+  }
+  input {
+    text-align: center;
+    margin-bottom: 10px;
+  }
+</style>

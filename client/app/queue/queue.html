@@ -20,7 +20,7 @@
         <md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="left" md-is-locked-open="$media('gt-md')">
             <md-toolbar class="md-theme-teal">
                 <!-- Sidebar -->
-                <h1 class="md-toolbar-tools font-white">Your Playlists</h1>
+                <h1 class="md-toolbar-tools font-white">Your Playlists<span class="glyphicon glyphicon-plus-sign" id="addPlaylist" ng-click="addNewPlaylist()"></span></h1>
                 <md-content class="md-padding">
                     <input id="filterBox" type="text" ng-model="searchTerm" placeholder="filter by song, artist, remix"></input>
                     <ul>
