@@ -110,6 +110,11 @@ md-toolbar.md-default-theme
     background: none;
 }
 
+#addPlaylist {
+  cursor: pointer;
+  margin-left: 50%;
+}
+
 @media(min-width:768px) {
 /*    #wrapper {
         padding-left: 250px;
