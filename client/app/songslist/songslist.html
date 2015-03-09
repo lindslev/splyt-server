@@ -45,7 +45,7 @@
                                         </ul>
                                     </div>
                                     <md-button class="md-primary" aria-label='none'>
-                                        <ng-md-icon ng-if='playlist.title != "Spotify Bookmarks"' ng-click='play(song)' icon="{{song.playing}}" size='30'></ng-md-icon>
+                                        <ng-md-icon ng-if='song.source != "Spotify"' ng-click='play(song)' icon="{{song.playing}}" size='30'></ng-md-icon>
                                     </md-button>
                                     <md-button ng-if='!playlist.friend_stream' ng-click='showConfirm($event, $index)' class="md-primary right" aria-label='none'>
                                         <ng-md-icon icon="clear" size='30'></ng-md-icon>
