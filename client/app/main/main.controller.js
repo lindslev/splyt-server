@@ -2,7 +2,12 @@
 
 angular.module('splytApp')
   .value('loggedInOnce', { flag: false })
-  .controller('MainCtrl', function ($rootScope, $state, $scope, $http, socket, youtube, Auth, $sanitize, $sce, loggedInOnce) {
+  .controller('PolicyTermsCtrl', function($scope, $modalInstance){
+    $scope.abort = function() {
+      $modalInstance.close()
+    }
+  })
+  .controller('MainCtrl', function ($modal, $rootScope, $state, $scope, $http, socket, youtube, Auth, $sanitize, $sce, loggedInOnce) {
     var ext_id = "dekmhppoomofnjclcollpbdknpldlgnd";
     var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1; //samuel mccords 'solid' chrome check
 
@@ -46,6 +51,22 @@ angular.module('splytApp')
       var modalInstance = $modal.open({
         templateUrl: 'app/SearchPage/SearchPage.html',
         controller: 'SearchPageCtrl',
+        size: 'lg'
+      });
+    }
+
+    $scope.openPriv = function(){
+      var modalInstance = $modal.open({
+        templateUrl: 'app/main/privacy.html',
+        controller: 'PolicyTermsCtrl',
+        size: 'lg'
+      });
+    }
+
+    $scope.openTerms = function(){
+      var modalInstance = $modal.open({
+        templateUrl: 'app/main/terms.html',
+        controller: 'PolicyTermsCtrl',
         size: 'lg'
       });
     }

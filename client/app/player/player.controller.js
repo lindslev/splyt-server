@@ -296,6 +296,7 @@ angular.module('splytApp')
     playerInit();
 
     socket.socket.on('updatePlayer', function(data){
+      console.log('Socket received!')
       if($scope.currentlyPlaying && data.user._id == $scope.currentUser._id) $scope.toggle();
     })
 

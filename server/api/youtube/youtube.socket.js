@@ -6,6 +6,7 @@
 
 var Youtube = require('./youtube.model');
 var eventMachine = require('./events')
+eventMachine.setMaxListeners(0)
 
 exports.register = function(socket) {
   eventMachine.on('updatePlayer', function(data){
