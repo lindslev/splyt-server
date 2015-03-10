@@ -5,6 +5,7 @@ var Youtube = require('./youtube.model');
 var request = require('request');
 var youtubeStream = require('youtube-audio-stream');
 var eventMachine = require('./events');
+eventMachine.setMaxListeners(0)
 
 // Emit event from ext to player.controller.js on client side
 exports.registerAction = function(req, res) {

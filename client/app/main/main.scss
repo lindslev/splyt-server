@@ -168,6 +168,11 @@ a {
   }
 }
 
+#privacy, #terms {
+  color: $oddur;
+  font-size: 10px;
+}
+
 @media (max-width: 500px) {
   #app-desc img {
     width: 400px;
