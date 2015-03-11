@@ -137,6 +137,11 @@ angular.module('splytApp')
         var songSourceHandled = scTested;
       }
       var AudioSource = AudioSources[songSourceHandled];
+      if($scope.repeat && songSourceHandled == 'SoundCloudNonstreamable') {
+        currentAudioProvider.stop($scope.currentlyPlaying);
+        songChangeHandler = switchSCWidgetTracks;
+      }
+      // ^ need to do this for SC widget songs bc SC widget is possibly the worst piece of technology in the world
       $scope.audioProvider = new AudioSource(song);
       if(typeof $scope.audioProvider.onReady === 'function') { //for soundcloud nonstreamable and youtube embeds
         $scope.audioProvider.onReady(function(){
@@ -157,6 +162,12 @@ angular.module('splytApp')
     //when a song is in the process of playing and another song is selected
     function switchTracks() {
       currentAudioProvider.stop($scope.currentlyPlaying);
+      $scope.audioProvider.play();
+      QueuePlayerComm.trigger('globalPlayerToggle', $scope.currentlyPlaying);
+    }
+
+    //the SC widget is literally the worst technology on earth
+    function switchSCWidgetTracks() {
       $scope.audioProvider.play();
       QueuePlayerComm.trigger('globalPlayerToggle', $scope.currentlyPlaying);
     }
@@ -206,7 +217,7 @@ angular.module('splytApp')
     music.addEventListener("timeupdate", timeUpdate, false); // timeupdate event listener
     timeline.addEventListener("click", function (event) { //Makes timeline clickable
       moveplayhead(event);
-      if(music.currentTime) music.currentTime = duration * clickPercent(event); //need the if(music.currentTime) for when user tries to seek a youtube or sc widget song first
+      // if(music.currentTime) music.currentTime = duration * clickPercent(event); //need the if(music.currentTime) for when user tries to seek a youtube or sc widget song first
       $q.when($scope.audioProvider.duration()).then(function(dur){
         $scope.audioProvider.seek(dur*clickPercent(event))
         // music.addEventListener('timeupdate', timeUpdate, false);
