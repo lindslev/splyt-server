@@ -123,6 +123,10 @@ angular.module('splytApp')
         $scope.repeat ? $scope.changeSong($scope.currentlyPlaying) : $scope.changeSong(nextSongInQueue($scope.currentlyPlaying));
         return;
       }
+      if(song.source == 'Spotify') {
+        $scope.changeSong(nextSongInQueue(song)); //dont play spotify songs, just try to play the next
+        return;
+      }
       if($scope.currentlyPlaying) $scope.currentlyPlaying.playing = 'play_arrow';
       var songChangeHandler;
       $scope.musicPlaying ? songChangeHandler = switchTracks : songChangeHandler = $scope.toggle; //if a song was already playing, use switchTracks
