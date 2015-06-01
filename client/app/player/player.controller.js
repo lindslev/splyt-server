@@ -167,6 +167,7 @@ angular.module('splytApp')
     function switchTracks() {
       currentAudioProvider.stop($scope.currentlyPlaying);
       $scope.audioProvider.play();
+      $scope.audioProvider.setVolume($scope.volume);
       QueuePlayerComm.trigger('globalPlayerToggle', $scope.currentlyPlaying);
     }
 
