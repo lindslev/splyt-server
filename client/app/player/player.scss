@@ -98,8 +98,20 @@
   margin-right: 20px;
 }
 
+.glyphicon-repeat, .glyphicon-volume-off {
+  color: #666666 !important;
+}
+
+.muted {
+  color: #009688 !important;
+}
+
 .repeat {
   color: #009688 !important;
+}
+
+.md-thumb:after {
+  background: #009688 !important;
 }
 
 @media (max-width: 1080px) {
