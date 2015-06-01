@@ -167,6 +167,7 @@ angular.module('splytApp')
     function switchTracks() {
       currentAudioProvider.stop($scope.currentlyPlaying);
       $scope.audioProvider.play();
+      $scope.audioProvider.setVolume($scope.volume);
       QueuePlayerComm.trigger('globalPlayerToggle', $scope.currentlyPlaying);
     }
 
@@ -319,5 +320,20 @@ angular.module('splytApp')
     $scope.repeat = false;
     $scope.toggleRepeat = function() {
       $scope.repeat ? $scope.repeat = false : $scope.repeat = true;
+    }
+
+    var rememberedVolume = $scope.volume;
+    $scope.toggleMute = function() {
+      if($scope.volume > 0) {
+        $scope.volume = 0;
+        var x = 'translate3d(' + 0 + 'px, 0px, 0px)';
+        $('.md-thumb-container').css({ '-webkit-transform' : x })
+        if($scope.audioProvider) $scope.audioProvider.setVolume(0);
+      } else {
+        $scope.volume = rememberedVolume;
+        var x = 'translate3d(' + rememberedVolume + 'px, 0px, 0px)';
+        $('.md-thumb-container').css({ '-webkit-transform' : x })
+        if($scope.audioProvider) $scope.audioProvider.setVolume(rememberedVolume);
+      }
     }
   });
