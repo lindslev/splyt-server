@@ -325,6 +325,7 @@ angular.module('splytApp')
     var rememberedVolume = $scope.volume;
     $scope.toggleMute = function() {
       if($scope.volume > 0) {
+        rememberedVolume = $scope.volume;
         $scope.volume = 0;
         var x = 'translate3d(' + 0 + 'px, 0px, 0px)';
         $('.md-thumb-container').css({ '-webkit-transform' : x })
