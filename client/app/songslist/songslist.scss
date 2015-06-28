@@ -123,6 +123,21 @@ md-toolbar.md-default-theme li.activeClass {
   }
 }
 
+.editable-has-buttons, .editable-input {
+  border: none;
+  border-bottom: 1.25px solid white;
+  color: white;
+  background: none;
+}
+
+.editable-buttons button {
+  border-radius: 5px;
+  border: none;
+  background: #009688;
+  font-family: Lato;
+  font-size: 13.5px;
+}
+
 @media screen and (min-width:650px) {
   md-list h3 {
     margin-left: 50px;
