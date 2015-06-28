@@ -20,6 +20,9 @@ angular.module('splytApp')
             },
             addSongtoPlaylist: function(playlistid, songid) {
               return $http.post('api/playlists/playlist/' + playlistid +'/song/' + songid);
+            },
+            changePlaylistName: function(listId, newName) {
+              return $http.put('/api/playlists/' + listId, {title: newName});
             }
         };
     });

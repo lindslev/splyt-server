@@ -2,6 +2,7 @@
 
 angular.module('splytApp')
   .controller('NewListCtrl', function($scope, $modalInstance, manage, toast, middleman){
+
     $scope.newPlaylist = {
         title : ''
     };
@@ -222,10 +223,6 @@ angular.module('splytApp')
           }
         }
       });
-    }
-
-    $scope.answer = function(answer) {
-      console.log('test')
     }
 
 });

@@ -10,7 +10,8 @@ angular.module('splytApp', [
   'ngMaterial',
   'ngMdIcons',
   'ui.router',
-  'ui.sortable'
+  'ui.sortable',
+  'xeditable'
 ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider, $httpProvider, $mdThemingProvider) {
     $urlRouterProvider
