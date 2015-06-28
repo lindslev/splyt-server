@@ -2,10 +2,12 @@
     <md-toolbar md-scroll-shrink ng-show='media_width >= 970'>
         <div class='md-toolbar-tools'>
             <h3>
-          <span class='font-white'>{{playlist.title}}</span>
+          <span class='font-white' editable-text='playlist_name' e-form="textBtnForm" onbeforesave='change($data)'>{{playlist_name|| 'empty'}}</span>
+          <i class="fa fa-pencil-square-o font-white edit_btn" ng-click="textBtnForm.$show()" ng-hide="textBtnForm.$visible"></i>
         </h3>
             <md-button class="md-primary" style="color:white; margin-left: 120px;" ng-click="open()">
                 Search for new songs to add!
+
             </md-button>
         </div>
     </md-toolbar>

@@ -115,6 +115,14 @@ md-toolbar.md-default-theme li.activeClass {
   overflow: none !important;
 }
 
+.edit_btn {
+  margin: 0 2px;
+  &:hover {
+    cursor: pointer;
+
+  }
+}
+
 @media screen and (min-width:650px) {
   md-list h3 {
     margin-left: 50px;
